@@ -1,0 +1,12 @@
+node_modules
+.nuxt
+.output
+dist
+package-lock.json
+pnpm-lock.yaml
+.env
+.env.local
+package-lock.json
+dev.db-journal
+migrations
+dev.db

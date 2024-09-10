@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Body Styling */
+body {
+  @apply bg-white text-black;
+}
+body {
+  font-family: "Chakra Petch", sans-serif;
+}
+/* Input Field Styling */
+input {
+  @apply block w-full rounded-lg border px-3 py-1 text-gray-900 shadow-sm;
+}
+
+/* Main Content Styling */
+main {
+  color: rgb(var(--foreground-rgb));
+  background-color: white; /* Ensure the background is consistent */
+}
+
+/* Headings Styling */
+h1 {
+  @apply text-center text-4xl font-bold text-orange-500;
+}
+
+h2 {
+  @apply text-3xl;
+}
+
+h3 {
+  @apply text-2xl;
+}
+
+/* Table Styling */
+table,
+th,
+tbody,
+tr {
+  @apply border-none text-center;
+}
+
+th {
+  @apply p-2 text-white;
+}
+
+th:first-child {
+  @apply rounded-tl-lg;
+}
+
+th:last-child {
+  @apply rounded-tr-lg;
+}
+
+td {
+  @apply px-3 py-2 text-sm;
+}
+
+/* Image Styling */
+img {
+  @apply rounded-lg;
+}
+
+/* Button Styling */
+button {
+  @apply m-1 rounded-lg px-4 py-2 font-bold text-white;
+}
+
+/* Scale-Up Animation */
+.scaleup {
+  @apply transition-transform duration-200 hover:scale-105;
+}
+
+.card {
+  @apply rounded-xl border bg-white p-2 shadow-md;
+}
