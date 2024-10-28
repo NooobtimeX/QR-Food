@@ -14,16 +14,28 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
   runtimeConfig: {
     public: {
       BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
     },
   },
+
   devServer: {
-    port: 4000,
+    port: 3000,
   },
 
-  modules: [
-  ],
+  nitro: {
+    serveStatic: true, // Enable static serving
+    publicAssets: [
+      {
+        dir: '/app/public/photos', // Maps /photos to the photo-storage volume in Docker
+        baseURL: '/photos',
+      },
+    ],
+  },
+
+  modules: [],
+
   compatibilityDate: "2024-08-27",
 });

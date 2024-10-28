@@ -1,33 +1,33 @@
-import { put } from '@vercel/blob';
-import { H3Event } from 'h3';
+// server/api/uploadPhoto.ts
 
-export default defineEventHandler(async (event: H3Event) => {
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
-  console.log("BLOB_READ_WRITE_TOKEN:", token);
+import multer from 'multer';
+import { defineEventHandler } from 'h3';
+import path from 'path';
+import fs from 'fs';
 
-  // Parse the request body
-  const body = await readBody(event);
-  const { filename, folder } = body;
-  const targetFolder = folder || 'default-folder';
+// Configure Multer storage to save files to /app/public/photos in Docker
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = '/app/public/photos';
+    fs.mkdirSync(uploadPath, { recursive: true });
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
-  const fileData = await readRawBody(event);
-  if (!fileData) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'No file data provided',
+const upload = multer({ storage });
+
+export default defineEventHandler(async (event) => {
+  return new Promise((resolve, reject) => {
+    upload.single('file')(event.req as any, event.res as any, (err) => {
+      if (err) {
+        reject({ statusCode: 500, body: { message: 'Upload failed' } });
+      } else {
+        const photoUrl = `/photos/${(event.req as any).file.filename}`;
+        resolve({ statusCode: 200, body: { message: 'Upload successful', photoUrl } });
+      }
     });
-  }
-
-  const filePath = `${targetFolder}/${filename}`;
-
-  // Upload the file to Vercel Blob with the token explicitly passed
-  const blob = await put(filePath, fileData, {
-    access: 'public',
-    token, // Use the token from process.env
   });
-
-  return {
-    statusCode: 200,
-    body: blob,
-  };
 });
