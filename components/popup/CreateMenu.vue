@@ -48,7 +48,7 @@
                 placeholder="Enter menu name"
                 aria-required="true"
                 required
-              >
+              />
             </div>
             <div class="w-1/5">
               <label
@@ -64,26 +64,29 @@
                 placeholder="Enter price"
                 aria-required="true"
                 required
-              >
+              />
             </div>
           </div>
           <div class="w-full">
-              <label for="photo" class="block text-sm font-bold text-black"
-                >Photo</label
-              >
-              <input
-                id="photo"
-                ref="photoInput"
-                type="file"
-                accept="image/*"
-                class="mt-1 block w-full text-black"
-                @change="handlePhotoUpload"
+            <label for="photo" class="block text-sm font-bold text-black"
+              >Photo</label
+            >
+            <input
+              id="photo"
+              ref="photoInput"
+              type="file"
+              accept="image/*"
+              class="mt-1 block w-full text-black"
+              @change="handlePhotoUpload"
+            />
+            <div v-if="previewUrl" class="mt-2">
+              <img
+                :src="previewUrl"
+                alt="Photo preview"
+                class="mx-auto mt-2 max-h-40"
               />
-              <div v-if="previewUrl" class="mt-2">
-    <p class="text-sm text-black">File: {{ selectedPhoto?.name }}</p>
-    <img :src="previewUrl" alt="Photo preview" class="mt-2 max-h-40 mx-auto" />
-  </div>
             </div>
+          </div>
           <!-- Category Selection -->
           <div>
             <label for="category" class="block text-sm font-bold text-black"
@@ -147,7 +150,7 @@
                   placeholder="Section Name"
                   aria-required="true"
                   requiredw
-                >
+                />
                 <button
                   type="button"
                   class="bg-red-500 p-1 text-white hover:bg-red-02"
@@ -169,7 +172,7 @@
                   placeholder="Option Name"
                   aria-required="true"
                   required
-                >
+                />
                 <input
                   v-model.number="option.price"
                   type="number"
@@ -177,7 +180,7 @@
                   placeholder="Option Price"
                   aria-required="true"
                   required
-                >
+                />
                 <button
                   type="button"
                   class="w-2/12 bg-red-500 text-white hover:bg-red-02"
@@ -242,7 +245,7 @@
           placeholder="Enter category name"
           aria-required="true"
           required
-        >
+        />
         <div class="mt-4 flex justify-end space-x-2">
           <button
             class="bg-green-500 text-white hover:bg-green-700"
@@ -309,8 +312,8 @@ const selectedRestaurant = ref<number | null>(null);
 const showAddCategoryPopup = ref(false);
 const newCategoryName = ref("");
 const tags = ref<string[]>([]);
-  const previewUrl = ref<string | null>(null);
-    const selectedPhoto = ref<File | null>(null);
+const previewUrl = ref<string | null>(null);
+const selectedPhoto = ref<File | null>(null);
 
 // Fetch all restaurants owned by the user
 const fetchRestaurants = async () => {
@@ -319,6 +322,9 @@ const fetchRestaurants = async () => {
       params: { userId: Number(localStorage.getItem("userId")) },
     });
     restaurants.value = response.data.body.ownedRestaurants;
+    if (restaurants.value.length > 0) {
+      selectedRestaurant.value = restaurants.value[0].id;
+    }
   } catch (error) {
     console.error("Error fetching restaurants:", error);
   }
@@ -332,22 +338,28 @@ const handlePhotoUpload = (event: Event) => {
   }
 };
 const uploadPhoto = async () => {
-  if (!selectedPhoto.value) return;
+  if (!selectedPhoto.value) {
+    console.error("No photo selected.");
+    return null;
+  }
 
   const formData = new FormData();
   formData.append("file", selectedPhoto.value);
 
   try {
-    const response = await axios.post("/api/uploadPhoto", formData, {
+    const response = await axios.post("/api/uploadMenu", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    return response.data.photoUrl; // Return the uploaded photo URL
+
+    return response.data.url; // Return the uploaded photo URL
   } catch (error) {
     console.error("Error uploading photo:", error);
+    return null;
   }
 };
+
 // Fetch categories for the selected restaurant
 const fetchCategories = async () => {
   if (!selectedRestaurant.value) return;
@@ -357,6 +369,9 @@ const fetchCategories = async () => {
       restaurantId: selectedRestaurant.value,
     });
     categories.value = response.data;
+    if (categories.value.length > 0) {
+      selectedCategory.value = categories.value[0].id;
+    }
   } catch (error) {
     console.error("Failed to fetch categories:", error);
   }
@@ -392,6 +407,10 @@ const submitForm = async () => {
   }
 
   const photoUrl = await uploadPhoto();
+  if (!photoUrl) {
+    console.error("Failed to upload photo.");
+    return;
+  }
 
   const data = {
     name: menuName.value,

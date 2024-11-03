@@ -1,7 +1,7 @@
 <template>
   <h1 class="mt-4 text-center text-3xl font-bold">{{ restaurantName }}</h1>
-  <p class="text-center text-white">{{ address }}</p>
-  <p class="text-center text-white">Table: {{ tableNo }}</p>
+  <p class="text-center">{{ address }}</p>
+  <p class="text-center">Table: {{ tableNo }}</p>
   <div class="mx-auto max-w-5xl items-center">
     <slot />
   </div>
@@ -11,7 +11,7 @@
       class="flex h-12 w-12 items-center justify-center rounded-full bg-orange-04"
       @click="showPopup = true"
     >
-      <img src="/icon/notification.svg" class="h-7 w-7" >
+      <img src="/icon/notification.svg" class="h-7 w-7" />
     </button>
     <!-- Cart Button -->
     <a :href="`/${tableNo}/cart`">
@@ -19,7 +19,7 @@
       <button
         class="flex h-12 w-12 items-center justify-center rounded-full bg-orange-04"
       >
-        <img src="/icon/clipboard.svg" class="h-7 w-7" >
+        <img src="/icon/clipboard.svg" class="h-7 w-7" />
       </button>
     </a>
     <!-- Popup -->
@@ -52,7 +52,7 @@
             type="text"
             placeholder="Enter your message"
             class="w-full rounded border-gray-300 p-2"
-          >
+          />
         </div>
 
         <!-- Buttons -->

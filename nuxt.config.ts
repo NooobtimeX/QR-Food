@@ -29,8 +29,8 @@ export default defineNuxtConfig({
     serveStatic: true, // Enable static serving
     publicAssets: [
       {
-        dir: '/app/public/photos', // Maps /photos to the photo-storage volume in Docker
-        baseURL: '/photos',
+        dir: "/app/public/photos", // Maps /photos to the photo-storage volume in Docker
+        baseURL: "/photos",
       },
     ],
   },

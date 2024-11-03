@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   if (method === "POST") {
     try {
       const body = await readBody(event);
-      const { name, price, description, categoryId, restaurantId, imageUrl } =
+      const { name, price, description, categoryId, restaurantId, photoUrl } =
         body;
 
       const newMenu = await prisma.menu.create({
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
           name,
           price,
           description,
-          imageUrl: imageUrl || null,
+          photoUrl,
           categoryId,
           restaurantId,
         },
@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
         id: branchMenu.menu.id,
         name: branchMenu.menu.name,
         price: branchMenu.menu.price,
-        imageUrl: branchMenu.menu.imageUrl,
+        photoUrl: branchMenu.menu.photoUrl,
         category: branchMenu.menu.category,
       }));
 

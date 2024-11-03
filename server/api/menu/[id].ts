@@ -51,7 +51,7 @@ export default defineEventHandler(async (event: H3Event) => {
     const formattedMenuItem = {
       name: menuItem.name,
       price: menuItem.price,
-      img: menuItem.imageUrl, // Assuming you store image URLs in the `imageUrl` field
+      photoUrl: menuItem.photoUrl || "/default-image.jpg", // Ensure photoUrl is mapped correctly
       options: menuItem.sections.map((section) => ({
         optionName: section.name,
         choices: section.options.map((option) => ({

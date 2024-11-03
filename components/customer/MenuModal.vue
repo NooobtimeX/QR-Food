@@ -10,22 +10,22 @@
         <!-- Image -->
         <img
           alt="ecommerce"
-          class="m-auto w-full rounded-lg border border-gray-200 object-cover object-center"
-          :src="menuItem?.img"
+          class="m-auto max-h-64 w-full rounded-lg border border-gray-200 object-cover object-center"
+          :src="menuItem.photoUrl || '/default-image.jpg'"
         />
 
         <!-- Item Name and Price -->
         <h1 class="mt-6 text-2xl font-bold text-gray-800">
-          {{ menuItem?.name }}
+          {{ menuItem.name }}
         </h1>
-        <span class="mt-2 block text-xl font-semibold text-green-600"
-          >{{ totalPrice }} ฿</span
-        >
+        <span class="mt-2 block text-xl font-semibold text-green-600">
+          {{ totalPrice }} ฿
+        </span>
 
         <!-- Options Section -->
-        <div v-if="menuItem?.options" class="mt-4">
+        <div v-if="menuItem.options" class="mt-4">
           <div
-            v-for="(option, index) in menuItem?.options"
+            v-for="(option, index) in menuItem.options"
             :key="index"
             class="mt-4"
           >
@@ -93,6 +93,7 @@
     </section>
   </div>
 </template>
+
 <script setup>
 import { ref, computed, watchEffect } from "vue";
 import { useFetch } from "#app";
@@ -123,6 +124,7 @@ watchEffect(() => {
   if (menuItem.value?.options) {
     selectedOptions.value = Array(menuItem.value.options.length).fill(0);
   }
+  console.log("Image URL:", menuItem.value?.photoUrl);
 });
 
 // Generate unique identifier for cart items

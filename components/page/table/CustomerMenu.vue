@@ -41,7 +41,7 @@
               class="block cursor-pointer rounded-xl border-2 border-gray-300 bg-white p-2 shadow-sm transition-shadow duration-300 hover:shadow-lg"
               @click="selectMenu(menu.id)"
             >
-              <img :src="menu.src" class="c-t-lg h-32 w-full object-cover" >
+              <img :src="menu.src" class="c-t-lg h-32 w-full object-cover" />
               <div class="p-1">
                 <h2 class="text-xl font-semibold">{{ menu.name }}</h2>
                 <p class="text-black">{{ menu.price }}฿</p>

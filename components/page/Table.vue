@@ -9,7 +9,7 @@
         :class="getTableClass(table)"
         @click="selectTable(table)"
       >
-        <img src="/icon/table.svg" class="h-14 w-14" >
+        <img src="/icon/table.svg" class="h-14 w-14" />
         <p class="mt-2 text-sm font-medium text-black">
           <span class="text-sm font-bold">Table:</span> {{ table.name }}
         </p>
@@ -61,12 +61,12 @@
           <p>QR Code:</p>
           <div id="printable-area">
             <vue-qrcode
-              :value="`http://localhost:4000/${selectedTable.qrCodeId}`"
+              :value="`http://localhost:3000/${selectedTable.qrCodeId}`"
               :size="128"
               class="mx-auto"
             />
           </div>
-          <span>{{ "http://localhost:4000/" + selectedTable.qrCodeId }}</span>
+          <span>{{ "http://localhost:3000/" + selectedTable.qrCodeId }}</span>
           <button
             class="mt-2 rounded bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
             @click="printQRCode"

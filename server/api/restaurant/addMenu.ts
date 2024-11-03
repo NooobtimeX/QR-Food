@@ -27,7 +27,15 @@ interface CreateMenuBody {
 export default async (event: H3Event) => {
   try {
     const body = await readBody<CreateMenuBody>(event);
-    const { name, description, price, categoryId, restaurantId, sections, photoUrl } = body;
+    const {
+      name,
+      description,
+      price,
+      categoryId,
+      restaurantId,
+      sections,
+      photoUrl,
+    } = body;
 
     if (!name || !description || !price || !categoryId || !restaurantId) {
       return createError({
@@ -74,7 +82,10 @@ export default async (event: H3Event) => {
           },
         });
       } catch (error) {
-        console.error(`Error creating branchMenu for branch ${branch.id}:`, error);
+        console.error(
+          `Error creating branchMenu for branch ${branch.id}:`,
+          error,
+        );
       }
     });
 

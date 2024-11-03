@@ -16,7 +16,7 @@
               class="mr-4 h-16 w-16 rounded-xl object-cover"
               :src="product.image || '/default-image.png'"
               alt="Product image"
-            >
+            />
             <div class="flex-1">
               <h2 class="text-lg font-semibold text-black">
                 {{ product.name }}
