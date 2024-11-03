@@ -12,7 +12,7 @@
           alt="ecommerce"
           class="m-auto w-full rounded-lg border border-gray-200 object-cover object-center"
           :src="menuItem?.img"
-        >
+        />
 
         <!-- Item Name and Price -->
         <h1 class="mt-6 text-2xl font-bold text-gray-800">
@@ -46,7 +46,7 @@
                   :name="`option-${index}`"
                   :value="subIndex"
                   class="absolute inset-0 opacity-0"
-                >
+                />
                 <span> {{ subOption.name }} (+{{ subOption.price }} ฿) </span>
               </label>
             </div>

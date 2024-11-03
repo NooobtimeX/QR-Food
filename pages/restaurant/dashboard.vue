@@ -32,7 +32,7 @@
           <div
             class="flex w-full flex-shrink-0 items-center justify-center sm:w-auto sm:justify-start"
           >
-            <img src="/logo/logo.png" alt="Logo" width="50px" >
+            <img src="/logo/logo.png" alt="Logo" width="50px" />
             <div class="ml-3 hidden sm:block">
               <div class="text-lg font-bold">{{ restaurantName }}</div>
               <div class="text-sm">{{ branchName }}</div>
@@ -54,7 +54,7 @@
                 class="mx-auto flex cursor-pointer flex-col items-center rounded-md px-3 py-2 text-sm font-medium"
                 @click="selectComponent(item)"
               >
-                <img width="25px" height="25px" :src="item.icon" class="mb-1" >
+                <img width="25px" height="25px" :src="item.icon" class="mb-1" />
                 {{ item.text }}
               </a>
             </div>
@@ -91,7 +91,7 @@
               class="flex cursor-pointer items-center rounded-md px-3 py-2 text-base font-medium"
               @click="selectComponent(item)"
             >
-              <img width="25px" height="25px" :src="item.icon" class="mr-3" >
+              <img width="25px" height="25px" :src="item.icon" class="mr-3" />
               {{ item.text }}
             </a>
 

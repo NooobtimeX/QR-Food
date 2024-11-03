@@ -8,13 +8,13 @@
         v-model="newTableName"
         placeholder="Table Name"
         class="mb-2 block w-full rounded-md border-gray-400 bg-white shadow-sm focus:outline-none focus:ring-2 sm:text-base"
-      >
+      />
       <input
         v-model.number="newTableCapacity"
         placeholder="Capacity"
         type="number"
         class="mb-4 block w-full rounded-md border-gray-400 bg-white shadow-sm focus:outline-none focus:ring-2 sm:text-base"
-      >
+      />
       <div class="flex justify-end">
         <button
           class="rounded-mb mr-2 border border-transparent bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-700"

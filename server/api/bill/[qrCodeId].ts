@@ -1,6 +1,6 @@
 // /server/api/bill/[qrCodeId].ts
 import { PrismaClient } from "@prisma/client";
-import type { H3Event} from "h3";
+import type { H3Event } from "h3";
 import { sendError, send } from "h3";
 
 const prisma = new PrismaClient();

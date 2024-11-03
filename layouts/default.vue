@@ -33,7 +33,7 @@
     >
       <div class="relative h-full overflow-y-auto bg-green-05 px-3 py-4">
         <div class="flex items-center justify-center text-white">
-          <img width="50px" src="/logo/logo.png" >
+          <img width="50px" src="/logo/logo.png" />
         </div>
         <div
           class="flex flex-col items-center justify-center text-2xl text-white"
@@ -51,7 +51,7 @@
             alt="Close"
             class="h-6 w-6"
             aria-hidden="true"
-          >
+          />
         </button>
         <ul class="mt-2 space-y-2 font-medium">
           <li v-for="item in menuItems" :key="item.text">
@@ -60,7 +60,7 @@
               class="group flex items-center rounded-xl p-2 text-white hover:bg-green-03"
               @click="selectComponent(item)"
             >
-              <img width="25px" height="25px" :src="item.icon" >
+              <img width="25px" height="25px" :src="item.icon" />
               <span class="ms-3">{{ item.text }}</span>
             </button>
             <router-link
@@ -68,7 +68,7 @@
               :to="item.link || '/'"
               class="group flex items-center rounded-xl p-2 text-white hover:bg-green-03"
             >
-              <img width="25px" height="25px" :src="item.icon" >
+              <img width="25px" height="25px" :src="item.icon" />
               <span class="ms-3">{{ item.text }}</span>
             </router-link>
           </li>

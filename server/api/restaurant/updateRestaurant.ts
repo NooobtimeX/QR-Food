@@ -1,4 +1,4 @@
-import type { H3Event} from "h3";
+import type { H3Event } from "h3";
 import { defineEventHandler, createError, readBody } from "h3";
 import { PrismaClient } from "@prisma/client";
 

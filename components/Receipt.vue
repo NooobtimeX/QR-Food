@@ -4,12 +4,12 @@
   <div>
     <div class="h-auto w-80 border-2 bg-white">
       <div class="flex items-center justify-center pt-2 text-white">
-        <img width="50px" src="/logo/logo.png" >
+        <img width="50px" src="/logo/logo.png" />
       </div>
       <h4 class="flex place-content-center font-bold">Pizza Hot</h4>
       <h5 class="flex place-content-center">Rangsit</h5>
       <h6 class="flex place-content-center">โต๊ะ :</h6>
-      <hr class="border-1 mx-auto w-64 border-gray-400" >
+      <hr class="border-1 mx-auto w-64 border-gray-400" />
 
       <div class="mx-7 flex place-content-between">
         <span class="font-bold">เริ่ม</span>
@@ -23,18 +23,18 @@
   <div>
     <div class="h-auto w-80 border-2 bg-white">
       <div class="flex items-center justify-center pt-2 text-white">
-        <img width="50px" src="/logo/logo.png" >
+        <img width="50px" src="/logo/logo.png" />
       </div>
       <h4 class="flex place-content-center font-bold">Pizza Hot</h4>
       <h5 class="flex place-content-center">Rangsit</h5>
       <h6 class="flex place-content-center">โต๊ะ :</h6>
-      <hr class="border-1 mx-auto w-64 border-gray-400" >
+      <hr class="border-1 mx-auto w-64 border-gray-400" />
       <div class="mx-7 flex place-content-between">
-        <span/>
+        <span />
         <span>20/20/2014 17:00</span>
       </div>
       <div class="mx-7 flex place-content-between">
-        <span/>
+        <span />
         <span class="">ใบเสร็จ : inv12345</span>
       </div>
 

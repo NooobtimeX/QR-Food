@@ -10,7 +10,7 @@
           type="text"
           placeholder="Search by email..."
           class="w-3/5 rounded-xl border border-gray-300 p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-        >
+        />
         <button
           class="rounded-lg bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-700"
           @click="showAddModal = true"
@@ -73,7 +73,7 @@
                 required
                 placeholder="name@company.com"
                 class="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-              >
+              />
             </div>
             <div class="mb-4">
               <label for="role" class="block text-base font-bold text-gray-700"

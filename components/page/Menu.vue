@@ -11,7 +11,7 @@
         type="text"
         placeholder="Search menu..."
         class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-orange-500 focus:outline-none"
-      >
+      />
     </div>
 
     <!-- No Menus Message -->
@@ -29,28 +29,32 @@
           <div
             v-for="menu in menus"
             :key="menu.id"
-            class="flex w-full flex-col items-start justify-between rounded-lg border bg-white p-4 shadow-md transition-transform hover:scale-105 sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)]"
+            class="flex w-full flex-col items-center justify-between rounded-lg border bg-white p-4 shadow-md transition-transform hover:scale-105 sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)]"
           >
-            <div>
-              <h3 class="mb-2 text-xl font-semibold text-gray-900">
+            <div class="flex flex-col items-center text-center">
+              <img
+                :src="menu.photoUrl"
+                alt="Menu photo"
+                class="mx-auto mb-2 max-h-40 w-full rounded-lg object-cover"
+              />
+              <h3 class="mb-1 text-xl font-semibold text-gray-900">
                 {{ menu.name }}
               </h3>
-              <p class="text-gray-600">{{ menu.description }}</p>
               <!-- Price Display -->
-              <p class="mt-2 font-bold text-gray-800">
+              <p class="mt-1 font-bold text-gray-800">
                 ฿{{ menu.price.toFixed(2) }}
               </p>
             </div>
             <!-- Toggle Status -->
             <label
-              class="relative mt-4 inline-flex cursor-pointer items-center"
+              class="relative mt-1 inline-flex cursor-pointer items-center"
             >
               <input
                 type="checkbox"
                 class="peer sr-only"
                 :checked="menu.isActive"
                 @change="toggleMenuStatus(menu.id, !menu.isActive)"
-              >
+              />
               <div
                 class="h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-focus:ring-4 peer-focus:ring-green-300"
               />

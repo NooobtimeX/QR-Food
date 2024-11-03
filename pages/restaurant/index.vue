@@ -12,7 +12,7 @@
             type="text"
             placeholder="Search Restaurants..."
             class="w-full max-w-md rounded-xl border border-black p-3 focus:outline-none focus:ring-2"
-          >
+          />
         </div>
 
         <!-- Buttons for creating restaurant or branch -->
@@ -106,7 +106,7 @@
             type="text"
             class="w-full rounded-lg border border-gray-400 p-3 focus:ring"
             required
-          >
+          />
         </div>
         <div class="flex justify-end">
           <button
@@ -141,7 +141,7 @@
             type="text"
             class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
             required
-          >
+          />
         </div>
         <div class="mb-4">
           <label class="block font-bold text-black">Phone Number</label>
@@ -150,7 +150,7 @@
             type="text"
             class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
             required
-          >
+          />
         </div>
         <div class="mb-4">
           <label class="block font-bold text-black">Select Restaurant</label>

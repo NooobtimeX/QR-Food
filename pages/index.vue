@@ -33,7 +33,7 @@
 
         <hr
           class="mx-auto my-4 h-1 w-full rounded border-0 shadow-sm dark:bg-gray-300"
-        >
+        />
 
         <form
           class="p-2"
@@ -53,7 +53,7 @@
               type="email"
               class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm"
               required
-            >
+            />
           </div>
 
           <div class="mb-4 shadow-md">
@@ -66,7 +66,7 @@
               type="password"
               class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm"
               required
-            >
+            />
           </div>
 
           <button
