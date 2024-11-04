@@ -17,15 +17,15 @@
           required
         />
       </div>
-      <div class="flex justify-end">
+      <div class="flex justify-end space-x-2">
         <button
-          class="mr-2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
+          class="mr-2 w-1/2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
           @click="cancel"
         >
           Cancel
         </button>
         <button
-          class="bg-green-500 pl-2 pr-2 text-white hover:bg-green-700"
+          class="w-1/2 bg-green-500 pl-2 pr-2 text-white hover:bg-green-700"
           @click="createRestaurant"
         >
           Create

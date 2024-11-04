@@ -209,16 +209,16 @@
           <!-- Submit and Cancel Buttons -->
           <div class="flex justify-end space-x-2">
             <button
-              type="submit"
-              class="w-1/3 bg-green-500 p-2 text-white hover:bg-green-700"
-            >
-              Create Menu
-            </button>
-            <button
-              class="w-1/3 bg-red-500 p-2 text-white hover:bg-red-02"
+              class="w-1/2 bg-red-500 p-2 text-white hover:bg-red-02"
               @click="closeModal"
             >
               Cancel
+            </button>
+            <button
+              type="submit"
+              class="w-1/2 bg-green-500 p-2 text-white hover:bg-green-700"
+            >
+              Create Menu
             </button>
           </div>
         </div>
