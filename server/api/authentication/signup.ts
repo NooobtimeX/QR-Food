@@ -1,5 +1,6 @@
 import { defineEventHandler, createError, readBody } from "h3";
 import { PrismaClient, Prisma } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -25,10 +26,13 @@ export default defineEventHandler(async (event) => {
       });
     }
 
+    // Hash the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(body.password, 10);
+
     const user = await prisma.user.create({
       data: {
         email: body.email,
-        password: body.password,
+        password: hashedPassword,
       },
     });
 
@@ -39,23 +43,20 @@ export default defineEventHandler(async (event) => {
         userId: user.id,
       },
     };
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Error during user sign-up:", error);
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      // Prisma-specific errors
       throw createError({
         statusCode: 500,
         statusMessage: `Prisma error: ${error.message}`,
       });
     } else if (error instanceof Error) {
-      // General errors
       throw createError({
         statusCode: 500,
         statusMessage: error.message || "Internal Server Error",
       });
     } else {
-      // Fallback for unknown error types
       throw createError({
         statusCode: 500,
         statusMessage: "Unknown error occurred",

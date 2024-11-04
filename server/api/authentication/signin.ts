@@ -1,5 +1,6 @@
 import { defineEventHandler, createError, readBody } from "h3";
 import { PrismaClient, Prisma } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -25,8 +26,9 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    // Directly compare the provided password with the stored password
-    if (body.password !== user.password) {
+    // Use bcrypt to compare provided password with hashed password in the database
+    const passwordMatch = await bcrypt.compare(body.password, user.password);
+    if (!passwordMatch) {
       throw createError({
         statusCode: 401,
         statusMessage: "Invalid email or password",
@@ -40,7 +42,7 @@ export default defineEventHandler(async (event) => {
         userId: user.id,
       },
     };
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Error during user sign-in:", error);
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
