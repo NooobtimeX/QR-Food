@@ -19,21 +19,21 @@
         <div class="mb-8 flex justify-center">
           <button
             class="rounded-lg bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
-            @click="showRestaurantModal = true"
+            @click="openRestaurantModal"
           >
             + New Restaurant
           </button>
           <button
             class="rounded-lg bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             :disabled="!ownerAccess.length"
-            @click="showBranchModal = true"
+            @click="openBranchModal"
           >
             + New Branch
           </button>
           <button
             class="rounded-lg bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             :disabled="!ownerAccess.length"
-            @click="showMenuModal = true"
+            @click="openMenuModal"
           >
             + New Menu
           </button>
@@ -41,6 +41,21 @@
 
         <!-- Menu Popup Component -->
         <CreateMenu :is-open="showMenuModal" @close="showMenuModal = false" />
+
+        <!-- Create Branch Modal Component -->
+        <CreateBranchModal
+          :isOpen="showBranchModal"
+          :ownerAccess="ownerAccess"
+          @close="showBranchModal = false"
+          @branchCreated="fetchRestaurants"
+        ></CreateBranchModal>
+
+        <!-- Create Restaurant Modal Component -->
+        <CreateRestaurantModal
+          :isOpen="showRestaurantModal"
+          @close="showRestaurantModal = false"
+          @restaurantCreated="fetchRestaurants"
+        ></CreateRestaurantModal>
 
         <!-- Restaurant and branch display -->
         <div v-if="filteredRestaurants.length" class="space-y-8">
@@ -89,101 +104,6 @@
         <p v-else class="text-xl text-black">No restaurants available.</p>
       </div>
     </div>
-
-    <!-- Modal for creating restaurant -->
-    <div
-      v-if="showRestaurantModal"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75"
-    >
-      <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h3 class="mb-4 text-center text-2xl font-bold text-black">
-          Create New Restaurant
-        </h3>
-        <div class="mb-4">
-          <label class="block font-bold text-black">Name</label>
-          <input
-            v-model="newRestaurant.name"
-            type="text"
-            class="w-full rounded-lg border border-gray-400 p-3 focus:ring"
-            required
-          />
-        </div>
-        <div class="flex justify-end">
-          <button
-            class="mr-2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
-            @click="cancelRestaurantCreation"
-          >
-            Cancel
-          </button>
-          <button
-            class="bg-green-500 pl-2 pr-2 text-white hover:bg-green-700"
-            @click="createRestaurant"
-          >
-            Create
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal for creating branch -->
-    <div
-      v-if="showBranchModal"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75"
-    >
-      <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h3 class="mb-4 text-center text-xl font-bold text-black">
-          Create New Branch
-        </h3>
-        <div class="mb-4">
-          <label class="block font-bold text-black">Branch Name</label>
-          <input
-            v-model="newBranch.name"
-            type="text"
-            class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label class="block font-bold text-black">Phone Number</label>
-          <input
-            v-model="newBranch.phoneNumber"
-            type="text"
-            class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label class="block font-bold text-black">Select Restaurant</label>
-          <select
-            v-model="newBranch.restaurantId"
-            class="w-full rounded-lg border border-gray-400 p-3 text-black focus:outline-none focus:ring-2"
-            required
-          >
-            <option
-              v-for="restaurant in ownerAccess"
-              :key="restaurant.id"
-              :value="restaurant.id"
-            >
-              {{ restaurant.name }}
-            </option>
-          </select>
-        </div>
-        <div class="flex justify-end">
-          <button
-            class="mr-2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
-            @click="cancelBranchCreation"
-          >
-            Cancel
-          </button>
-          <button
-            class="bg-green-500 pl-2 pr-2 text-white hover:bg-green-700"
-            @click="createBranch"
-          >
-            Create
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -191,7 +111,9 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
-import CreateMenu from "../../components/popup/CreateMenu.vue"; // Import the Menu Popup component
+import CreateMenu from "@/components/popup/CreateMenu.vue";
+import CreateBranchModal from "@/components/popup/CreateBranchModal.vue";
+import CreateRestaurantModal from "@/components/popup/CreateRestaurantModal.vue";
 
 // Define types
 interface Branch {
@@ -209,27 +131,17 @@ interface Restaurant {
 
 const showRestaurantModal = ref(false);
 const showBranchModal = ref(false);
+const showMenuModal = ref(false);
 const searchQuery = ref("");
-const newRestaurant = ref({ name: "" });
-const newBranch = ref({ name: "", phoneNumber: "", restaurantId: 0 });
 const ownerAccess = ref<Restaurant[]>([]);
 const staffAccess = ref<Restaurant[]>([]);
-const showMenuModal = ref(false);
 
 const router = useRouter();
 
-const cancelRestaurantCreation = () => {
-  showRestaurantModal.value = false;
-};
-
-const cancelBranchCreation = () => {
-  showBranchModal.value = false;
-};
-
 const goToDashboard = (restaurantId: number, branchId: number) => {
-  localStorage.setItem("restaurantId", restaurantId.toString()); // Save restaurantId in localStorage
-  localStorage.setItem("branchId", branchId.toString()); // Save branchId in localStorage
-  router.push(`/restaurant/dashboard`); // Redirect to the dashboard
+  localStorage.setItem("restaurantId", restaurantId.toString());
+  localStorage.setItem("branchId", branchId.toString());
+  router.push(`/restaurant/dashboard`);
 };
 
 // Computed property for filtering restaurants
@@ -263,6 +175,7 @@ const filteredRestaurants = computed(() => {
   return uniqueRestaurants;
 });
 
+// Fetch restaurants from API
 const fetchRestaurants = async () => {
   try {
     const response = await axios.get("/api/restaurant/getAllRestaurants", {
@@ -270,43 +183,23 @@ const fetchRestaurants = async () => {
     });
     ownerAccess.value = response.data.body.ownedRestaurants;
     staffAccess.value = response.data.body.staffRestaurants;
-    if (ownerAccess.value.length > 0) {
-      newBranch.value.restaurantId = ownerAccess.value[0].id;
-    }
   } catch (error) {
     console.error("Error fetching restaurants:", error);
   }
 };
 
-const createRestaurant = async () => {
-  try {
-    await axios.post("/api/restaurant/createRestaurant", {
-      name: newRestaurant.value.name,
-      userId: Number(localStorage.getItem("userId")),
-    });
-    showRestaurantModal.value = false;
-    await fetchRestaurants();
-  } catch (error) {
-    console.error("Error creating restaurant:", error);
-  }
-  fetchRestaurants();
+// Function to open branch modal after fetching restaurants
+const openRestaurantModal = async () => {
+  await fetchRestaurants();
+  showRestaurantModal.value = true;
 };
-
-const createBranch = async () => {
-  try {
-    await axios.post("/api/branch/createBranch", {
-      name: newBranch.value.name,
-      phoneNumber: newBranch.value.phoneNumber,
-      restaurantId: newBranch.value.restaurantId,
-      userId: Number(localStorage.getItem("userId")),
-    });
-    showBranchModal.value = false;
-    await fetchRestaurants();
-  } catch (error) {
-    console.error("Error creating branch:", error);
-  }
-  fetchRestaurants();
+const openBranchModal = async () => {
+  await fetchRestaurants();
+  showBranchModal.value = true;
 };
-
+const openMenuModal = async () => {
+  await fetchRestaurants();
+  showMenuModal.value = true;
+};
 onMounted(fetchRestaurants);
 </script>
