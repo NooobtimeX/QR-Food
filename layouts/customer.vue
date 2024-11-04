@@ -75,11 +75,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRoute } from "vue-router"; // Import useRoute
-import axios from "axios"; // Import axios for API requests
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
 
-const route = useRoute(); // Get the route object
+const route = useRoute();
+const router = useRouter();
 
 const restaurantName = "Res Name";
 const address = "bababa";
@@ -91,6 +92,30 @@ const showPopup = ref(false);
 // Selected option for the preset messages
 const selectedOption = ref("Request more water");
 const customMessage = ref("");
+
+// Check if the QR code is associated with a table
+const checkQrCode = async () => {
+  const qrCodeId = route.params.table;
+  try {
+    const response = await axios.get(`/api/checkQrCode/${qrCodeId}`);
+    if (response.data.success) {
+      console.log("QR Code is associated with a table");
+    } else {
+      // Show alert popup if QR code is not associated
+      alert("QR Code is not associated with any table.");
+      router.push("/"); // Redirect to the homepage
+    }
+  } catch (error) {
+    console.error("Error checking QR Code:", error);
+    alert("An error occurred. Redirecting to the homepage.");
+    router.push("/"); // Redirect if an error occurs
+  }
+};
+
+// Run checkQrCode when component is mounted
+onMounted(() => {
+  checkQrCode();
+});
 
 // Clear custom message when another option is selected
 const clearCustomMessage = () => {
@@ -122,8 +147,8 @@ const confirmNotification = async () => {
     const qrCodeId = route.params.table; // Get QR code from the URL
     // Send the message to the backend to update the table's notification
     await axios.post("/api/updateNotification", {
-      qrCodeId, // Use QR code ID directly
-      notification: message, // Send the selected or custom message
+      qrCodeId,
+      notification: message,
     });
 
     alert("Notification sent.");
