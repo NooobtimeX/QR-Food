@@ -52,9 +52,14 @@
             </div>
           </div>
         </div>
-
+        <label class="block text-gray-700">Add a Note:</label>
+        <textarea
+          v-model="orderNote"
+          placeholder="e.g., Extra spicy, no onions"
+          class="w-full rounded-md border-gray-300 p-2"
+        ></textarea>
         <!-- Quantity Control -->
-        <div class="mt-6 flex items-center justify-center space-x-4">
+        <div class="mt-2 flex items-center justify-center space-x-4">
           <button
             class="flex h-10 w-10 items-center justify-center rounded-full border bg-gray-100 text-gray-700 transition hover:bg-red-500 hover:text-white"
             @click="decrementQuantity"
@@ -71,7 +76,7 @@
         </div>
 
         <!-- Add to Cart Button -->
-        <div class="mt-8 flex justify-center">
+        <div class="mt-4 flex justify-center">
           <button
             class="w-full rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-green-600 disabled:opacity-50"
             @click="addToCart"
@@ -111,6 +116,7 @@ const emit = defineEmits(["close"]);
 const menuItem = ref(null);
 const quantity = ref(1);
 const selectedOptions = ref([]);
+const orderNote = ref("");
 
 // Close modal
 const close = () => emit("close");
@@ -167,6 +173,7 @@ const addToCart = () => {
 
     if (existingItemIndex !== -1) {
       cart[existingItemIndex].quantity += quantity.value;
+      cart[existingItemIndex].note = orderNote.value; // Update note if it exists
     } else {
       cart.push({
         key: itemKey,
@@ -174,6 +181,8 @@ const addToCart = () => {
         name: menuItem.value.name,
         price: menuItem.value.price,
         quantity: quantity.value,
+        photoUrl: menuItem.photoUrl,
+        note: orderNote.value, // Add note
         options: menuItem.value.options.map((option, index) => ({
           optionName: option.optionName,
           selectedChoice: option.choices[selectedOptions.value[index]].name,

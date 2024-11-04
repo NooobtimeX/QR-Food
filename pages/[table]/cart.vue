@@ -35,6 +35,9 @@
                   </p>
                 </div>
               </div>
+              <div v-if="product.note" class="mt-1">
+                <p class="text-sm text-gray-500">Note: {{ product.note }}</p>
+              </div>
               <p class="text-black">{{ calculateProductPrice(product) }} ฿</p>
             </div>
             <div class="flex items-center">
