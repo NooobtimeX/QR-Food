@@ -270,6 +270,9 @@ const fetchRestaurants = async () => {
     });
     ownerAccess.value = response.data.body.ownedRestaurants;
     staffAccess.value = response.data.body.staffRestaurants;
+    if (ownerAccess.value.length > 0) {
+      newBranch.value.restaurantId = ownerAccess.value[0].id;
+    }
   } catch (error) {
     console.error("Error fetching restaurants:", error);
   }
@@ -286,6 +289,7 @@ const createRestaurant = async () => {
   } catch (error) {
     console.error("Error creating restaurant:", error);
   }
+  fetchRestaurants();
 };
 
 const createBranch = async () => {
@@ -301,6 +305,7 @@ const createBranch = async () => {
   } catch (error) {
     console.error("Error creating branch:", error);
   }
+  fetchRestaurants();
 };
 
 onMounted(fetchRestaurants);
