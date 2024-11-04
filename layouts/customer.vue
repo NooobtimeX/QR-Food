@@ -1,6 +1,5 @@
 <template>
   <h1 class="mt-4 text-center text-3xl font-bold">{{ restaurantName }}</h1>
-  <p class="text-center">{{ address }}</p>
   <p class="text-center">Table: {{ tableNo }}</p>
   <div class="mx-auto max-w-5xl items-center">
     <slot />

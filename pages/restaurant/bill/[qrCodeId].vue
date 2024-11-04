@@ -138,10 +138,6 @@
     >
       <div class="w-80 rounded bg-white p-6 shadow-md">
         <h1 class="text-center text-xl font-bold">Business Name</h1>
-        <p class="text-center">1234 Main Street, Suite 567</p>
-        <p class="text-center">City Name, State 54321</p>
-        <p class="mb-4 text-center">123-456-7890</p>
-
         <div class="border-b border-t border-dashed py-2 text-center">
           <p>
             <strong>Total:</strong> {{ calculateTotalPrice(bill.orderMenus) }} ฿
