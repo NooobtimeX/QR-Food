@@ -84,7 +84,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import useFetchOrders from "@/components/customer/useFetchOrders";
+import useFetchOrders from "@/components/customer/useFetchOrders.vue";
 import axios from "axios";
 
 interface CartItem {
