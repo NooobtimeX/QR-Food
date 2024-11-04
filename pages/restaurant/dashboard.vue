@@ -2,7 +2,7 @@
   <div>
     <!-- Navbar -->
     <nav
-      class="bg-background/90 sticky top-0 z-40 mb-1 rounded-b-xl shadow-xl backdrop-blur"
+      class="bg-background/90 sticky top-0 z-40 rounded-b-xl py-4 shadow-xl backdrop-blur"
     >
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">

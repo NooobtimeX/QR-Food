@@ -14,7 +14,6 @@
     </button>
     <!-- Cart Button -->
     <a :href="`/${tableNo}/cart`">
-      <!-- Use dynamic route for table/cart -->
       <button
         class="flex h-12 w-12 items-center justify-center rounded-full bg-orange-04"
       >
@@ -29,7 +28,6 @@
       <div class="w-80 rounded-xl bg-white p-4 shadow-lg">
         <p class="text-gray-800">Call the staff for:</p>
 
-        <!-- Preset Options -->
         <select
           v-model="selectedOption"
           class="mt-2 w-full rounded border-gray-300 p-2"
@@ -44,7 +42,6 @@
           <option value="custom">Other (Specify)</option>
         </select>
 
-        <!-- Custom Message Field (only shown when 'custom' is selected) -->
         <div v-if="selectedOption === 'custom'" class="mt-2">
           <input
             v-model="customMessage"
@@ -54,7 +51,6 @@
           />
         </div>
 
-        <!-- Buttons -->
         <div class="mt-4 flex justify-between">
           <button
             class="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700"
@@ -83,8 +79,7 @@ const route = useRoute();
 const router = useRouter();
 
 const restaurantName = "Res Name";
-const address = "bababa";
-const tableNo = ref(route.params.table); // Set tableNo from route params
+const tableNo = ref(route.params.table);
 
 // Popup control
 const showPopup = ref(false);
@@ -93,47 +88,40 @@ const showPopup = ref(false);
 const selectedOption = ref("Request more water");
 const customMessage = ref("");
 
-// Check if the QR code is associated with a table
+// Function to check if the QR code is associated with a table
 const checkQrCode = async () => {
   const qrCodeId = route.params.table;
   try {
-    const response = await axios.get(`/api/checkQrCode/${qrCodeId}`);
+    const response = await axios.post(`/api/checkQrCode`, { qrCodeId });
     if (response.data.success) {
       console.log("QR Code is associated with a table");
     } else {
-      // Show alert popup if QR code is not associated
       alert("QR Code is not associated with any table.");
       router.push("/"); // Redirect to the homepage
     }
   } catch (error) {
     console.error("Error checking QR Code:", error);
     alert("An error occurred. Redirecting to the homepage.");
-    router.push("/"); // Redirect if an error occurs
+    router.push("/");
   }
 };
 
-// Run checkQrCode when component is mounted
 onMounted(() => {
   checkQrCode();
 });
 
-// Clear custom message when another option is selected
 const clearCustomMessage = () => {
   customMessage.value = "";
 };
 
-// Close the popup
 const closePopup = () => {
   showPopup.value = false;
   selectedOption.value = "";
   customMessage.value = "";
 };
 
-// Confirm notification to call staff
 const confirmNotification = async () => {
   let message = selectedOption.value;
-
-  // If the custom option is selected, use the custom message instead
   if (selectedOption.value === "custom") {
     message = customMessage.value;
   }
@@ -144,15 +132,14 @@ const confirmNotification = async () => {
   }
 
   try {
-    const qrCodeId = route.params.table; // Get QR code from the URL
-    // Send the message to the backend to update the table's notification
+    const qrCodeId = route.params.table;
     await axios.post("/api/updateNotification", {
       qrCodeId,
       notification: message,
     });
 
     alert("Notification sent.");
-    closePopup(); // Close the popup after sending the message
+    closePopup();
   } catch (error) {
     console.error("Failed to send notification:", error);
   }
