@@ -17,14 +17,14 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    // Your logic for fetching restaurants
+    // Fetch restaurants where the user has a direct relationship
     const restaurants = await prisma.restaurant.findMany({
       where: {
         OR: [
           {
             userRestaurantRoles: {
               some: {
-                userId: Number(userId), // Make sure userId is a number
+                userId: Number(userId), // Direct relation to the restaurant
               },
             },
           },
@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
               some: {
                 userBranchRoles: {
                   some: {
-                    userId: Number(userId), // Filter branches by userId
+                    userId: Number(userId), // Direct relation to a branch
                   },
                 },
               },
@@ -42,7 +42,10 @@ export default defineEventHandler(async (event) => {
         ],
       },
       include: {
-        userRestaurantRoles: true,
+        userRestaurantRoles: {
+          where: { userId: Number(userId) },
+          select: { role: true },
+        },
         branches: {
           include: {
             userBranchRoles: {
@@ -54,16 +57,39 @@ export default defineEventHandler(async (event) => {
       },
     });
 
-    // Return the response
+    // Transform data to include relation type
+    const formattedRestaurants = restaurants.map((restaurant) => {
+      const isDirectRestaurantRelation =
+        restaurant.userRestaurantRoles.length > 0;
+
+      // Map branches to add relation type for branch relations
+      const formattedBranches = restaurant.branches.map((branch) => ({
+        ...branch,
+        relationType: branch.userBranchRoles.length > 0 ? "branch" : null,
+        userBranchRoles: branch.userBranchRoles, // keep the role information
+      }));
+
+      return {
+        ...restaurant,
+        relationType: isDirectRestaurantRelation ? "restaurant" : "branch",
+        branches: formattedBranches,
+      };
+    });
+
+    // Separate out owned and staff restaurants for better structure
+    const ownedRestaurants = formattedRestaurants.filter(
+      (restaurant) => restaurant.relationType === "restaurant",
+    );
+    const staffRestaurants = formattedRestaurants.filter(
+      (restaurant) => restaurant.relationType === "branch",
+    );
+
+    // Return the response with additional metadata
     return {
       statusCode: 200,
       body: {
-        ownedRestaurants: restaurants.filter(
-          (r) => r.userRestaurantRoles.length > 0,
-        ),
-        staffRestaurants: restaurants.filter((r) =>
-          r.branches.some((branch) => branch.userBranchRoles.length > 0),
-        ),
+        ownedRestaurants,
+        staffRestaurants,
       },
     };
   } catch (error) {

@@ -80,20 +80,42 @@
                 @click="goToDashboard(restaurant.id, branch.id)"
               >
                 <p class="text-lg text-black">
-                  <span class="font-bold">Branch :</span> {{ branch.name }}
+                  <span class="font-bold">Branch:</span> {{ branch.name }}
                 </p>
                 <p class="text-lg text-black">
-                  <span class="font-bold">Phone Number :</span>
+                  <span class="font-bold">Phone Number:</span>
                   {{ branch.phoneNumber }}
                 </p>
                 <p class="text-lg text-black">
-                  <span class="font-bold">Role :</span>
+                  <span class="font-bold">Role:</span>
                   <span class="text-black">
-                    {{
-                      branch.userBranchRoles.length
-                        ? branch.userBranchRoles[0].role
-                        : "No role assigned"
-                    }}
+                    <!-- Display branch role if available, otherwise fallback to restaurant role -->
+                    <template
+                      v-if="
+                        branch.userBranchRoles &&
+                        branch.userBranchRoles.length > 0
+                      "
+                    >
+                      {{
+                        branch.userBranchRoles
+                          .map((role) => role.role)
+                          .join(", ")
+                      }}
+                    </template>
+                    <template
+                      v-else-if="
+                        restaurant.userRestaurantRoles &&
+                        restaurant.userRestaurantRoles.length > 0
+                      "
+                    >
+                      {{
+                        restaurant.userRestaurantRoles
+                          .map((role) => role.role)
+                          .join(", ")
+                      }}
+                      <!-- Fallback to restaurant role -->
+                    </template>
+                    <template v-else> No role assigned </template>
                   </span>
                 </p>
               </div>
@@ -127,6 +149,7 @@ interface Restaurant {
   id: number;
   name: string;
   branches: Branch[];
+  userRestaurantRoles: { role: string }[]; // Include userRestaurantRoles to get roles
 }
 
 const showRestaurantModal = ref(false);
@@ -183,6 +206,8 @@ const fetchRestaurants = async () => {
     });
     ownerAccess.value = response.data.body.ownedRestaurants;
     staffAccess.value = response.data.body.staffRestaurants;
+    console.log("Owner Access:", ownerAccess.value);
+    console.log("Staff Access:", staffAccess.value);
   } catch (error) {
     console.error("Error fetching restaurants:", error);
   }
