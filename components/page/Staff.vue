@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="mx-auto items-center">
-      <h2 class="pb-6 text-center text-5xl font-bold text-orange-500">Staff</h2>
+      <h1>Staff</h1>
 
       <!-- Search Input -->
       <div class="mb-6 flex items-center justify-center space-x-4">

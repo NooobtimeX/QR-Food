@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="mb-4 text-2xl font-bold">Branch Dashboard</h1>
+    <h1>Dashboard</h1>
     <div class="grid grid-cols-2 gap-4">
       <TableStatusChart v-if="branchId" :branchId="branchId" />
       <MenuStatusChart v-if="branchId" :branchId="branchId" />

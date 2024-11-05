@@ -1,7 +1,7 @@
 <template>
-  <div class="my-4 rounded-lg border p-4 shadow">
+  <div class="m-auto my-4 w-full rounded-lg border p-4 shadow">
     <h2 class="mb-2 text-xl font-semibold">Menu Activity</h2>
-    <canvas ref="menuChart"></canvas>
+    <canvas ref="menuChart" class="max-h-80"></canvas>
   </div>
 </template>
 
@@ -40,6 +40,7 @@ onMounted(async () => {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: true,
     },
   });
 });

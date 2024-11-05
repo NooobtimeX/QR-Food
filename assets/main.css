@@ -20,7 +20,7 @@ main {
 
 /* Headings Styling */
 h1 {
-  @apply text-center text-4xl font-bold;
+  @apply text-center text-4xl font-bold text-orange-500;
 }
 
 h2 {

@@ -141,10 +141,7 @@
         <h2 class="text-center text-lg">Branch</h2>
         <h3 class="text-center text-base">Tel: 0971234567</h3>
         <h6></h6>
-        <div class=" border-t border-dashed  mt-2 text-center">
-        
-        </div>
-
+        <div class="mt-2 border-t border-dashed text-center"></div>
         <div class="mt-2 text-left">
           <ul>
             <li

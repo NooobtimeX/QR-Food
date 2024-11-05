@@ -12,7 +12,7 @@
 
       <!-- Category Navigation -->
       <nav
-        class="sticky top-0 z-50 flex overflow-x-auto rounded-xl border-2 border-gray-300 bg-white shadow-md"
+        class="sticky top-0 z-50 flex overflow-x-auto rounded-xl border border-orange-300 bg-white"
       >
         <div
           v-for="category in categories"
@@ -31,17 +31,20 @@
           v-for="category in categories"
           :id="category.name"
           :key="category.name"
-          class="mb-2 rounded-xl border-2 border-gray-300 p-2 shadow-md"
+          class="mb-2 rounded-xl border border-orange-300 p-2"
         >
           <h2 class="text-2xl font-bold">{{ category.name }}</h2>
           <div class="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
             <div
               v-for="menu in category.menus"
               :key="menu.id"
-              class="block cursor-pointer rounded-xl border-2 border-gray-300 bg-white p-2 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+              class="block cursor-pointer rounded-xl border border-orange-300 bg-white p-2 transition-shadow duration-300 hover:shadow-lg"
               @click="selectMenu(menu.id)"
             >
-              <img :src="menu.src" class="c-t-lg h-32 w-full object-cover" />
+              <img
+                :src="menu.photoUrl"
+                class="c-t-lg h-32 w-full object-cover"
+              />
               <div class="p-1">
                 <h2 class="text-xl font-semibold">{{ menu.name }}</h2>
                 <p class="text-black">{{ menu.price }}฿</p>
@@ -106,7 +109,7 @@ watch(
         id: menu.id,
         name: menu.name,
         price: menu.price,
-        src: menu.imageUrl,
+        photoUrl: menu.photoUrl,
       });
     });
 

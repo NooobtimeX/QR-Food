@@ -1,18 +1,20 @@
 <template>
   <div>
-    <h1 class="pb-6 text-center text-5xl font-bold text-orange-500">Order</h1>
+    <h1>Order</h1>
 
     <!-- Status Filter -->
-    <div class="mb-4 flex flex-wrap items-center space-x-4">
-      <div
+    <div class="mb-2 grid w-full grid-cols-3 gap-4">
+      <button
         v-for="status in availableStatuses"
         :key="status"
-        :class="statusFilterClass(status)"
-        class="cursor-pointer rounded-lg px-4 py-2 transition duration-200"
+        :class="[
+          'cursor-pointer rounded-lg px-4 py-2 text-center font-medium transition duration-200 hover:bg-orange-400 focus:outline-none',
+          statusFilterClass(status),
+        ]"
         @click="toggleStatusFilter(status)"
       >
         {{ status }}
-      </div>
+      </button>
     </div>
 
     <!-- Orders Table -->

@@ -1,6 +1,15 @@
 <template>
   <div>
-    <h1 class="pb-6 text-center text-5xl font-bold text-orange-04">Table</h1>
+    <h1>Table</h1>
+    <div class="mt-4 flex justify-end">
+      <button
+        class="rounded-lg bg-green-500 px-4 py-2 text-base text-white hover:bg-green-700"
+        @click="showCreateTableForm"
+      >
+        Add Table
+      </button>
+    </div>
+
     <div class="flex flex-wrap justify-start gap-4">
       <button
         v-for="table in tables"
@@ -16,14 +25,6 @@
         <p class="text-sm font-medium text-black">
           <span class="text-sm font-bold">Seat:</span> {{ table.capacity }}
         </p>
-      </button>
-    </div>
-    <div class="mt-4">
-      <button
-        class="rounded-lg bg-green-500 px-4 text-base text-white hover:bg-green-700"
-        @click="showCreateTableForm"
-      >
-        Add Table
       </button>
     </div>
   </div>
@@ -43,14 +44,14 @@
           class="rounded bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
           @click="updateTable('isReserved')"
         >
-          จองโต๊ะอาหาร
+          Reserved
         </button>
         <button
           v-if="selectedTable.status === 'isOpen'"
           class="rounded bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
           @click="updateTable('isUnavailable')"
         >
-          ใช้การไม่ได้
+          Make unavailable
         </button>
       </div>
       <div
@@ -80,13 +81,13 @@
             selectedTable = false;
           "
         >
-          สั่งอาหาร
+          Order Food
         </button>
         <button
           class="rounded bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
           @click="updateTable('isOpen', 'closeTable')"
         >
-          ปิดโต๊ะอาหาร
+          Check Bill & Close
         </button>
       </div>
       <div

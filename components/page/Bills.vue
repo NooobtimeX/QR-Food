@@ -1,15 +1,12 @@
 <template>
   <div>
-    <h1 class="pb-6 text-center text-5xl font-bold text-orange-500">Bills</h1>
+    <h1>Bills</h1>
 
     <!-- Bills Table -->
     <table class="min-w-full table-auto border-collapse rounded-md">
       <thead class="bg-orange-500 text-white">
         <tr>
           <th class="px-4 py-2 text-center text-lg font-medium">Bill ID</th>
-          <th class="px-4 py-2 text-center text-lg font-medium">
-            Total Amount
-          </th>
           <th class="px-4 py-2 text-center text-lg font-medium">
             Payment Status
           </th>
@@ -24,9 +21,6 @@
           @click="openBillDetails(bill.qrCodeId)"
         >
           <td class="px-4 py-2 text-center text-base">{{ bill.id }}</td>
-          <td class="px-4 py-2 text-center text-base">
-            {{ bill.totalAmount }} ฿
-          </td>
           <td class="px-4 py-2 text-center text-base">
             {{ bill.paymentStatus }}
           </td>
