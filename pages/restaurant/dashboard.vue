@@ -112,9 +112,11 @@
       <component :is="currentComponent" v-if="currentComponent" />
     </div>
   </div>
+  <NotificationPopUp />
 </template>
 
 <script setup lang="ts">
+import NotificationPopUp from "@/components/popup/NotificationPopUp.vue";
 import { ref, defineAsyncComponent, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
@@ -202,13 +204,6 @@ onMounted(() => {
       icon: "/icon/order.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Order.vue"),
-      ),
-    },
-    {
-      text: "Notification",
-      icon: "/icon/notification.svg",
-      component: defineAsyncComponent(
-        () => import("@/components/page/Notification.vue"),
       ),
     },
     {
