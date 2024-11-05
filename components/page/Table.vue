@@ -58,21 +58,19 @@
         class="ms-auto mt-2 grid justify-center gap-1"
       >
         <div v-if="selectedTable.qrCodeId" class="text-center">
-          <p>QR Code:</p>
-          <div id="printable-area">
-            <vue-qrcode
-              :value="`http://localhost:3000/${selectedTable.qrCodeId}`"
-              :size="128"
-              class="mx-auto"
-            />
-          </div>
-          <span>{{ "http://localhost:3000/" + selectedTable.qrCodeId }}</span>
           <button
             class="mt-2 rounded bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
-            @click="printQRCode"
+            @click="showPrintQRCode = true"
           >
             Print QR Code
           </button>
+          <PrintQRCode
+            :show="showPrintQRCode"
+            :qr-code-id="selectedTable.qrCodeId"
+            @close="showPrintQRCode = false"
+          >
+            <p>This is the content inside the modal.</p>
+          </PrintQRCode>
         </div>
 
         <button
@@ -137,6 +135,9 @@ import axios from "axios";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 import CustomerMenu from "./table/CustomerMenu.vue"; // Replaced OrderFood with CustomerMenu
 import CreateTableModal from "./table/CreateTableModal.vue"; // Import the modal component
+import PrintQRCode from "@/components/popup/PrintQRCode.vue";
+
+const showPrintQRCode = ref(false);
 
 const tables = ref([]);
 const selectedTable = ref(null);
