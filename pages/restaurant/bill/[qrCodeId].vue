@@ -138,14 +138,14 @@
     >
       <div class="w-80 rounded bg-white p-6 shadow-md">
         <h1 class="text-center text-xl font-bold">Business Name</h1>
-        <div class="border-b border-t border-dashed py-2 text-center">
-          <p>
-            <strong>Total:</strong> {{ calculateTotalPrice(bill.orderMenus) }} ฿
-          </p>
-          <p><strong>Payment Status:</strong> {{ bill.paymentStatus }}</p>
+        <h2 class="text-center text-lg">Branch</h2>
+        <h3 class="text-center text-base">Tel: 0971234567</h3>
+        <h6></h6>
+        <div class=" border-t border-dashed  mt-2 text-center">
+        
         </div>
 
-        <div class="mt-4 text-left">
+        <div class="mt-2 text-left">
           <ul>
             <li
               v-for="order in bill.orderMenus"
@@ -157,7 +157,11 @@
             </li>
           </ul>
         </div>
-
+        <div class="border-b border-dashed py-2 text-center">
+          <p>
+            <strong>Total:</strong> {{ calculateTotalPrice(bill.orderMenus) }} ฿
+          </p>
+        </div>
         <div class="mt-4 text-center">
           <p><strong>Created At:</strong> {{ formatDate(bill.createdAt) }}</p>
           <p><strong>QR Code:</strong> {{ qrCodeId }}</p>

@@ -25,7 +25,7 @@
         <h2 class="mb-4 text-2xl font-bold text-gray-800">{{ category }}</h2>
 
         <!-- Responsive Flexbox for Menus -->
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap justify-start gap-4">
           <div
             v-for="menu in menus"
             :key="menu.id"
