@@ -23,10 +23,8 @@
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "multer": "1.4.5-lts.1",
-    "nuxt": "^3.13.2",
-    "typescript": "^5.6.3",
-    "vue-chartjs": "^5.3.2",
-    "vuedraggable": "^2.24.3"
+    "nuxt": "^3.14.0",
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.0",
@@ -36,7 +34,7 @@
     "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/multer": "^1.4.12",
-    "globals": "^15.11.0",
+    "globals": "^15.12.0",
     "happy-dom": "^14.12.3",
     "playwright-core": "^1.48.2",
     "prettier": "^3.3.3",
