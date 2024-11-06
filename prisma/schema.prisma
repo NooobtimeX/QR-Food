@@ -73,7 +73,7 @@ model Table {
 model Menu {
   id           Int          @id @default(autoincrement())
   name         String
-  description  String
+  description  String?      @default("")
   price        Float
   categoryId   Int
   restaurantId Int

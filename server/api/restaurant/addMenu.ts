@@ -37,7 +37,7 @@ export default async (event: H3Event) => {
       photoUrl,
     } = body;
 
-    if (!name || !description || !price || !categoryId || !restaurantId) {
+    if (!name || !price || !categoryId || !restaurantId) {
       return createError({
         statusCode: 400,
         message: "Missing required fields",
