@@ -44,7 +44,6 @@ import axios from "axios";
 const props = defineProps({
   isOpen: { type: Boolean, required: true },
 });
-
 const emit = defineEmits(["close", "restaurantCreated"]);
 
 // Local state for new restaurant details
@@ -63,6 +62,7 @@ const createRestaurant = async () => {
     });
     emit("restaurantCreated"); // Notify parent component of successful creation
     emit("close"); // Close modal after successful creation
+    location.reload();
     resetForm();
   } catch (error) {
     console.error("Error creating restaurant:", error);
