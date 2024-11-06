@@ -4,8 +4,8 @@ import { defineEventHandler, readBody } from "h3";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
-  // Get the branchId from the request body or query params
-  const { branchId } = await readBody(event);
+  // Get branchId, startDate, and endDate from the request body
+  const { branchId, startDate, endDate } = await readBody(event);
 
   if (!branchId) {
     return { error: "branchId is required" };
@@ -14,14 +14,17 @@ export default defineEventHandler(async (event) => {
   try {
     const bills = await prisma.bill.findMany({
       where: {
-        branchId: Number(branchId), // Filter by branchId
+        branchId: Number(branchId),
+        createdAt: {
+          gte: new Date(startDate), // Greater than or equal to startDate
+          lte: new Date(endDate), // Less than or equal to endDate
+        },
       },
       select: {
         id: true,
         totalAmount: true,
-        paymentStatus: true,
         createdAt: true,
-        qrCodeId: true, // Include qrCodeId in the response
+        qrCodeId: true,
       },
     });
     return bills;
