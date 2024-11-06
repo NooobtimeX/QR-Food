@@ -1,6 +1,9 @@
 <template>
   <div class="container mx-auto p-4">
     <h1>Dashboard</h1>
+    <div>
+      <BillToday />
+    </div>
     <div class="grid grid-cols-2 gap-4">
       <TableStatusChart v-if="branchId" :branchId="branchId" />
       <MenuStatusChart v-if="branchId" :branchId="branchId" />
@@ -12,6 +15,7 @@
 import { ref, onMounted } from "vue";
 import TableStatusChart from "@/components/dashboard/TableStatusChart.vue";
 import MenuStatusChart from "@/components/dashboard/MenuStatusChart.vue";
+import BillToday from "@/components/dashboard/BillToday.vue";
 
 const branchId = ref(null);
 
