@@ -8,10 +8,10 @@
         <!-- Printable Area Start -->
         <div id="printable-area" class="p-4">
           <h2 class="text-center text-xl font-semibold">{{ title }}</h2>
-          <div class="mt-4 text-center">
-            <p><strong>Date:</strong> {{ new Date().toLocaleDateString() }}</p>
+          <div class="mt-4 text-center   ">
             <p><strong>Restaurant:</strong> {{ restaurantName }}</p>
             <p><strong>Branch:</strong> {{ branchName }}</p>
+            <p ><strong>Date:</strong> {{ new Date().toLocaleDateString() }}</p>
             <p><strong>Table:</strong> {{ tableNumber }}</p>
           </div>
           <div class="my-4 flex justify-center">

@@ -56,7 +56,7 @@
         <textarea
           v-model="orderNote"
           placeholder="e.g., Extra spicy, no onions"
-          class="w-full rounded-md border-gray-300 p-2"
+          class="w-full rounded-md border-2 border-gray-300 p-2"
         ></textarea>
         <!-- Quantity Control -->
         <div class="mt-2 flex items-center justify-center space-x-4">
