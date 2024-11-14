@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <h1>Active Menu</h1>
+  <div class="container mx-auto p-4">
+    <h1 class="pb-4">รายการอาหาร</h1>
 
     <!-- Search Input -->
-    <div class="mb-4">
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="Search menu..."
-        class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-orange-500 focus:outline-none"
-      />
+    <div class="flex justify-center mb-4 pt-4">
+      <input v-model="searchQuery" type="text" placeholder="ค้นหาเมนู..."
+        class="w-3/4 rounded-lg border border-gray-300 p-2 shadow-sm focus:border-orange-500 focus:outline-none" />
     </div>
+
 
     <!-- No Menus Message -->
     <div v-if="filteredMenus.length === 0" class="text-gray-500">
@@ -24,17 +21,10 @@
 
         <!-- Responsive Flexbox for Menus -->
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          <div
-            v-for="menu in menus"
-            :key="menu.id"
-            class="flex w-full flex-col items-center justify-between rounded-lg border bg-white p-4 shadow-md transition-transform hover:scale-105"
-          >
+          <div v-for="menu in menus" :key="menu.id"
+            class="flex w-full flex-col items-center justify-between rounded-lg border bg-white p-4 shadow-md transition-transform hover:scale-105">
             <div class="flex flex-col items-center text-center">
-              <img
-                :src="menu.photoUrl"
-                alt="Menu photo"
-                class="mx-auto mb-2 max-h-40 w-full rounded-lg object-cover"
-              />
+              <img :src="menu.photoUrl" alt="Menu photo" class="mx-auto mb-2 max-h-40 w-full rounded-lg object-cover" />
               <h3 class="mb-1 text-xl font-semibold text-gray-900">
                 {{ menu.name }}
               </h3>
@@ -44,18 +34,11 @@
               </p>
             </div>
             <!-- Toggle Status -->
-            <label
-              class="relative mt-1 inline-flex cursor-pointer items-center"
-            >
-              <input
-                type="checkbox"
-                class="peer sr-only"
-                :checked="menu.isActive"
-                @change="toggleMenuStatus(menu.id, !menu.isActive)"
-              />
+            <label class="relative mt-1 inline-flex cursor-pointer items-center">
+              <input type="checkbox" class="peer sr-only" :checked="menu.isActive"
+                @change="toggleMenuStatus(menu.id, !menu.isActive)" />
               <div
-                class="h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-focus:ring-4 peer-focus:ring-green-300"
-              />
+                class="h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-focus:ring-4 peer-focus:ring-green-300" />
               <span class="ml-3 text-sm font-medium text-gray-900">
                 {{ menu.isActive ? "On" : "Off" }}
               </span>

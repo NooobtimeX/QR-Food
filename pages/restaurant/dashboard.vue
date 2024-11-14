@@ -45,13 +45,13 @@
               <a
                 v-for="item in menuItems"
                 :key="item.text"
-                :class="{
+                :class="{ 
                   'bg-orange-600 text-white':
                     currentComponentText === item.text,
                   'text-gray-500 hover:text-orange-600':
                     currentComponentText !== item.text,
                 }"
-                class="mx-auto flex cursor-pointer flex-col items-center rounded-md px-3 py-2 text-sm font-medium"
+                class="mx-auto flex cursor-pointer flex-col items-center rounded-md px-3 py-2 text-sm font-semibold"
                 @click="selectComponent(item)"
               >
                 <img width="25px" height="25px" :src="item.icon" class="mb-1" />
@@ -186,42 +186,42 @@ async function checkRestaurantAndBranch(
 onMounted(() => {
   menuItems.value = [
     {
-      text: "Dashboard",
+      text: "แดชบอร์ด",
       icon: "/icon/dashboard.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Dashboard.vue"),
       ),
     },
     {
-      text: "Table",
+      text: "โต๊ะอาหาร",
       icon: "/icon/table.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Table.vue"),
       ),
     },
     {
-      text: "Order",
+      text: "ออเดอร์",
       icon: "/icon/order.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Order.vue"),
       ),
     },
     {
-      text: "Menu",
+      text: "รายการอาหาร",
       icon: "/icon/menu.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Menu.vue"),
       ),
     },
     {
-      text: "Bills",
+      text: "บิลส์",
       icon: "/icon/bill.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Bills.vue"),
       ),
     },
     {
-      text: "Staff",
+      text: "พนักงาน",
       icon: "/icon/staff.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Staff.vue"),

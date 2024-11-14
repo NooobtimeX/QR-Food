@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <h1 class="mb-4 text-2xl font-bold">Bills</h1>
+  <div class="container mx-auto p-4">
+    <h1 class="pb-4">บิลส์</h1>
 
     <!-- Date Controls with Custom Ranges -->
-    <div class="mb-4 flex items-center space-x-4">
+    <div class="mb-4 flex items-center space-x-4 pt-2 w-1/3 pb-2">
       <VueDatePicker
         v-model="selected"
         range
         placeholder="Choose date range"
         :close-on-select="true"
-        class="rounded-md bg-orange-500 p-1 text-white hover:bg-orange-600"
+        class="rounded-md bg-gray-300 p-1 text-white hover:bg-gray-500"
       />
     </div>
 
     <!-- Bills Table -->
-    <table class="min-w-full table-auto border-collapse rounded-md">
+    <table class="min-w-full table-auto border-collapse rounded-md ">
       <thead class="bg-orange-500 text-white">
         <tr>
           <th class="px-4 py-2 text-center text-lg font-medium">Bill ID</th>

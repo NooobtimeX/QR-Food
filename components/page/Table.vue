@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>Table</h1>
-    <div class="mt-4 flex justify-end">
+  <div class="container mx-auto p-4">
+    <h1 class="pb-4">โต๊ะอาหาร</h1>
+    <div class="mt-4 flex justify-start pb-2">
       <button
         class="rounded-lg bg-green-500 px-4 py-2 text-base text-white hover:bg-green-700"
         @click="showCreateTableForm"
