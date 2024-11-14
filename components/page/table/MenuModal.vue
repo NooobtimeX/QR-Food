@@ -10,12 +10,12 @@
         <!-- Image -->
         <img
           alt="ecommerce"
-          class="m-auto w-full rounded-lg border border-gray-200 object-cover object-center"
-          :src="menuItem?.img"
+          class="m-auto aspect-auto max-h-80 w-full rounded-lg border border-gray-200 object-cover object-center"
+          :src="menuItem?.photoUrl"
         />
 
         <!-- Item Name and Price -->
-        <h1 class="mt-6 text-2xl font-bold text-gray-800">
+        <h1 class="mt-2 text-2xl font-bold text-gray-800">
           {{ menuItem?.name }}
         </h1>
         <span class="mt-2 block text-xl font-semibold text-green-600"
@@ -54,7 +54,7 @@
         </div>
 
         <!-- Quantity Control -->
-        <div class="mt-6 flex items-center justify-center space-x-4">
+        <div class="mt-2 flex items-center justify-center space-x-4">
           <button
             class="flex h-10 w-10 items-center justify-center rounded-full border bg-gray-100 text-gray-700 transition hover:bg-red-500 hover:text-white"
             @click="decrementQuantity"
@@ -69,9 +69,22 @@
             +
           </button>
         </div>
+        <!-- Write Note Section -->
+        <div class="mt-2">
+          <label for="note" class="block text-sm font-semibold text-gray-700"
+            >Write Note</label
+          >
+          <textarea
+            id="note"
+            v-model="note"
+            class="mt-2 w-full rounded-lg border border-gray-300 p-2 text-gray-700 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200"
+            rows="3"
+            placeholder="Add any special instructions or notes here..."
+          ></textarea>
+        </div>
 
         <!-- Order Button -->
-        <div class="mt-8 flex justify-center">
+        <div class="mt-2 flex justify-center">
           <button
             class="w-full rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-green-600 disabled:opacity-50"
             @click="orderNow"
@@ -112,6 +125,7 @@ const emit = defineEmits(["close"]);
 const menuItem = ref(null);
 const quantity = ref(1);
 const selectedOptions = ref([]);
+const note = ref("");
 
 // Close modal
 const close = () => emit("close");
@@ -151,13 +165,13 @@ const orderNow = async () => {
       name: menuItem.value.name,
       price: menuItem.value.price,
       quantity: quantity.value,
+      note: note.value,
       options: menuItem.value.options.map((option, index) => ({
         optionName: option.optionName,
         selectedChoice: option.choices[selectedOptions.value[index]].name,
         choicePrice: option.choices[selectedOptions.value[index]].price,
       })),
     };
-
     try {
       const response = await axios.post("/api/orderbystaff", {
         qrCodeId: props.qrCodeId,

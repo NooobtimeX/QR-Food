@@ -20,10 +20,13 @@
         </p>
       </div>
       <p class="mt-2 text-gray-600">
-        Quantity: <span class="font-semibold">{{ order.quantity }}</span>
+        Quantity: <span>{{ order.quantity }}</span>
       </p>
       <p class="text-gray-600">
-        Total Price: <span class="font-semibold">{{ order.totalPrice }} ฿</span>
+        <span>Note: {{ order.note }}</span>
+      </p>
+      <p class="text-gray-600">
+        Total Price: <span>{{ order.totalPrice }} ฿</span>
       </p>
 
       <div v-if="order.options.length > 0" class="mt-4">
@@ -58,6 +61,7 @@ interface Order {
   quantity: number;
   totalPrice: number;
   status: string;
+  note: string;
   options: Array<{
     optionName: string;
     selectedChoice: string;

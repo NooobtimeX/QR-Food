@@ -25,7 +25,8 @@
           <th class="px-4 py-2 text-center text-lg font-medium">Menu</th>
           <th class="px-4 py-2 text-center text-lg font-medium">Date</th>
           <th class="px-4 py-2 text-center text-lg font-medium">Status</th>
-          <th class="px-4 py-2 text-center text-lg font-medium">who Ordered</th>
+          <th class="px-4 py-2 text-center text-lg font-medium">Who Ordered</th>
+          <th class="px-4 py-2 text-center text-lg font-medium">Note</th>
         </tr>
       </thead>
       <tbody class="bg-gray-100 text-black">
@@ -47,6 +48,7 @@
             </span>
           </td>
           <td class="px-4 py-2 text-base">{{ order.whoOrdered }}</td>
+          <td class="px-4 py-2 text-base">{{ order.note }}</td>
         </tr>
       </tbody>
     </table>
@@ -139,6 +141,7 @@ interface Order {
   time: string;
   menuName?: string;
   menuPrice?: number;
+  note: string;
 }
 
 const orders = ref<Order[]>([]);

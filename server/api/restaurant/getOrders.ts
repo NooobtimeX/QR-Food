@@ -41,6 +41,7 @@ export default defineEventHandler(async (event) => {
       time: order.createdAt, // Assuming createdAt is the order time
       menuName: order.name, // Assuming 'name' is the menu name in OrderMenu
       menuPrice: order.totalPrice, // Assuming 'totalPrice' is the menu price
+      note: order.note, // Assuming 'note' is the order note
       whoOrdered: order.whoOrdered,
       items: order.orderOptions.map((option) => ({
         optionName: option.name, // Name of the option

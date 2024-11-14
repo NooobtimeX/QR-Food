@@ -47,6 +47,7 @@ export default defineEventHandler(async (event) => {
         quantity: order.quantity,
         totalPrice: order.totalPrice,
         status: order.status, // Ensure this field is included
+        note: order.note, // Ensure this field is included
         options: order.orderOptions.map((option) => ({
           optionName: option.name,
           selectedChoice: option.selectedChoice,
