@@ -20,6 +20,9 @@
           <th class="px-4 py-2 text-center text-lg font-medium">Bill ID</th>
           <th class="px-4 py-2 text-center text-lg font-medium">QR Code ID</th>
           <th class="px-4 py-2 text-center text-lg font-medium">Created At</th>
+          <th class="px-4 py-2 text-center text-lg font-medium">
+            Total Amount
+          </th>
         </tr>
       </thead>
       <tbody class="bg-gray-100 text-black">
@@ -33,6 +36,9 @@
           <td class="px-4 py-2 text-center text-base">{{ bill.qrCodeId }}</td>
           <td class="px-4 py-2 text-center text-base">
             {{ new Date(bill.createdAt).toLocaleString() }}
+          </td>
+          <td class="px-4 py-2 text-center text-base">
+            {{ bill.totalAmount }} ฿
           </td>
         </tr>
       </tbody>
@@ -52,6 +58,7 @@ interface Bill {
   id: number;
   qrCodeId: string;
   createdAt: string;
+  totalAmount: number;
 }
 
 const bills = ref<Bill[]>([]);

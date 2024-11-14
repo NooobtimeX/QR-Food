@@ -17,7 +17,7 @@
       <div class="mb-6">
         <p class="text-lg font-semibold">
           <strong>Total Amount:</strong>
-          {{ calculateTotalPrice(bill.orderMenus) }} ฿
+          {{ bill.totalAmount }} ฿
         </p>
         <p class="text-lg font-semibold">
           <strong>Payment Status:</strong>
@@ -46,7 +46,9 @@
           </thead>
           <tbody class="bg-gray-100">
             <tr
-              v-for="order in bill.orderMenus"
+              v-for="order in bill.orderMenus.filter(
+                (order) => order.status === 'finish',
+              )"
               :key="order.id"
               class="border-b border-gray-200 hover:bg-gray-200"
             >
@@ -99,22 +101,21 @@
     <!-- Hidden Bill Print Content for actual printing -->
     <div id="printableBill" class="hidden">
       <div class="w-80 rounded bg-white p-6 shadow-md">
-        <h1 class="text-center text-xl font-bold">Business Name</h1>
-        <p class="text-center">1234 Main Street, Suite 567</p>
-        <p class="text-center">City Name, State 54321</p>
-        <p class="mb-4 text-center">123-456-7890</p>
-
+        <h1 class="text-center text-xl font-bold">
+          {{ bill.branch.restaurant.name }}
+        </h1>
+        <h2 class="text-center text-lg">{{ bill.branch.name }}</h2>
         <div class="border-b border-t border-dashed py-2 text-center">
-          <p>
-            <strong>Total:</strong> {{ calculateTotalPrice(bill.orderMenus) }} ฿
-          </p>
+          <p><strong>Total Amount:</strong> {{ bill.totalAmount }} ฿</p>
           <p><strong>Payment Status:</strong> {{ bill.paymentStatus }}</p>
         </div>
 
         <div class="mt-4 text-left">
           <ul>
             <li
-              v-for="order in bill.orderMenus"
+              v-for="order in bill.orderMenus.filter(
+                (order) => order.status === 'finish',
+              )"
               :key="order.id"
               class="flex justify-between"
             >
@@ -137,15 +138,21 @@
       class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75"
     >
       <div class="w-80 rounded bg-white p-6 shadow-md">
-        <h1 class="text-center text-xl font-bold">Business Name</h1>
-        <h2 class="text-center text-lg">Branch</h2>
-        <h3 class="text-center text-base">Tel: 0971234567</h3>
+        <h1 class="text-center text-xl font-bold">
+          {{ bill.branch.restaurant.name }}
+        </h1>
+        <h2 class="text-center text-lg">{{ bill.branch.name }}</h2>
+        <p class="mt-2 text-center">
+          <strong>Total:</strong> {{ bill.totalAmount }} ฿
+        </p>
         <h6></h6>
         <div class="mt-2 border-t border-dashed text-center"></div>
         <div class="mt-2 text-left">
           <ul>
             <li
-              v-for="order in bill.orderMenus"
+              v-for="order in bill.orderMenus.filter(
+                (order) => order.status === 'finish',
+              )"
               :key="order.id"
               class="flex justify-between"
             >
@@ -155,9 +162,7 @@
           </ul>
         </div>
         <div class="border-b border-dashed py-2 text-center">
-          <p>
-            <strong>Total:</strong> {{ calculateTotalPrice(bill.orderMenus) }} ฿
-          </p>
+          <p><strong>Total:</strong> {{ bill.totalAmount }} ฿</p>
         </div>
         <div class="mt-4 text-center">
           <p><strong>Created At:</strong> {{ formatDate(bill.createdAt) }}</p>

@@ -70,13 +70,16 @@
         <option value="cancel">cancel</option>
       </select>
 
-      <!-- Display menu name and price -->
+      <!-- Display menu name, price, and quantity -->
       <div v-if="selectedOrder.menuName && selectedOrder.menuPrice">
         <div class="font-bold">
           เมนู: <span class="font-normal">{{ selectedOrder.menuName }}</span>
         </div>
         <div class="font-bold">
           ราคา: <span class="font-normal">{{ selectedOrder.menuPrice }}฿</span>
+        </div>
+        <div class="font-bold">
+          จำนวน: <span class="font-normal">{{ selectedOrder.quantity }}</span>
         </div>
       </div>
 
@@ -130,6 +133,7 @@ interface OrderItem {
   name: string;
   options: OrderOption[];
   price: number;
+  quantity: number;
 }
 
 interface Order {
@@ -142,6 +146,7 @@ interface Order {
   menuName?: string;
   menuPrice?: number;
   note: string;
+  quantity: number;
 }
 
 const orders = ref<Order[]>([]);

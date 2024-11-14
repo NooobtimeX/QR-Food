@@ -15,7 +15,50 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    // Disconnect bill from table
+    // Fetch the bill associated with this table, including only "finish" OrderMenus and their OrderOptions
+    const bill = await prisma.bill.findFirst({
+      where: {
+        tableId: tableId,
+      },
+      include: {
+        orderMenus: {
+          where: {
+            status: "finish", // Only include completed order menus
+          },
+          include: {
+            orderOptions: true,
+          },
+        },
+      },
+    });
+
+    if (!bill) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: "Bill not found for the specified table",
+      });
+    }
+
+    // Calculate total price for only completed items
+    const totalPrice = bill.orderMenus.reduce((total, orderMenu) => {
+      // Calculate total for the base menu price
+      const menuTotal = orderMenu.totalPrice * orderMenu.quantity;
+
+      // Add the total price of options for this order menu
+      const optionsTotal = orderMenu.orderOptions.reduce((optTotal, option) => {
+        return optTotal + option.choicePrice;
+      }, 0);
+
+      return total + menuTotal + optionsTotal;
+    }, 0);
+
+    // Update bill with the calculated total amount
+    await prisma.bill.update({
+      where: { id: bill.id },
+      data: { totalAmount: totalPrice },
+    });
+
+    // Disconnect the bill from the table
     await prisma.bill.updateMany({
       where: {
         tableId: tableId,
@@ -27,7 +70,9 @@ export default defineEventHandler(async (event) => {
 
     return {
       statusCode: 200,
-      statusMessage: "Bill disconnected successfully",
+      statusMessage:
+        "Bill disconnected and total price calculated successfully",
+      totalAmount: totalPrice,
     };
   } catch (error) {
     console.error("Error disconnecting bill:", error);

@@ -40,6 +40,7 @@ export default defineEventHandler(async (event) => {
       status: order.status,
       time: order.createdAt, // Assuming createdAt is the order time
       menuName: order.name, // Assuming 'name' is the menu name in OrderMenu
+      quantity: order.quantity,
       menuPrice: order.totalPrice, // Assuming 'totalPrice' is the menu price
       note: order.note, // Assuming 'note' is the order note
       whoOrdered: order.whoOrdered,
