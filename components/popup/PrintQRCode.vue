@@ -10,7 +10,9 @@
           <h2 class="text-center text-xl font-semibold">{{ title }}</h2>
           <div class="mt-4 text-center">
             <p><strong>Date:</strong> {{ new Date().toLocaleDateString() }}</p>
-            <p><strong>Bill ID:</strong> {{ qrCodeId }}</p>
+            <p><strong>Restaurant:</strong> {{ restaurantName }}</p>
+            <p><strong>Branch:</strong> {{ branchName }}</p>
+            <p><strong>Table:</strong> {{ tableNumber }}</p>
           </div>
           <div class="my-4 flex justify-center">
             <vue-qrcode
@@ -42,9 +44,11 @@
     </div>
   </div>
 </template>
+
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, watch, ref } from "vue";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
+import axios from "axios";
 
 const props = defineProps({
   show: {
@@ -63,10 +67,17 @@ const props = defineProps({
 
 const emits = defineEmits(["close"]);
 
+// Define reactive properties for restaurant details
+const restaurantName = ref("");
+const branchName = ref("");
+const tableNumber = ref("");
+
+// Function to close the modal
 const closeModal = () => {
   emits("close");
 };
 
+// Function to print the bill
 const printBill = () => {
   const printContents = document.getElementById("printable-area").innerHTML;
   const originalBodyClass = document.body.className;
@@ -97,4 +108,34 @@ const printBill = () => {
     printWindow.close();
   };
 };
+
+// Function to fetch bill details from the API using qrCodeId
+const fetchBillDetails = async () => {
+  try {
+    // Ensure the URL path includes `/bills/`
+    const response = await axios.get(`/api/${props.qrCodeId}`);
+    const {
+      restaurantName: restName,
+      branchName: brName,
+      tableNumber: tblNumber,
+    } = response.data.body;
+
+    // Update reactive properties with the data
+    restaurantName.value = restName;
+    branchName.value = brName;
+    tableNumber.value = tblNumber;
+  } catch (error) {
+    console.error("Error fetching bill details:", error);
+  }
+};
+
+// Watch for when the modal is shown and fetch bill details
+watch(
+  () => props.show,
+  (newShow) => {
+    if (newShow) {
+      fetchBillDetails();
+    }
+  },
+);
 </script>
