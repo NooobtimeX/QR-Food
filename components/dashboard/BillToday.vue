@@ -12,12 +12,18 @@ import axios from "axios";
 const totalOpenBills = ref(0);
 
 async function fetchOpenBills() {
-  const today = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
-  const response = await axios.get(`/api/dashboard/bills?date=${today}`);
-  const bills = response.data;
+  const today = new Date().toISOString().split("T")[0];
+  const branchId = localStorage.getItem("branchId"); // Retrieve branchId from localStorage
 
-  // Calculate the total amount of open bills for today
-  totalOpenBills.value = bills.reduce((acc, bill) => acc + bill.totalAmount, 0);
+  if (!branchId) {
+    console.error("Branch ID not found in localStorage");
+    return;
+  }
+
+  const response = await axios.get(
+    `/api/dashboard/bills?date=${today}&branchId=${branchId}`,
+  );
+  totalOpenBills.value = response.data.totalOpenBills;
 }
 
 onMounted(() => {

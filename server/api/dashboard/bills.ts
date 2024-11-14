@@ -4,21 +4,21 @@ import { defineEventHandler, getQuery, createError } from "h3";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
-  // Extract the date from the query parameters
-  const query = getQuery(event) as { date?: string };
-  const { date } = query;
+  const query = getQuery(event) as { date?: string; branchId?: string };
+  const { date, branchId } = query;
 
-  if (!date) {
+  if (!date || !branchId) {
     throw createError({
       statusCode: 400,
-      statusMessage: "The 'date' query parameter is required.",
+      statusMessage:
+        "Both 'date' and 'branchId' query parameters are required.",
     });
   }
 
   try {
-    // Query open bills for the specified date
     const bills = await prisma.bill.findMany({
       where: {
+        branchId: parseInt(branchId, 10), // Convert branchId to an integer
         createdAt: {
           gte: new Date(`${date}T00:00:00Z`),
           lt: new Date(`${date}T23:59:59Z`),
@@ -26,10 +26,8 @@ export default defineEventHandler(async (event) => {
       },
     });
 
-    // Calculate the total amount of open bills for that date
     const totalAmount = bills.reduce((sum, bill) => sum + bill.totalAmount, 0);
 
-    // Return the total amount as JSON response
     return {
       date,
       totalOpenBills: totalAmount,
@@ -37,7 +35,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     throw createError({
       statusCode: 500,
-      statusMessage: "Error fetching open bills",
+      statusMessage: "Error fetching open bills for the branch",
       data: error,
     });
   }
