@@ -181,7 +181,7 @@ const addToCart = () => {
         name: menuItem.value.name,
         price: menuItem.value.price,
         quantity: quantity.value,
-        photoUrl: menuItem.photoUrl,
+        photoUrl: menuItem.value.photoUrl || "/default-image.jpg",
         note: orderNote.value, // Add note
         options: menuItem.value.options.map((option, index) => ({
           optionName: option.optionName,

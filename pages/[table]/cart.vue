@@ -14,7 +14,7 @@
           >
             <img
               class="mr-4 h-16 w-16 rounded-xl object-cover"
-              :src="product.image || '/default-image.png'"
+              :src="product.photoUrl || '/default-image.png'"
               alt="Product image"
             />
             <div class="flex-1">
@@ -90,7 +90,7 @@ import axios from "axios";
 interface CartItem {
   menuId: string;
   name: string;
-  image: string;
+  photoUrl: string;
   price: number;
   quantity: number;
   note?: string;
@@ -111,7 +111,7 @@ onMounted(() => {
       cart.value = parsedCart.map((item: any) => ({
         menuId: item.menuId,
         name: item.name,
-        image: item.image || "",
+        photoUrl: item.photoUrl || "",
         price: item.price,
         quantity: item.quantity,
         note: item.note || "",
