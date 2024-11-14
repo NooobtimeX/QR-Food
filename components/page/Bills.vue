@@ -17,11 +17,11 @@
     <table class="min-w-full table-auto border-collapse rounded-md ">
       <thead class="bg-orange-500 text-white">
         <tr>
-          <th class="px-4 py-2 text-center text-lg font-medium">Bill ID</th>
-          <th class="px-4 py-2 text-center text-lg font-medium">QR Code ID</th>
-          <th class="px-4 py-2 text-center text-lg font-medium">Created At</th>
+          <th class="px-4 py-2 text-center text-lg font-medium">หมายเลขใบเสร็จ</th>
+          <th class="px-4 py-2 text-center text-lg font-medium">หมายเลข QR Code</th>
+          <th class="px-4 py-2 text-center text-lg font-medium">วันที่</th>
           <th class="px-4 py-2 text-center text-lg font-medium">
-            Total Amount
+            ยอดรวม
           </th>
         </tr>
       </thead>

@@ -6,7 +6,7 @@
         class="rounded-lg bg-green-500 px-4 py-2 text-base text-white hover:bg-green-700"
         @click="showCreateTableForm"
       >
-        Add Table
+        เพิ่มโต๊ะอาหาร
       </button>
     </div>
 
@@ -20,10 +20,10 @@
       >
         <img src="/icon/table.svg" class="h-14 w-14" />
         <p class="mt-2 text-sm font-medium text-black">
-          <span class="text-sm font-bold">Table:</span> {{ table.name }}
+          <span class="text-sm font-bold">โต๊ะ:</span> {{ table.name }}
         </p>
         <p class="text-sm font-medium text-black">
-          <span class="text-sm font-bold">Seat:</span> {{ table.capacity }}
+          <span class="text-sm font-bold">ที่นั้ง:</span> {{ table.capacity }}
         </p>
       </button>
     </div>
@@ -36,7 +36,7 @@
   >
     <div class="w-96 rounded-lg bg-white p-4">
       <p class="text-center text-2xl text-black">
-        Table : <span class="font-bold">{{ selectedTable.name }}</span>
+        โต๊ะ : <span class="font-bold">{{ selectedTable.name }}</span>
       </p>
       <div class="ms-auto mt-2 grid justify-center gap-1">
         <button
@@ -44,14 +44,14 @@
           class="rounded bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
           @click="updateTable('isReserved')"
         >
-          Reserved
+          เปิดโต๊ะอาหาร
         </button>
         <button
           v-if="selectedTable.status === 'isOpen'"
           class="rounded bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
           @click="updateTable('isUnavailable')"
         >
-          Make unavailable
+          ปิดการใช้งานโต๊ะอาหาร
         </button>
       </div>
       <div
@@ -63,7 +63,7 @@
             class="mt-2 rounded bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
             @click="showPrintQRCode = true"
           >
-            Print QR Code
+          ปริ้น QR Code
           </button>
           <PrintQRCode
             :show="showPrintQRCode"
@@ -75,19 +75,19 @@
         </div>
 
         <button
-          class="rounded bg-orange-05 px-2 py-1 text-lg text-white hover:bg-yellow-600"
+          class="rounded bg-orange-05 px-2 py-1 text-lg text-white hover:bg-yellow-600 "
           @click="
             openCustomerMenu(selectedTable.qrCodeId);
             selectedTable = false;
           "
         >
-          Order Food
+          สั่งอาหาร
         </button>
         <button
           class="rounded bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
           @click="updateTable('isOpen', 'closeTable')"
         >
-          Check Bill & Close
+          ปิดโต๊ะอาหารและชำระเงิน
         </button>
       </div>
       <div
@@ -110,7 +110,7 @@
             isCustomerMenuVisible = false;
           "
         >
-          Close
+          ยกเลิก
         </button>
       </div>
     </div>

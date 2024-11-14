@@ -1,21 +1,21 @@
 <template>
   <div>
-    <section class="mx-auto items-center">
-      <h1>Staff</h1>
+    <section class="container mx-auto p-4">
+      <h1 class="pb-4">พนักงาน</h1>
 
       <!-- Search Input -->
-      <div class="mb-6 flex items-center justify-center space-x-4">
+      <div class="mb-6 flex items-center justify-center space-x-4 mt-4">
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Search by email..."
+          placeholder="ค้นหาด้วยอีเมล..."
           class="w-3/5 rounded-xl border border-gray-300 p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
         <button
           class="rounded-lg bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-700"
           @click="showAddModal = true"
         >
-          Add Employee
+          เพิ่มพนักงาน
         </button>
       </div>
 
@@ -26,7 +26,7 @@
         class="mb-6"
       >
         <h3 class="mb-4 text-2xl font-semibold text-gray-800">
-          {{ roleGroup.role === "owner" ? "Owners" : "Staff" }}
+          {{ roleGroup.role === "owner" ? "ผู้จัดการ" : "พนักงาน" }}
         </h3>
 
         <div class="flex flex-wrap justify-start gap-4">
@@ -39,13 +39,13 @@
               staff.email
             }}</span>
             <span class="mt-1 text-sm text-gray-500">
-              Role: {{ roleGroup.role === "owner" ? "Owner" : "Staff" }}
+              ตำแหน่ง: {{ roleGroup.role === "owner" ? "ผู้จัดการ" : "พนักงาน" }}
             </span>
             <button
               class="mt-3 rounded bg-red-500 px-4 py-1 text-white transition duration-300 hover:bg-red-700"
               @click="deleteStaff(staff.id)"
             >
-              Delete
+              ลบ
             </button>
           </div>
         </div>

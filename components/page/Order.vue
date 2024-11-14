@@ -65,14 +65,14 @@
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
   >
     <div class="w-64 rounded-lg bg-white p-4 text-black">
-      <h2 class="pb-4 text-center">Table: {{ selectedOrder.table }}</h2>
+      <h2 class="pb-4 text-center">โต๊ะ: {{ selectedOrder.table }}</h2>
       <select
         v-model="selectedOrder.status"
         class="mb-1 w-full rounded-xl border-2 bg-gray-200"
       >
-        <option value="finish">finish</option>
-        <option value="pending">pending</option>
-        <option value="cancel">cancel</option>
+        <option value="finish">สำเร็จ</option>
+        <option value="pending">กำลังจัดเตรียม</option>
+        <option value="cancel">ยกเลิก</option>
       </select>
 
       <!-- Display menu name, price, and quantity -->
@@ -105,7 +105,7 @@
         class="mt-2 w-full rounded-xl bg-green-500 text-white hover:bg-green-700"
         @click="updateOrderStatus"
       >
-        OK
+        ยืนยัน
       </button>
 
       <!-- Close button -->
@@ -113,7 +113,7 @@
         class="mt-2 w-full rounded-xl bg-red-500 p-2 text-white hover:bg-red-700"
         @click="closePopup"
       >
-        Close
+        ยกเลิก
       </button>
     </div>
   </div>
