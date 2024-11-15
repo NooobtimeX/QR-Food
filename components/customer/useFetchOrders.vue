@@ -47,7 +47,7 @@
     </div>
   </div>
   <div v-else class="mt-8 text-center">
-    <p class="text-lg text-gray-600">No orders yet.</p>
+    <p class="text-lg text-gray-600">ยังไม่มีรายการอาหาร</p>
   </div>
 </template>
 

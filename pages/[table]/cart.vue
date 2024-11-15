@@ -5,7 +5,7 @@
         v-if="cart.length > 0"
         class="w-full rounded-xl border-2 border-gray-300 bg-white p-2 shadow-xl"
       >
-        <h1 class="text-3xl font-bold">CART</h1>
+        <h1 class="text-3xl font-bold">รถเข็น</h1>
         <div class="mb-4">
           <div
             v-for="(product, index) in cart"
@@ -62,18 +62,18 @@
         <div
           class="my-auto mb-4 flex justify-between text-lg font-bold text-black"
         >
-          <span>Total {{ cartTotal }} ฿</span>
+          <span>ยอดรวม {{ cartTotal }} ฿</span>
         </div>
       </div>
       <div class="grid gap-2 md:grid-cols-2">
         <button class="bg-orange-02 py-3 text-lg text-white" @click="orderMore">
-          ORDER MORE
+          สั่งอาหารเพิ่มเติม
         </button>
         <button
           class="bg-green-500 py-3 text-lg text-white"
           @click="confirmOrder"
         >
-          ORDER
+          สั่งอาหาร
         </button>
       </div>
       <useFetchOrders />

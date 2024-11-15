@@ -18,7 +18,7 @@
         <h1 class="mt-6 text-2xl font-bold text-gray-800">
           {{ menuItem.name }}
         </h1>
-        <span class="mt-2 block text-xl font-semibold text-green-600">
+        <span class="mt-2 block text-xl font-semibold text-green-600 text-center">
           {{ totalPrice }} ฿
         </span>
 
@@ -29,7 +29,7 @@
             :key="index"
             class="mt-4"
           >
-            <h2 class="font-semibold text-gray-700">{{ option.optionName }}</h2>
+            <h2 class=" text-gray-700">{{ option.optionName }}</h2>
             <div class="mt-2 flex flex-wrap gap-2">
               <label
                 v-for="(subOption, subIndex) in option.choices"
@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-        <label class="block text-gray-700">Add a Note:</label>
+        <h3 class="text-gray-700">เพิ่มโน๊ต</h3>
         <textarea
           v-model="orderNote"
           placeholder="e.g., Extra spicy, no onions"
@@ -81,17 +81,17 @@
             class="w-full rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-green-600 disabled:opacity-50"
             @click="addToCart"
           >
-            Add to Cart
+            เพิ่มลงรถเข็น
           </button>
         </div>
 
         <!-- Close Button -->
-        <div class="mt-4 flex justify-center">
+        <div class="w flex justify-center">
           <button
-            class="font-semibold text-gray-600 transition hover:text-red-500"
+            class="w-full rounded-lg bg-red-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-red-600 disabled:opacity-50"
             @click="close"
           >
-            Close
+            ยกเลิก
           </button>
         </div>
       </div>
