@@ -152,7 +152,7 @@
                 />
                 <button
                   type="button"
-                  class="bg-red-500 p-2 text-white hover:bg-red-02 w-2/12 "
+                  class="w-2/12 bg-red-500 p-2 text-white hover:bg-red-02"
                   @click="removeSection(sectionIndex)"
                 >
                   ลบ
