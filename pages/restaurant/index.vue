@@ -10,7 +10,7 @@
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Search Restaurants..."
+            placeholder="ค้นหาร้านอาหาร..."
             class="w-full max-w-md rounded-xl border border-black p-3 focus:outline-none focus:ring-2"
           />
         </div>
@@ -21,21 +21,21 @@
             class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             @click="openRestaurantModal"
           >
-            + New Restaurant
+            + เพิ่มร้านอาหาร
           </button>
           <button
             class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             :disabled="!ownerAccess.length"
             @click="openBranchModal"
           >
-            + New Branch
+            + เพิ่มสาขา
           </button>
           <button
             class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             :disabled="!ownerAccess.length"
             @click="openMenuModal"
           >
-            + New Menu
+            + เพิ่มเมนู
           </button>
         </div>
 
@@ -80,14 +80,14 @@
                 @click="goToDashboard(restaurant.id, branch.id)"
               >
                 <p class="text-lg text-black">
-                  <span class="font-bold">Branch:</span> {{ branch.name }}
+                  <span class="font-bold">สาขา:</span> {{ branch.name }}
                 </p>
                 <p class="text-lg text-black">
-                  <span class="font-bold">Phone Number:</span>
+                  <span class="font-bold">เบอร์โทร:</span>
                   {{ branch.phoneNumber }}
                 </p>
                 <p class="text-lg text-black">
-                  <span class="font-bold">Role:</span>
+                  <span class="font-bold">ตำแหน่ง:</span>
                   <span class="text-black">
                     <!-- Display branch role if available, otherwise fallback to restaurant role -->
                     <template

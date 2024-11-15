@@ -6,10 +6,10 @@
   >
     <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
       <h3 class="mb-4 text-center text-2xl font-bold text-black">
-        Create New Restaurant
+        สร้างร้านอาหาร
       </h3>
       <div class="mb-4">
-        <label class="block font-bold text-black">Name</label>
+        <label class="block font-bold text-black">ชื่อร้านอาหาร</label>
         <input
           v-model="newRestaurant.name"
           type="text"
@@ -22,13 +22,13 @@
           class="mr-2 w-1/2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
           @click="cancel"
         >
-          Cancel
+          ยกเลิก
         </button>
         <button
           class="w-1/2 bg-green-500 pl-2 pr-2 text-white hover:bg-green-700"
           @click="createRestaurant"
         >
-          Create
+          สร้าง
         </button>
       </div>
     </div>

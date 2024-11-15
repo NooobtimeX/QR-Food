@@ -8,7 +8,7 @@
         class="rounded-xl bg-red-500 p-2 text-white shadow-xl hover:bg-red-02"
         @click="signOut"
       >
-        Log out
+        ออกจากระบบ
       </button>
     </div>
   </nav>

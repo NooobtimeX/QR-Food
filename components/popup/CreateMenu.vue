@@ -7,13 +7,13 @@
       class="relative max-h-[75vh] overflow-y-auto rounded-lg bg-white p-4 shadow-lg"
     >
       <h1 class="mb-5 text-center text-3xl font-bold text-black">
-        Create Menu
+        สร้างเมนูอาหาร
       </h1>
       <form @submit.prevent="submitForm">
         <!-- Restaurant Selection -->
         <div>
           <label for="restaurant" class="block text-sm font-bold text-black"
-            >Select Restaurant</label
+            >เลือกร้านอาหาร</label
           >
           <select
             id="restaurant"
@@ -38,14 +38,14 @@
           <div class="flex space-x-4">
             <div class="w-4/5">
               <label for="menu-name" class="block text-sm font-bold text-black"
-                >Menu Name</label
+                >ชื่อเมนูอาหาร</label
               >
               <input
                 id="menu-name"
                 v-model="menuName"
                 type="text"
                 class="mt-1 block w-full border-gray-400 p-2 shadow-sm"
-                placeholder="Enter menu name"
+                placeholder="กรอกชื่อร้านอาหาร"
                 aria-required="true"
                 required
               />
@@ -54,14 +54,14 @@
               <label
                 for="price"
                 class="block border-gray-400 text-sm font-bold text-black"
-                >Price</label
+                >ราคา</label
               >
               <input
                 id="price"
                 v-model.number="price"
                 type="number"
                 class="mt-1 block w-full border-gray-400 p-2 shadow-sm"
-                placeholder="Enter price"
+                placeholder="ราคา"
                 aria-required="true"
                 required
               />
@@ -69,7 +69,7 @@
           </div>
           <div class="w-full">
             <label for="photo" class="block text-sm font-bold text-black"
-              >Photo</label
+              >รูปภาพ</label
             >
             <input
               id="photo"
@@ -90,7 +90,7 @@
           <!-- Category Selection -->
           <div>
             <label for="category" class="block text-sm font-bold text-black"
-              >Category</label
+              >หมวดหมู่อาหาร</label
             >
             <div class="flex items-center space-x-2">
               <select
@@ -114,7 +114,7 @@
                 class="bg-green-500 text-white hover:bg-green-700"
                 @click="openAddCategoryPopup"
               >
-                Add Category
+                เพิ่มหมวดหมู่อาหาร
               </button>
             </div>
           </div>
@@ -122,20 +122,20 @@
           <!-- Description -->
           <div>
             <label for="description" class="block text-sm font-bold text-black"
-              >Description</label
+              >คำอธิบาย</label
             >
             <textarea
               id="description"
               v-model="description"
               class="mt-1 block w-full rounded-lg border border-gray-400 p-2 text-black shadow-sm"
-              placeholder="Enter description e.g. Have shrimp"
+              placeholder="กรอกคำอธิบายอาหาร เช่น มีกุ้งเป็นส่วนผสม"
               aria-required="true"
             />
           </div>
 
           <!-- Sections -->
           <div>
-            <label class="block text-sm font-bold text-black">Sections</label>
+            <label class="block text-sm font-bold text-black">ตัวเลือก</label>
             <div
               v-for="(section, sectionIndex) in sections"
               :key="sectionIndex"
@@ -145,17 +145,17 @@
                 <input
                   v-model="section.name"
                   type="text"
-                  class="mb-1 block w-full border-gray-400 p-2 shadow-sm"
-                  placeholder="Section Name"
+                  class="mb-1 block w-5/6 border-gray-400 p-2 shadow-sm"
+                  placeholder="ตัวเลือก"
                   aria-required="true"
                   requiredw
                 />
                 <button
                   type="button"
-                  class="bg-red-500 p-1 text-white hover:bg-red-02"
+                  class="bg-red-500 p-2 text-white hover:bg-red-02 w-2/12 "
                   @click="removeSection(sectionIndex)"
                 >
-                  Remove
+                  ลบ
                 </button>
               </div>
 
@@ -176,7 +176,7 @@
                   v-model.number="option.price"
                   type="number"
                   class="w-3/12 border-gray-400 p-2 shadow-sm"
-                  placeholder="Option Price"
+                  placeholder="ตัวเลือกย่อย"
                   aria-required="true"
                   required
                 />
@@ -185,7 +185,7 @@
                   class="w-2/12 bg-red-500 text-white hover:bg-red-02"
                   @click="removeOption(sectionIndex, optionIndex)"
                 >
-                  Remove
+                  ลบ
                 </button>
               </div>
               <button
@@ -193,7 +193,7 @@
                 class="5 mt-2 w-full bg-green-500 p-2 text-white hover:bg-green-700"
                 @click="addOption(sectionIndex)"
               >
-                Add Option
+                เพิ่มตัวเลือกย่อย
               </button>
             </div>
             <button
@@ -201,7 +201,7 @@
               class="w-full bg-green-500 p-2 text-white hover:bg-green-700"
               @click="addSection"
             >
-              Add Section
+              เพิ่มตัวเลือก
             </button>
           </div>
 
@@ -211,13 +211,13 @@
               class="w-1/2 bg-red-500 p-2 text-white hover:bg-red-02"
               @click="closeModal"
             >
-              Cancel
+              ยกเลิก
             </button>
             <button
               type="submit"
               class="w-1/2 bg-green-500 p-2 text-white hover:bg-green-700"
             >
-              Create Menu
+              สร้าง
             </button>
           </div>
         </div>

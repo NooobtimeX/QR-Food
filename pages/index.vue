@@ -7,27 +7,27 @@
           <button
             class="m-0 flex-1 p-2"
             :class="{
-              'rounded-lg border-2 border-black bg-orange-04 text-white hover:bg-orange-03':
+              'rounded-lg border-2 border-gray-300 bg-orange-04 text-white hover:bg-orange-03':
                 showSignUp,
               'rounded-lg bg-white text-black hover:bg-white hover:text-orange-03':
                 !showSignUp,
             }"
             @click="showSignUp = true"
           >
-            REGISTER
+            สมัครสมาชิก
           </button>
           <!-- Login Button -->
           <button
             class="m-0 flex-1 p-2"
             :class="{
-              'rounded-lg border-2 border-black bg-orange-04 text-white hover:bg-orange-03':
+              'rounded-lg border-2 border-gray-300 bg-orange-04 text-white hover:bg-orange-03':
                 !showSignUp,
               'rounded-lg bg-white text-black hover:bg-white hover:text-orange-03':
                 showSignUp,
             }"
             @click="showSignUp = false"
           >
-            LOGIN
+            เข้าสู่ระบบ
           </button>
         </div>
 
@@ -40,12 +40,12 @@
           @submit.prevent="showSignUp ? handleSignup() : handleSignin()"
         >
           <h1 class="my-2 mt-1 text-center text-lg text-black md:text-2xl">
-            {{ showSignUp ? "REGISTER" : "LOGIN" }}
+            {{ showSignUp ? "สมัครสมาชิก" : "เข้าสู่ระบบ" }}
           </h1>
 
           <div class="mb-4 mt-6 shadow-md">
             <label class="block text-sm font-bold text-gray-700 md:text-base"
-              >Email</label
+              >อีเมล</label
             >
             <input
               v-model="email"
@@ -58,7 +58,7 @@
 
           <div class="mb-4 shadow-md">
             <label class="block text-sm font-bold text-gray-700 md:text-base"
-              >Password</label
+              >รหัสผ่าน</label
             >
             <input
               v-model="password"
@@ -73,7 +73,7 @@
             type="submit"
             class="mt-5 w-full rounded-lg bg-orange-04 px-4 py-2 text-white shadow-sm hover:bg-orange-03"
           >
-            {{ showSignUp ? "REGISTER" : "LOGIN" }}
+            {{ showSignUp ? "สมัครมาชิก" : "เข้าสู่ระบบ" }}
           </button>
 
           <div
