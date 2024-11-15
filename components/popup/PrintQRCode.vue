@@ -3,17 +3,23 @@
     v-if="show"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
   >
-    <div class="w-96 rounded-lg bg-white p-6">
+    <div class="w-96 rounded-lg bg-white p-4 shadow-lg">
       <div class="modal-content">
         <!-- Printable Area Start -->
-        <div id="printable-area" class="p-4">
-          <h2 class="text-center text-xl font-semibold">{{ title }}</h2>
-          <div class="mt-4 text-center   ">
-            <p><strong>Restaurant:</strong> {{ restaurantName }}</p>
-            <p><strong>Branch:</strong> {{ branchName }}</p>
-            <p ><strong>Date:</strong> {{ new Date().toLocaleDateString() }}</p>
-            <p><strong>Table:</strong> {{ tableNumber }}</p>
+        <div id="printable-area" class="rounded-md border border-gray-300 p-4">
+          <!-- Header -->
+          <div class="border-b border-gray-300 pb-2 text-center">
+            <h2 class="text-xl font-bold">{{ restaurantName }}</h2>
           </div>
+          <!-- Bill Details -->
+          <div class="mt-4">
+            <p class="text-left"><strong>สาขา:</strong> {{ branchName }}</p>
+            <p class="text-left">
+              <strong>วันที่:</strong> {{ new Date().toLocaleDateString() }}
+            </p>
+            <p class="text-left"><strong>โต๊ะ:</strong> {{ tableNumber }}</p>
+          </div>
+          <!-- QR Code -->
           <div class="my-4 flex justify-center">
             <vue-qrcode
               :value="`http://localhost:3000/${qrCodeId}`"
@@ -21,21 +27,23 @@
               tag="img"
             />
           </div>
-          <p class="text-center text-sm text-gray-600">
-            Scan the QR code to order menu
+          <p class="text-center text-sm text-gray-500">
+            สแกน QR Code เพื่อสั่งเมนู
           </p>
+          <!-- Footer -->
         </div>
         <!-- Printable Area End -->
-        <div class="mt-4 flex justify-end space-x-2">
+        <!-- Buttons -->
+        <div class="mt-4 flex justify-between space-x-4">
           <button
             @click="printBill"
-            class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            class="w-1/2 rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           >
             Print
           </button>
           <button
             @click="closeModal"
-            class="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            class="w-1/2 rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
           >
             Close
           </button>
@@ -57,7 +65,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: "QR Code Bill",
+    default: "Restaurant Bill",
   },
   qrCodeId: {
     type: String,
@@ -67,35 +75,29 @@ const props = defineProps({
 
 const emits = defineEmits(["close"]);
 
-// Define reactive properties for restaurant details
 const restaurantName = ref("");
 const branchName = ref("");
 const tableNumber = ref("");
 
-// Function to close the modal
 const closeModal = () => {
   emits("close");
 };
 
-// Function to print the bill
 const printBill = () => {
   const printContents = document.getElementById("printable-area").innerHTML;
-  const originalBodyClass = document.body.className;
-
   const printWindow = window.open("", "_blank", "width=800,height=600");
   printWindow.document.open();
   printWindow.document.write(`
     <html>
       <head>
         <title>${props.title}</title>
-        <!-- Include Tailwind CSS -->
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <style>
-          /* Additional styling if needed */
-          body { margin: 0; }
+          body { margin: 0; font-family: Arial, sans-serif; }
+          .border { border: 1px solid #e5e7eb; padding: 8px; margin: 4px 0; }
         </style>
       </head>
-      <body class="${originalBodyClass}">
+      <body>
         ${printContents}
       </body>
     </html>
@@ -103,24 +105,20 @@ const printBill = () => {
   printWindow.document.close();
   printWindow.focus();
 
-  printWindow.onload = function () {
+  printWindow.onload = () => {
     printWindow.print();
     printWindow.close();
   };
 };
 
-// Function to fetch bill details from the API using qrCodeId
 const fetchBillDetails = async () => {
   try {
-    // Ensure the URL path includes `/bills/`
     const response = await axios.get(`/api/${props.qrCodeId}`);
     const {
       restaurantName: restName,
       branchName: brName,
       tableNumber: tblNumber,
     } = response.data.body;
-
-    // Update reactive properties with the data
     restaurantName.value = restName;
     branchName.value = brName;
     tableNumber.value = tblNumber;
@@ -129,13 +127,10 @@ const fetchBillDetails = async () => {
   }
 };
 
-// Watch for when the modal is shown and fetch bill details
 watch(
   () => props.show,
   (newShow) => {
-    if (newShow) {
-      fetchBillDetails();
-    }
+    if (newShow) fetchBillDetails();
   },
 );
 </script>

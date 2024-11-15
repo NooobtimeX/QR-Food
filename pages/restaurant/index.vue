@@ -18,20 +18,20 @@
         <!-- Buttons for creating restaurant or branch -->
         <div class="mb-8 flex justify-center">
           <button
-            class="rounded-lg bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
+            class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             @click="openRestaurantModal"
           >
             + New Restaurant
           </button>
           <button
-            class="rounded-lg bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
+            class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             :disabled="!ownerAccess.length"
             @click="openBranchModal"
           >
             + New Branch
           </button>
           <button
-            class="rounded-lg bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
+            class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
             :disabled="!ownerAccess.length"
             @click="openMenuModal"
           >
@@ -62,7 +62,7 @@
           <div
             v-for="restaurant in filteredRestaurants"
             :key="restaurant.id"
-            class="rounded-lg border-2 border-gray-300 bg-white p-6 shadow-xl"
+            class="rounded-xl bg-white p-6 shadow-lg"
           >
             <h3 class="mb-4 text-2xl text-black">
               {{ restaurant.name }}

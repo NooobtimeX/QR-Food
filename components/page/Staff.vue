@@ -4,7 +4,7 @@
       <h1 class="pb-4">พนักงาน</h1>
 
       <!-- Search Input -->
-      <div class="mb-6 flex items-center justify-center space-x-4 mt-4">
+      <div class="mb-6 mt-4 flex items-center justify-center space-x-4">
         <input
           v-model="searchQuery"
           type="text"
@@ -12,7 +12,7 @@
           class="w-3/5 rounded-xl border border-gray-300 p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
         <button
-          class="rounded-lg bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-700"
+          class="bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-700"
           @click="showAddModal = true"
         >
           เพิ่มพนักงาน
@@ -33,16 +33,17 @@
           <div
             v-for="staff in roleGroup.staffs"
             :key="staff.id"
-            class="flex w-full flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-md transition duration-300 hover:bg-gray-100 sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)] xl:w-[calc(20%-1rem)] 2xl:w-[calc(16.666%-1rem)]"
+            class="flex w-full flex-col items-center justify-center rounded-xl p-4 shadow-md transition duration-300 hover:bg-gray-100 sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)] xl:w-[calc(20%-1rem)] 2xl:w-[calc(16.666%-1rem)]"
           >
             <span class="text-base font-semibold text-gray-900">{{
               staff.email
             }}</span>
             <span class="mt-1 text-sm text-gray-500">
-              ตำแหน่ง: {{ roleGroup.role === "owner" ? "ผู้จัดการ" : "พนักงาน" }}
+              ตำแหน่ง:
+              {{ roleGroup.role === "owner" ? "ผู้จัดการ" : "พนักงาน" }}
             </span>
             <button
-              class="mt-3 rounded bg-red-500 px-4 py-1 text-white transition duration-300 hover:bg-red-700"
+              class="mt-3 bg-red-500 px-4 py-1 text-white transition duration-300 hover:bg-red-700"
               @click="deleteStaff(staff.id)"
             >
               ลบ

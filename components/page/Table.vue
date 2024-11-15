@@ -1,9 +1,9 @@
 <template>
   <div class="container mx-auto p-4">
     <h1 class="pb-4">โต๊ะอาหาร</h1>
-    <div class="mt-4 flex justify-start pb-2">
+    <div class="mt-4 flex justify-end pb-2">
       <button
-        class="rounded-lg bg-green-500 px-4 py-2 text-base text-white hover:bg-green-700"
+        class="` en bg-green-500 px-4 py-2 text-base text-white hover:bg-green-700"
         @click="showCreateTableForm"
       >
         เพิ่มโต๊ะอาหาร
@@ -14,7 +14,7 @@
       <button
         v-for="table in tables"
         :key="table.id"
-        class="flex h-32 w-32 max-w-xs flex-col items-center justify-center bg-gray-100 p-4 shadow-md hover:bg-gray-300"
+        class="flex h-32 w-32 max-w-xs flex-col items-center justify-center bg-gray-100 p-4 shadow-md hover:bg-gray-200"
         :class="getTableClass(table)"
         @click="selectTable(table)"
       >
@@ -34,21 +34,21 @@
     v-if="selectedTable"
     class="fixed inset-0 z-20 flex items-center justify-center bg-gray-800 bg-opacity-50"
   >
-    <div class="w-96 rounded-lg bg-white p-4">
+    <div class="w-96 rounded-lg bg-white p-3">
       <p class="text-center text-2xl text-black">
         โต๊ะ : <span class="font-bold">{{ selectedTable.name }}</span>
       </p>
       <div class="ms-auto mt-2 grid justify-center gap-1">
         <button
           v-if="canReserveTable"
-          class="rounded bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
+          class="w-full bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
           @click="updateTable('isReserved')"
         >
           เปิดโต๊ะอาหาร
         </button>
         <button
           v-if="selectedTable.status === 'isOpen'"
-          class="rounded bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
+          class="w-full bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
           @click="updateTable('isUnavailable')"
         >
           ปิดการใช้งานโต๊ะอาหาร
@@ -60,10 +60,10 @@
       >
         <div v-if="selectedTable.qrCodeId" class="text-center">
           <button
-            class="mt-2 rounded bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
+            class="mt-2 w-full bg-green-500 px-2 py-1 text-lg text-white hover:bg-green-700"
             @click="showPrintQRCode = true"
           >
-          ปริ้น QR Code
+            ปริ้น QR Code
           </button>
           <PrintQRCode
             :show="showPrintQRCode"
@@ -75,7 +75,7 @@
         </div>
 
         <button
-          class="rounded bg-orange-05 px-2 py-1 text-lg text-white hover:bg-yellow-600 "
+          class="w-full bg-orange-05 px-2 py-1 text-lg text-white hover:bg-yellow-600"
           @click="
             openCustomerMenu(selectedTable.qrCodeId);
             selectedTable = false;
@@ -84,7 +84,7 @@
           สั่งอาหาร
         </button>
         <button
-          class="rounded bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
+          class="w-full bg-red-500 p-2 px-2 py-1 text-lg text-white hover:bg-red-02"
           @click="updateTable('isOpen', 'closeTable')"
         >
           ปิดโต๊ะอาหารและชำระเงิน
@@ -95,7 +95,7 @@
         class="ms-auto mt-2 grid justify-center gap-1"
       >
         <button
-          class="rounded bg-green-600 px-2 py-1 text-lg text-white"
+          class="w-full bg-green-600 px-2 py-1 text-lg text-white"
           @click="updateTable('isOpen', 'makeAvailable')"
         >
           Make available
@@ -104,7 +104,7 @@
       <!-- Close Modal Button -->
       <div class="mt-4 flex justify-end">
         <button
-          class="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-02"
+          class="bg-red-500 px-4 py-2 text-white hover:bg-red-02"
           @click="
             selectedTable = null;
             isCustomerMenuVisible = false;

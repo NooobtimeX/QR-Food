@@ -3,26 +3,28 @@
     <h1 class="pb-4">บิลส์</h1>
 
     <!-- Date Controls with Custom Ranges -->
-    <div class="mb-4 flex items-center space-x-4 pt-2 w-1/3 pb-2">
+    <div class="mx-auto mb-4 flex w-1/2 items-center space-x-4 pb-2 pt-2">
       <VueDatePicker
         v-model="selected"
         range
         placeholder="Choose date range"
         :close-on-select="true"
-        class="rounded-md bg-gray-300 p-1 text-white hover:bg-gray-500"
+        class="rounded-xl text-white"
       />
     </div>
 
     <!-- Bills Table -->
-    <table class="min-w-full table-auto border-collapse rounded-md ">
+    <table class="min-w-full table-auto border-collapse rounded-md">
       <thead class="bg-orange-500 text-white">
         <tr>
-          <th class="px-4 py-2 text-center text-lg font-medium">หมายเลขใบเสร็จ</th>
-          <th class="px-4 py-2 text-center text-lg font-medium">หมายเลข QR Code</th>
-          <th class="px-4 py-2 text-center text-lg font-medium">วันที่</th>
           <th class="px-4 py-2 text-center text-lg font-medium">
-            ยอดรวม
+            หมายเลขใบเสร็จ
           </th>
+          <th class="px-4 py-2 text-center text-lg font-medium">
+            หมายเลข QR Code
+          </th>
+          <th class="px-4 py-2 text-center text-lg font-medium">วันที่</th>
+          <th class="px-4 py-2 text-center text-lg font-medium">ยอดรวม</th>
         </tr>
       </thead>
       <tbody class="bg-gray-100 text-black">

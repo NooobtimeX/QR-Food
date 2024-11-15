@@ -2,17 +2,20 @@
   <div
     class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50"
   >
-    <div class="relative w-full max-w-4xl rounded-lg bg-white p-4 shadow-lg">
-      <button
-        class="absolute right-4 top-4 text-black hover:text-gray-700"
-        @click="$emit('close')"
-      >
-        <span class="text-2xl">&times;</span>
-      </button>
-
+    <div
+      class="relative max-h-[90vh] min-h-[500px] w-full max-w-4xl overflow-y-auto rounded-xl bg-gray-100 p-4 shadow-lg"
+    >
+      <div class="sticky top-0 z-50 flex justify-end">
+        <button
+          class="pb-2 text-black hover:text-gray-700"
+          @click="$emit('close')"
+        >
+          <span class="text-2xl">&times;</span>
+        </button>
+      </div>
       <!-- Category Navigation -->
       <nav
-        class="sticky top-0 z-50 flex overflow-x-auto rounded-xl border border-orange-300 bg-white"
+        class="sticky top-0 z-50 flex overflow-x-auto rounded-xl bg-white shadow-lg"
       >
         <div
           v-for="category in categories"
@@ -31,14 +34,14 @@
           v-for="category in categories"
           :id="category.name"
           :key="category.name"
-          class="mb-2 rounded-xl border border-orange-300 p-2"
+          class="mb-2 rounded-xl p-2"
         >
           <h2 class="text-2xl font-bold">{{ category.name }}</h2>
           <div class="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
             <div
               v-for="menu in category.menus"
               :key="menu.id"
-              class="block cursor-pointer rounded-xl border border-orange-300 bg-white p-2 transition-shadow duration-300 hover:shadow-lg"
+              class="block cursor-pointer rounded-xl bg-white p-2 shadow-lg transition-shadow duration-300 hover:shadow-lg"
               @click="selectMenu(menu.id)"
             >
               <img
@@ -46,8 +49,10 @@
                 class="c-t-lg h-32 w-full object-cover"
               />
               <div class="p-1">
-                <h2 class="text-xl font-semibold">{{ menu.name }}</h2>
-                <p class="text-black">{{ menu.price }}฿</p>
+                <h2 class="text-center text-xl font-semibold">
+                  {{ menu.name }}
+                </h2>
+                <p class="text-center text-black">{{ menu.price }}฿</p>
               </div>
             </div>
           </div>
@@ -55,14 +60,6 @@
       </div>
 
       <!-- Additional Close Button -->
-      <div class="mt-6 flex justify-end">
-        <button
-          class="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-700"
-          @click="$emit('close')"
-        >
-          Close
-        </button>
-      </div>
 
       <!-- Modal for Menu Details -->
       <MenuModal

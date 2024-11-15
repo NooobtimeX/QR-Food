@@ -85,13 +85,13 @@
         </table>
       </div>
       <a href="/restaurant/dashboard/">
-        <button class="mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white">
-          Back
+        <button class="mt-4 bg-red-500 px-4 py-2 font-bold text-white">
+          Close
         </button>
       </a>
       <!-- Print Button -->
       <button
-        class="mt-4 rounded bg-blue-500 px-4 py-2 font-bold text-white"
+        class="mt-4 bg-green-500 px-4 py-2 font-bold text-white"
         @click="openPrintPreview"
       >
         Print Bill

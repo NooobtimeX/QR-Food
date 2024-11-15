@@ -45,13 +45,13 @@
               <a
                 v-for="item in menuItems"
                 :key="item.text"
-                :class="{ 
+                :class="{
                   'bg-orange-600 text-white':
                     currentComponentText === item.text,
                   'text-gray-500 hover:text-orange-600':
                     currentComponentText !== item.text,
                 }"
-                class="mx-auto flex cursor-pointer flex-col items-center rounded-md px-3 py-2 text-sm font-semibold"
+                class="mx-auto flex cursor-pointer flex-col items-center rounded-xl px-3 py-2 text-sm font-semibold"
                 @click="selectComponent(item)"
               >
                 <img width="25px" height="25px" :src="item.icon" class="mb-1" />
@@ -62,7 +62,7 @@
 
           <!-- Sign Out Button (Visible on larger screens) -->
           <button
-            class="hidden rounded-xl bg-red-500 p-2 text-white hover:bg-red-02 sm:block"
+            class="hidden bg-red-500 p-2 text-white hover:bg-red-02 sm:block"
             @click="changerestaurant"
           >
             เปลี่ยนร้านอาหาร
