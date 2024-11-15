@@ -120,10 +120,10 @@
                 </p>
               </div>
             </div>
-            <p v-else class="text-black">No branches available.</p>
+            <p v-else class="text-black">ไม่มีสาขาในร้านอาหารนี้</p>
           </div>
         </div>
-        <p v-else class="text-xl text-black">No restaurants available.</p>
+        <p v-else class="text-xl text-black">ไม่มีร้านอาหารที่คุณเป็นเจ้าของ</p>
       </div>
     </div>
   </div>

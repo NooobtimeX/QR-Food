@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Order</h1>
+    <h1>ออเดอร์ที่ลูกค้าสั่ง</h1>
 
     <!-- Status Filter -->
     <div class="mb-2 grid w-full grid-cols-3 gap-2">

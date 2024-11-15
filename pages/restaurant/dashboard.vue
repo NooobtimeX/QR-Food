@@ -214,7 +214,7 @@ onMounted(() => {
       ),
     },
     {
-      text: "บิลส์",
+      text: "ใบเสร็จ",
       icon: "/icon/bill.svg",
       component: defineAsyncComponent(
         () => import("@/components/page/Bills.vue"),

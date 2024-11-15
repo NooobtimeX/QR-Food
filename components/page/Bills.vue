@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="pb-4">บิลส์</h1>
+    <h1 class="pb-4">ใบเสร็จ</h1>
 
     <!-- Date Controls with Custom Ranges -->
     <div class="mx-auto mb-4 flex w-1/2 items-center space-x-4 pb-2 pt-2">
