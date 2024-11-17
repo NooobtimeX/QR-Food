@@ -32,7 +32,7 @@
           <div
             class="flex w-full flex-shrink-0 items-center justify-center sm:w-auto sm:justify-start"
           >
-            <img src="/logo/logo.png" alt="Logo" width="50px" />
+            <img src="/logo/logo.png" alt="Logo" width="60px" />
             <div class="ml-3 hidden sm:block">
               <div class="text-lg font-bold">{{ restaurantName }}</div>
               <div class="text-sm">{{ branchName }}</div>

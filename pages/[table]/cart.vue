@@ -1,9 +1,9 @@
 <template>
   <NuxtLayout name="customer">
-    <div>
+    <div class="px-2">
       <div
         v-if="cart.length > 0"
-        class="w-full rounded-xl border-2 border-gray-300 bg-white p-2 shadow-xl"
+        class="w-full rounded-xl border-2 border-gray-300 bg-white shadow-xl"
       >
         <h1 class="text-3xl font-bold">รถเข็น</h1>
         <div class="mb-4">
@@ -65,7 +65,7 @@
           <span>ยอดรวม {{ cartTotal }} ฿</span>
         </div>
       </div>
-      <div class="grid gap-2 md:grid-cols-2">
+      <div class="grid grid-cols-2 gap-1">
         <button class="bg-orange-02 py-3 text-lg text-white" @click="orderMore">
           สั่งอาหารเพิ่มเติม
         </button>
@@ -73,7 +73,7 @@
           class="bg-green-500 py-3 text-lg text-white"
           @click="confirmOrder"
         >
-          สั่งอาหาร
+          ยืนยันการสั่ง
         </button>
       </div>
       <useFetchOrders />

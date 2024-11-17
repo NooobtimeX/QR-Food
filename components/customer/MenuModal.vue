@@ -18,7 +18,9 @@
         <h1 class="mt-6 text-2xl font-bold text-gray-800">
           {{ menuItem.name }}
         </h1>
-        <span class="mt-2 block text-xl font-semibold text-green-600 text-center">
+        <span
+          class="mt-2 block text-center text-xl font-semibold text-green-600"
+        >
           {{ totalPrice }} ฿
         </span>
 
@@ -29,7 +31,7 @@
             :key="index"
             class="mt-4"
           >
-            <h2 class=" text-gray-700">{{ option.optionName }}</h2>
+            <h2 class="text-gray-700">{{ option.optionName }}</h2>
             <div class="mt-2 flex flex-wrap gap-2">
               <label
                 v-for="(subOption, subIndex) in option.choices"

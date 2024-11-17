@@ -39,13 +39,13 @@
             @click="printBill"
             class="w-1/2 rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           >
-            Print
+            ปริ้น
           </button>
           <button
             @click="closeModal"
             class="w-1/2 rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
           >
-            Close
+            ปิด
           </button>
         </div>
       </div>

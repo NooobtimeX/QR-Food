@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto max-w-7xl px-4">
     <h1 class="py-6 text-center text-3xl font-bold">
       Bill Details for QR Code: {{ qrCodeId }}
     </h1>

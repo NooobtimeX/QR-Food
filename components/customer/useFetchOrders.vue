@@ -1,13 +1,15 @@
 <template>
   <div v-if="orders.length > 0" class="mt-8">
-    <h2 class="mb-6 text-3xl font-bold text-gray-800">Your Orders</h2>
+    <h2 class="mb-6 text-3xl font-bold text-gray-800">รายการที่สั่ง</h2>
     <div
       v-for="(order, index) in orders"
       :key="index"
-      class="my-4 rounded-lg border border-gray-300 bg-white p-6 shadow-md"
+      class="my-2 rounded-lg border border-gray-300 bg-white p-6 shadow-md"
     >
       <div class="flex items-center justify-between">
-        <h3 class="text-xl font-semibold text-gray-700">{{ order.name }}</h3>
+        <h3 class="text-xl font-semibold text-gray-700">
+          {{ order.name }} x {{ order.quantity }}
+        </h3>
         <p
           :class="{
             'text-green-500': order.status === 'finish',
@@ -19,18 +21,7 @@
           {{ order.status }}
         </p>
       </div>
-      <p class="mt-2 text-gray-600">
-        Quantity: <span>{{ order.quantity }}</span>
-      </p>
-      <p class="text-gray-600">
-        <span>Note: {{ order.note }}</span>
-      </p>
-      <p class="text-gray-600">
-        Total Price: <span>{{ order.totalPrice }} ฿</span>
-      </p>
-
-      <div v-if="order.options.length > 0" class="mt-4">
-        <h4 class="text-lg font-semibold text-gray-700">Options:</h4>
+      <div v-if="order.options.length > 0" class="mt-1">
         <ul class="mt-2 space-y-1">
           <li
             v-for="(option, idx) in order.options"
@@ -44,6 +35,12 @@
           </li>
         </ul>
       </div>
+      <p class="text-gray-600">
+        <span class="text-green-600">{{ order.note }}</span>
+      </p>
+      <p class="text-gray-600">
+        ราคา: <span>{{ order.totalPrice }} ฿</span>
+      </p>
     </div>
   </div>
   <div v-else class="mt-8 text-center">

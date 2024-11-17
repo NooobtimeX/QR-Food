@@ -17,7 +17,7 @@
       </button>
     </div>
     <!-- Orders Table -->
-    <table class="min-w-full table-auto border-collapse rounded-md">
+    <table class="mx-auto table-auto border-collapse rounded-md">
       <thead class="bg-orange-500 text-white">
         <tr>
           <th class="px-4 py-2 text-center text-lg font-medium">โต๊ะอาหาร</th>
