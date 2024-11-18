@@ -16,7 +16,7 @@
     <div v-if="bill" class="mt-4">
       <div class="overflow-x-auto">
         <table
-          class="mx-auto min-w-[1000px] table-auto border-collapse rounded-lg border border-gray-300 shadow-sm"
+          class="mx-auto min-w-[100vh] table-auto border-collapse rounded-lg border border-gray-300 shadow-sm"
         >
           <thead class="bg-orange-500 text-white">
             <tr>
@@ -71,7 +71,7 @@
         </p>
       </div>
     </div>
-    <div class="grid grid-cols-2">
+    <div class="mx-auto grid max-w-[100vh] grid-cols-2">
       <!-- Print Button -->
       <button
         class="mt-4 bg-green-500 px-4 py-2 font-bold text-white"
