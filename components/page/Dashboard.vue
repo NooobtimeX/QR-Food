@@ -5,7 +5,7 @@
       <BillToday v-if="branchId" />
       <OrderPeding v-if="branchId" :branchId="branchId" />
       <TableStatusChart v-if="branchId" :branchId="branchId" />
-      <MenuStatusChart v-if="branchId" :branchId="branchId" />
+      <OrderStatusChart v-if="branchId" :branchId="branchId" />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import TableStatusChart from "@/components/dashboard/TableStatusChart.vue";
-import MenuStatusChart from "@/components/dashboard/MenuStatusChart.vue";
+import OrderStatusChart from "~/components/dashboard/OrderStatusChart.vue";
 import BillToday from "@/components/dashboard/BillToday.vue";
 import OrderPeding from "@/components/dashboard/OrderPeding.vue";
 
@@ -23,7 +23,3 @@ onMounted(() => {
   branchId.value = localStorage.getItem("branchId") || "1"; // Fallback to branch ID 1 if not set
 });
 </script>
-
-<style scoped>
-/* Add custom styles if needed */
-</style>

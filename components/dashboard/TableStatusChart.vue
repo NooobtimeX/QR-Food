@@ -1,6 +1,6 @@
 <template>
   <div class="card m-auto w-full">
-    <h2 class="mb-2 text-xl font-semibold">Table Status</h2>
+    <h2 class="mb-2 text-xl font-semibold">สถานะโต็ะอาหาร</h2>
     <canvas ref="tableChart" class="max-h-80"></canvas>
   </div>
 </template>

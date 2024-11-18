@@ -14,10 +14,18 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const branchMenus = await prisma.branchMenu.findMany({
-    where: { branchId },
-    select: { isActive: true },
+  const orders = await prisma.orderMenu.findMany({
+    where: { bill: { branchId } },
+    select: {
+      status: true,
+      quantity: true,
+      totalPrice: true,
+      name: true,
+      note: true,
+      createdAt: true,
+      updatedAt: true,
+    },
   });
 
-  return branchMenus;
+  return orders;
 });
