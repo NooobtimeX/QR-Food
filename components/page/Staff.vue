@@ -29,11 +29,13 @@
           {{ roleGroup.role === "owner" ? "ผู้จัดการ" : "พนักงาน" }}
         </h3>
 
-        <div class="flex flex-wrap justify-start gap-4">
+        <div
+          class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+        >
           <div
             v-for="staff in roleGroup.staffs"
             :key="staff.id"
-            class="flex w-full flex-col items-center justify-center rounded-xl p-4 shadow-md transition duration-300 hover:bg-gray-100 sm:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1rem)] xl:w-[calc(20%-1rem)] 2xl:w-[calc(16.666%-1rem)]"
+            class="card flex w-full flex-col items-center justify-center"
           >
             <span class="text-base font-semibold text-gray-900">{{
               staff.email

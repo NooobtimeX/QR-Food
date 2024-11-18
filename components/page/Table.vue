@@ -179,7 +179,9 @@ const fetchTables = async () => {
     const response = await axios.get(
       `/api/restaurant/${restaurantId}/branch/${branchId}/getTableById`,
     );
-    tables.value = response.data.body || [];
+    tables.value = (response.data.body || []).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
   } catch (error) {
     console.error("Error fetching tables:", error);
   }

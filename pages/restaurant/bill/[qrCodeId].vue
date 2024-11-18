@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto max-w-7xl px-4">
     <h1 class="py-6 text-center text-3xl font-bold">
-      Bill Details for QR Code: {{ qrCodeId }}
+      บิลสำหรับ {{ qrCodeId }}
     </h1>
 
     <!-- Loading state -->
@@ -14,34 +14,16 @@
 
     <!-- Render bill details if available -->
     <div v-if="bill" class="mt-4">
-      <div class="mb-6">
-        <p class="text-lg font-semibold">
-          <strong>Total Amount:</strong>
-          {{ bill.totalAmount }} ฿
-        </p>
-        <p class="text-lg font-semibold">
-          <strong>Payment Status:</strong>
-          <span class="capitalize">{{ bill.paymentStatus }}</span>
-        </p>
-        <p class="text-lg font-semibold">
-          <strong>Created At:</strong> {{ formatDate(bill.createdAt) }}
-        </p>
-      </div>
-
-      <h2 class="mb-4 text-2xl font-bold">Order Menus:</h2>
-
       <div class="overflow-x-auto">
         <table
-          class="min-w-full table-auto border-collapse rounded-lg border border-gray-300 shadow-sm"
+          class="mx-auto min-w-[1000px] table-auto border-collapse rounded-lg border border-gray-300 shadow-sm"
         >
           <thead class="bg-orange-500 text-white">
             <tr>
-              <th class="px-4 py-2 text-center">Order Name</th>
-              <th class="px-4 py-2 text-center">Quantity</th>
-              <th class="px-4 py-2 text-center">Base Price</th>
-              <th class="px-4 py-2 text-center">Status</th>
-              <th class="px-4 py-2 text-center">Order Options</th>
-              <th class="px-4 py-2 text-center">Option Price</th>
+              <th class="px-4 py-2 text-center">รายการอาหาร</th>
+              <th class="px-4 py-2 text-center">ราคา</th>
+              <th class="px-4 py-2 text-center">ตัวเลือกเพิ่มเติม</th>
+              <th class="px-4 py-2 text-center">ราคาตัวเลือก</th>
             </tr>
           </thead>
           <tbody class="bg-gray-100">
@@ -52,23 +34,21 @@
               :key="order.id"
               class="border-b border-gray-200 hover:bg-gray-200"
             >
-              <td class="px-4 py-2 text-center">{{ order.name }}</td>
-              <td class="px-4 py-2 text-center">{{ order.quantity }}</td>
-              <td class="px-4 py-2 text-center">{{ order.totalPrice }} ฿</td>
-              <td class="px-4 py-2 text-center capitalize">
-                {{ order.status }}
+              <td class="px-4 py-2 text-center">
+                {{ order.name }} x{{ order.quantity }}
               </td>
+              <td class="px-4 py-2 text-center">{{ order.totalPrice }} ฿</td>
 
               <!-- Order Options -->
               <td class="px-4 py-2">
-                <ul
+                <div
                   v-if="order.orderOptions.length"
                   class="list-inside list-disc"
                 >
-                  <li v-for="option in order.orderOptions" :key="option.id">
+                  <div v-for="option in order.orderOptions" :key="option.id">
                     {{ option.name }} ({{ option.selectedChoice }})
-                  </li>
-                </ul>
+                  </div>
+                </div>
                 <p v-else class="text-center">No options</p>
               </td>
 
@@ -84,20 +64,28 @@
           </tbody>
         </table>
       </div>
-      <a href="/restaurant/dashboard/">
-        <button class="mt-4 bg-red-500 px-4 py-2 font-bold text-white">
-          Close
-        </button>
-      </a>
+      <div class="my-3">
+        <p class="max-w-5xl text-end text-lg font-semibold">
+          <strong>ราคารวม</strong>
+          {{ bill.totalAmount }} ฿
+        </p>
+      </div>
+    </div>
+    <div class="grid grid-cols-2">
       <!-- Print Button -->
       <button
         class="mt-4 bg-green-500 px-4 py-2 font-bold text-white"
         @click="openPrintPreview"
       >
-        Print Bill
+        ปริ้น
+      </button>
+      <button
+        class="mt-4 bg-red-500 px-4 py-2 font-bold text-white"
+        @click="goBack"
+      >
+        ปิด
       </button>
     </div>
-
     <!-- Hidden Bill Print Content for actual printing -->
     <div id="printableBill" class="hidden">
       <div class="w-80 rounded bg-white p-6 shadow-md">
@@ -169,18 +157,15 @@
           <p><strong>QR Code:</strong> {{ qrCodeId }}</p>
         </div>
 
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 grid grid-cols-2">
           <button
-            class="rounded bg-gray-300 px-4 py-2"
-            @click="closePrintPreview"
-          >
-            Cancel
-          </button>
-          <button
-            class="rounded bg-blue-500 px-4 py-2 text-white"
+            class="bg-green-500 px-4 py-2 text-white"
             @click="printPreview"
           >
             Print
+          </button>
+          <button class="bg-red-500 px-4 py-2" @click="closePrintPreview">
+            Cancel
           </button>
         </div>
       </div>
@@ -214,24 +199,8 @@ const openPrintPreview = () => {
 const closePrintPreview = () => {
   showPrintPreview.value = false;
 };
-
-// Function to calculate total price (including options)
-const calculateTotalPrice = (orderMenus) => {
-  let total = 0;
-
-  // Loop through each order menu
-  orderMenus.forEach((order) => {
-    total += order.totalPrice; // Add the base price of the order
-
-    // Loop through each order option and add the option price
-    if (order.orderOptions) {
-      order.orderOptions.forEach((option) => {
-        total += option.choicePrice;
-      });
-    }
-  });
-
-  return total.toFixed(2); // Return the total price formatted to 2 decimal places
+const goBack = () => {
+  window.location = "/restaurant/dashboard/";
 };
 
 // Function to format date

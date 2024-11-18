@@ -28,7 +28,7 @@
           <div
             v-for="menu in menus"
             :key="menu.id"
-            class="flex w-full flex-col items-center justify-between rounded-xl border bg-white p-2 shadow-md transition-transform hover:scale-105"
+            class="card flex w-full flex-col items-center justify-between"
           >
             <div class="flex flex-col items-center text-center">
               <img

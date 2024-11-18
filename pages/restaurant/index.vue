@@ -62,7 +62,7 @@
           <div
             v-for="restaurant in filteredRestaurants"
             :key="restaurant.id"
-            class="rounded-xl bg-white p-6 shadow-lg"
+            class="card"
           >
             <h3 class="mb-4 text-2xl text-black">
               {{ restaurant.name }}

@@ -1,5 +1,5 @@
 <template>
-  <div class="m-auto my-4 w-full rounded-lg border p-4 shadow">
+  <div class="card m-auto my-4 w-full">
     <h2 class="mb-2 text-xl font-semibold">Table Status</h2>
     <canvas ref="tableChart" class="max-h-80"></canvas>
   </div>

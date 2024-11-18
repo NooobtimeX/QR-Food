@@ -1,5 +1,5 @@
 <template>
-  <div class="m-auto my-4 w-full rounded-lg border p-4 shadow">
+  <div class="card m-auto my-4 w-full">
     <h2 class="mb-2 text-xl font-semibold">รายได้รวมวันนี้</h2>
     <p class="text-2xl font-bold">{{ totalOpenBills }} THB</p>
   </div>

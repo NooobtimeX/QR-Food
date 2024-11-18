@@ -65,7 +65,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: "Restaurant Bill",
+    default: "QR Code",
   },
   qrCodeId: {
     type: String,

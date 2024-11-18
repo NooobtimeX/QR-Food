@@ -69,3 +69,7 @@ button {
 .scaleup {
   @apply transition-transform duration-200 hover:scale-105;
 }
+
+.card {
+  @apply rounded-xl border bg-white p-2 shadow-md;
+}

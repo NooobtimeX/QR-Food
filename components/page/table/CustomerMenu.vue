@@ -41,7 +41,7 @@
             <div
               v-for="menu in category.menus"
               :key="menu.id"
-              class="block cursor-pointer rounded-xl bg-white p-2 shadow-lg transition-shadow duration-300 hover:shadow-lg"
+              class="card block cursor-pointer"
               @click="selectMenu(menu.id)"
             >
               <img
