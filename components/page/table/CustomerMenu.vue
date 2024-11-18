@@ -3,7 +3,7 @@
     class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50"
   >
     <div
-      class="relative max-h-[90vh] min-h-[500px] w-full max-w-4xl overflow-y-auto rounded-xl bg-gray-100 p-4 shadow-lg"
+      class="relative max-h-[80vh] min-h-[500px] w-full max-w-4xl overflow-y-auto rounded-xl bg-gray-100 p-4 shadow-lg"
     >
       <div class="sticky top-0 z-50 flex justify-end">
         <button

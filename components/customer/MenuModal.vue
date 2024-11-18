@@ -4,7 +4,7 @@
     @click.self="close"
   >
     <section
-      class="w-full max-w-lg overflow-hidden rounded-xl border-2 border-gray-300 bg-white p-6 shadow-xl"
+      class="max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-xl border-2 border-gray-300 bg-white p-6 shadow-xl"
     >
       <div v-if="menuItem">
         <!-- Image -->
@@ -77,20 +77,18 @@
           </button>
         </div>
 
-        <!-- Add to Cart Button -->
-        <div class="mt-4 flex justify-center">
+        <div class="grid grid-cols-2">
+          <!-- Add to Cart Button -->
           <button
-            class="w-full rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-green-600 disabled:opacity-50"
+            class="bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-green-600 disabled:opacity-50"
             @click="addToCart"
           >
             เพิ่มลงรถเข็น
           </button>
-        </div>
 
-        <!-- Close Button -->
-        <div class="w flex justify-center">
+          <!-- Close Button -->
           <button
-            class="w-full rounded-lg bg-red-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-red-600 disabled:opacity-50"
+            class="bg-red-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-red-600 disabled:opacity-50"
             @click="close"
           >
             ยกเลิก

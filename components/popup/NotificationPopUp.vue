@@ -5,20 +5,11 @@
       class="fixed bottom-6 right-6 z-10 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg hover:bg-orange-600 focus:outline-none"
       @click="toggleNotificationPopup"
     >
-      <!-- Notification Icon -->
-      <svg
+      <img
+        src="/icon/notification.svg"
         class="h-8 w-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M15 17h5l-1.405-1.405C18.403 14.015 18 12.551 18 11V7a6 6 0 10-12 0v4c0 1.551-.403 3.015-1.595 4.595L3 17h5"
-        />
-      </svg>
+        alt="Notification Icon"
+      />
     </button>
 
     <!-- Notification Popup -->

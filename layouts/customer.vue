@@ -7,10 +7,10 @@
   <div class="fixed bottom-4 right-4 z-10 grid grid-cols-1 gap-2">
     <!-- Notification Button -->
     <button
-      class="flex h-12 w-12 items-center justify-center rounded-full bg-orange-04"
+      class="flex aspect-square items-center justify-center rounded-full bg-orange-04"
       @click="showPopup = true"
     >
-      <img src="/icon/notification.svg" class="h-7 w-7" />
+      <img src="/icon/notification.svg" class="h-5 w-5" />
     </button>
     <!-- Cart Button -->
     <a :href="`/${tableNo}/cart`">
