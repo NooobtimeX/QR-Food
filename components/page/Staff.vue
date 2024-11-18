@@ -63,11 +63,11 @@
         <div
           class="w-80 rounded-lg border border-gray-300 bg-white p-6 shadow-xl"
         >
-          <h2 class="mb-4 text-xl font-bold text-black">Add New Employee</h2>
+          <h2 class="mb-4 text-xl font-bold text-black">เพิ่มพนักงาน</h2>
           <form @submit.prevent="addEmployee">
             <div class="mb-4">
               <label for="email" class="block text-base font-bold text-gray-700"
-                >Email</label
+                >อีเมล</label
               >
               <input
                 id="email"
@@ -80,15 +80,15 @@
             </div>
             <div class="mb-4">
               <label for="role" class="block text-base font-bold text-gray-700"
-                >Role</label
+                >ตำแหน่ง</label
               >
               <select
                 id="role"
                 v-model="newEmployee.role"
                 class="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
-                <option value="owner">Owner</option>
-                <option value="staff">Staff</option>
+                <option value="owner">ผู้จัดการ</option>
+                <option value="staff">พนักงาน</option>
               </select>
             </div>
             <div class="flex justify-end">
@@ -97,13 +97,13 @@
                 class="mr-2 rounded-md border bg-red-500 px-4 py-2 text-white transition duration-300 hover:bg-red-700"
                 @click="showAddModal = false"
               >
-                Cancel
+                ยกเลิก
               </button>
               <button
                 type="submit"
                 class="rounded-md bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-700"
               >
-                Add Employee
+                เพิ่มพนักงาน
               </button>
             </div>
           </form>

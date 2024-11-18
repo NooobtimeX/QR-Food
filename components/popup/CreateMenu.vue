@@ -230,11 +230,11 @@
       class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
       <div class="relative max-w-md rounded-lg bg-white p-4 shadow-lg">
-        <h2 class="text-lg font-bold text-black">Add New Category</h2>
+        <h2 class="text-lg font-bold text-black">เพิ่มประเภทอาหาร</h2>
         <label
           for="new-category-name"
           class="block text-sm font-medium text-black"
-          >Category Name</label
+          >ชื่อประเภทอาหาร</label
         >
         <input
           id="new-category-name"
@@ -250,13 +250,13 @@
             class="bg-green-500 text-white hover:bg-green-700"
             @click="submitCategory"
           >
-            Add Category
+            เพิ่มประเภทอาหาร
           </button>
           <button
             class="bg-red-500 text-white hover:bg-red-02"
             @click="closeAddCategoryPopup"
           >
-            Cancel
+            ยกเลิก
           </button>
         </div>
       </div>
