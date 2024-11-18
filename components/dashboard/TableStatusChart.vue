@@ -1,23 +1,30 @@
 <template>
-  <div class="card m-auto my-4 w-full">
+  <div class="card m-auto w-full">
     <h2 class="mb-2 text-xl font-semibold">Table Status</h2>
     <canvas ref="tableChart" class="max-h-80"></canvas>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import Chart from "chart.js/auto";
 import axios from "axios";
 
 const props = defineProps({ branchId: String });
 const tableChart = ref(null);
+let chartInstance = null;
 
 async function fetchTableData() {
   const response = await axios.get(
     `/api/dashboard/tables?branchId=${props.branchId}`,
   );
   return response.data;
+}
+
+function updateChart(chart, tableStatusCounts) {
+  chart.data.labels = Object.keys(tableStatusCounts);
+  chart.data.datasets[0].data = Object.values(tableStatusCounts);
+  chart.update();
 }
 
 onMounted(async () => {
@@ -27,7 +34,7 @@ onMounted(async () => {
     return acc;
   }, {});
 
-  new Chart(tableChart.value, {
+  chartInstance = new Chart(tableChart.value, {
     type: "pie",
     data: {
       labels: Object.keys(tableStatusCounts),
@@ -42,6 +49,20 @@ onMounted(async () => {
       responsive: true,
       maintainAspectRatio: true,
     },
+  });
+
+  const interval = setInterval(async () => {
+    const updatedTableData = await fetchTableData();
+    const updatedTableStatusCounts = updatedTableData.reduce((acc, table) => {
+      acc[table.status] = (acc[table.status] || 0) + 1;
+      return acc;
+    }, {});
+    updateChart(chartInstance, updatedTableStatusCounts);
+  }, 2000);
+
+  onUnmounted(() => {
+    clearInterval(interval);
+    if (chartInstance) chartInstance.destroy();
   });
 });
 </script>

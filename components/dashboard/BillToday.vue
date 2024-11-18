@@ -1,15 +1,16 @@
 <template>
-  <div class="card m-auto my-4 w-full">
+  <div class="card m-auto w-full">
     <h2 class="mb-2 text-xl font-semibold">รายได้รวมวันนี้</h2>
     <p class="text-2xl font-bold">{{ totalOpenBills }} THB</p>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import axios from "axios";
 
 const totalOpenBills = ref(0);
+let intervalId;
 
 async function fetchOpenBills() {
   const today = new Date().toISOString().split("T")[0];
@@ -20,17 +21,22 @@ async function fetchOpenBills() {
     return;
   }
 
-  const response = await axios.get(
-    `/api/dashboard/bills?date=${today}&branchId=${branchId}`,
-  );
-  totalOpenBills.value = response.data.totalOpenBills;
+  try {
+    const response = await axios.get(
+      `/api/dashboard/bills?date=${today}&branchId=${branchId}`,
+    );
+    totalOpenBills.value = response.data.totalOpenBills;
+  } catch (error) {
+    console.error("Error fetching open bills:", error);
+  }
 }
 
 onMounted(() => {
   fetchOpenBills();
+  intervalId = setInterval(fetchOpenBills, 2000); // Fetch every 2 seconds
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId); // Clear interval when the component is destroyed
 });
 </script>
-
-<style scoped>
-/* Add custom styles if needed */
-</style>

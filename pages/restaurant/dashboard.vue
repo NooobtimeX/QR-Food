@@ -7,7 +7,7 @@
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <!-- Mobile menu button -->
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div class="absolute inset-y-0 left-0 flex items-center lg:hidden">
             <button
               class="bg-800 inline-flex items-center justify-center p-2 text-black focus:outline-none focus:ring-2 focus:ring-inset"
               @click="toggleMobileMenu"
@@ -30,17 +30,17 @@
 
           <!-- Logo and Restaurant Info -->
           <div
-            class="flex w-full flex-shrink-0 items-center justify-center sm:w-auto sm:justify-start"
+            class="flex w-full flex-shrink-0 items-center justify-center lg:w-auto lg:justify-start"
           >
             <img src="/logo/logo.png" alt="Logo" width="60px" />
-            <div class="ml-3 hidden sm:block">
+            <div class="ml-3 hidden lg:block">
               <div class="text-lg font-bold">{{ restaurantName }}</div>
               <div class="text-sm">{{ branchName }}</div>
             </div>
           </div>
 
           <!-- Desktop Menu -->
-          <div class="hidden sm:ml-6 sm:block">
+          <div class="hidden lg:ml-6 lg:block">
             <div class="flex space-x-4">
               <a
                 v-for="item in menuItems"
@@ -62,7 +62,7 @@
 
           <!-- Sign Out Button (Visible on larger screens) -->
           <button
-            class="hidden bg-red-500 p-2 text-white hover:bg-red-02 sm:block"
+            class="hidden bg-red-500 p-2 text-white hover:bg-red-02 lg:block"
             @click="changerestaurant"
           >
             เปลี่ยนร้านอาหาร
@@ -71,7 +71,7 @@
       </div>
 
       <!-- Mobile Menu -->
-      <div v-if="isMobileMenuOpen" class="sm:hidden">
+      <div v-if="isMobileMenuOpen" class="lg:hidden">
         <div class="px-2 pb-3 pt-2">
           <!-- Restaurant Info (Visible on smaller screens) -->
           <div class="mb-2 text-center">

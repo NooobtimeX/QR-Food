@@ -22,7 +22,7 @@
           <!-- QR Code -->
           <div class="my-4 flex justify-center">
             <vue-qrcode
-              :value="`http://localhost:3000/${qrCodeId}`"
+              :value="`${baseUrl}${qrCodeId}`"
               :size="128"
               tag="img"
             />
@@ -57,6 +57,7 @@
 import { defineProps, defineEmits, watch, ref } from "vue";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   show: {
@@ -74,7 +75,7 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["close"]);
-
+const router = useRouter();
 const restaurantName = ref("");
 const branchName = ref("");
 const tableNumber = ref("");
@@ -82,6 +83,8 @@ const tableNumber = ref("");
 const closeModal = () => {
   emits("close");
 };
+const baseUrl = `${window.location.origin}${router.resolve("/").href}`;
+console.log("Base URL:", baseUrl);
 
 const printBill = () => {
   const printContents = document.getElementById("printable-area").innerHTML;
