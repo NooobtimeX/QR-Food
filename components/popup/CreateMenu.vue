@@ -208,16 +208,16 @@
           <!-- Submit and Cancel Buttons -->
           <div class="flex justify-end space-x-2">
             <button
-              class="w-1/2 bg-red-500 p-2 text-white hover:bg-red-02"
-              @click="closeModal"
-            >
-              ยกเลิก
-            </button>
-            <button
               type="submit"
               class="w-1/2 bg-green-500 p-2 text-white hover:bg-green-700"
             >
               สร้าง
+            </button>
+            <button
+              class="w-1/2 bg-red-500 p-2 text-white hover:bg-red-02"
+              @click="closeModal"
+            >
+              ยกเลิก
             </button>
           </div>
         </div>

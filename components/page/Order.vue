@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <h1>ออเดอร์ที่ลูกค้าสั่ง</h1>
+  <div class="container mx-auto p-4">
+    <h1 class="pb-4">ออเดอร์ที่ลูกค้าสั่ง</h1>
 
     <!-- Status Filter -->
-    <div class="mb-2 grid w-full grid-cols-3 gap-2">
+    <div
+      class="mx-auto mb-2 grid w-full max-w-xl rounded-lg bg-gray-100 md:grid-cols-3"
+    >
       <button
         v-for="status in availableStatuses"
         :key="status"
@@ -13,11 +15,13 @@
         ]"
         @click="toggleStatusFilter(status)"
       >
-        {{ status }}
+        <template v-if="status === 'finish'">สำเร็จ</template>
+        <template v-else-if="status === 'pending'">กำลังจัดเตรียม</template>
+        <template v-else>ยกเลิก</template>
       </button>
     </div>
     <!-- Orders Table -->
-    <table class="mx-auto table-auto border-collapse rounded-md">
+    <table class="mx-auto min-w-[100vh] table-auto border-collapse rounded-md">
       <thead class="bg-orange-500 text-white">
         <tr>
           <th class="px-4 py-2 text-center text-lg font-medium">โต๊ะอาหาร</th>
@@ -43,7 +47,11 @@
               class="rounded-xl px-2 py-1"
               :class="statusClass(order.status)"
             >
-              {{ order.status }}
+              <template v-if="order.status === 'finish'">สำเร็จ</template>
+              <template v-else-if="order.status === 'pending'"
+                >กำลังจัดเตรียม</template
+              >
+              <template v-else>ยกเลิก</template>
             </span>
           </td>
           <td class="px-4 py-2 text-base">{{ order.whoOrdered }}</td>
@@ -219,7 +227,7 @@ const toggleStatusFilter = (status: OrderStatus) => {
 const statusFilterClass = (status: OrderStatus) => {
   return selectedStatuses.value.includes(status)
     ? "bg-orange-500 text-white"
-    : "bg-gray-200 text-gray-700";
+    : "text-gray-700";
 };
 
 // Sort orders by status priority

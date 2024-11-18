@@ -42,16 +42,16 @@
       </div>
       <div class="flex justify-end space-x-2">
         <button
-          class="mr-2 w-1/2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
-          @click="cancel"
-        >
-          ยกเลิก
-        </button>
-        <button
           class="w-1/2 bg-green-500 pl-2 pr-2 text-white hover:bg-green-700"
           @click="createBranch"
         >
           สร้าง
+        </button>
+        <button
+          class="mr-2 w-1/2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
+          @click="cancel"
+        >
+          ยกเลิก
         </button>
       </div>
     </div>

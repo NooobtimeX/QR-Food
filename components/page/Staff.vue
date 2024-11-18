@@ -91,19 +91,19 @@
                 <option value="staff">พนักงาน</option>
               </select>
             </div>
-            <div class="flex justify-end">
+            <div class="grid grid-cols-2">
+              <button
+                type="submit"
+                class="bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-700"
+              >
+                เพิ่มพนักงาน
+              </button>
               <button
                 type="button"
-                class="mr-2 rounded-md border bg-red-500 px-4 py-2 text-white transition duration-300 hover:bg-red-700"
+                class="border bg-red-500 px-4 py-2 text-white transition duration-300 hover:bg-red-700"
                 @click="showAddModal = false"
               >
                 ยกเลิก
-              </button>
-              <button
-                type="submit"
-                class="rounded-md bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-700"
-              >
-                เพิ่มพนักงาน
               </button>
             </div>
           </form>
