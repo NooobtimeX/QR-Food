@@ -72,14 +72,14 @@
         <!-- Write Note Section -->
         <div class="mt-2">
           <label for="note" class="block text-sm font-semibold text-gray-700"
-            >Write Note</label
+            >เขียนโน๊ต</label
           >
           <textarea
             id="note"
             v-model="note"
             class="mt-2 w-full rounded-lg border border-gray-300 p-2 text-gray-700 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200"
             rows="3"
-            placeholder="Add any special instructions or notes here..."
+            placeholder="เช่น ไม่ผัก"
           ></textarea>
         </div>
 
@@ -89,17 +89,17 @@
             class="w-full rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-green-600 disabled:opacity-50"
             @click="orderNow"
           >
-            Order
+            สั่งอาหาร
           </button>
         </div>
 
         <!-- Close Button -->
-        <div class="mt-4 flex justify-center">
+        <div class="mt-2 flex justify-center">
           <button
-            class="font-semibold text-gray-600 transition hover:text-red-500"
+            class="w-full rounded-lg bg-red-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-red-600 disabled:opacity-50"
             @click="close"
           >
-            Close
+            ยกเลิก
           </button>
         </div>
       </div>
