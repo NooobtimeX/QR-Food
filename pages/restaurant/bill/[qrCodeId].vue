@@ -132,10 +132,10 @@
               class="bg-green-500 px-4 py-2 text-white"
               @click="printPreview"
             >
-              Print
+              ปริ้น
             </button>
             <button class="bg-red-500 px-4 py-2" @click="closePrintPreview">
-              Cancel
+              ยกเลิก
             </button>
           </div>
         </div>
