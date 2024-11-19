@@ -6,30 +6,37 @@
     <div class="w-96 rounded-lg bg-white p-4 shadow-lg">
       <div class="modal-content">
         <!-- Printable Area Start -->
-        <div id="printable-area" class="rounded-md border border-gray-300 p-4">
+        <div
+          id="printable-area"
+          class="mb-4 rounded-md border border-gray-300 p-4"
+        >
           <!-- Header -->
           <div class="border-b border-gray-300 pb-2 text-center">
             <h2 class="text-xl font-bold">{{ restaurantName }}</h2>
           </div>
           <!-- Bill Details -->
-          <div class="mt-4">
-            <p class="text-left"><strong>สาขา:</strong> {{ branchName }}</p>
-            <p class="text-left">
-              <strong>วันที่:</strong> {{ new Date().toLocaleDateString() }}
-            </p>
-            <p class="text-left"><strong>โต๊ะ:</strong> {{ tableNumber }}</p>
+          <div>
+            <p class="text-center">{{ branchName }}</p>
+            <div class="mt-2 border-t border-dashed text-center"></div>
+            <p class="text-center"><strong>โต๊ะ:</strong> {{ tableNumber }}</p>
           </div>
           <!-- QR Code -->
-          <div class="my-4 flex justify-center">
+          <div class="my-2 flex justify-center">
             <vue-qrcode
               :value="`${baseUrl}${qrCodeId}`"
               :size="128"
               tag="img"
             />
           </div>
-          <p class="text-center text-sm text-gray-500">
-            สแกน QR Code เพื่อสั่งเมนู
-          </p>
+          <div class="border-b border-gray-300 pb-2 text-center">
+            <p class="text-center text-sm text-gray-500">
+              สแกน QR Code เพื่อสั่งเมนู
+            </p>
+            <div class="mt-2 border-t border-dashed text-center"></div>
+            <p class="text-center">
+              <strong>วันที่:</strong> {{ new Date().toLocaleDateString() }}
+            </p>
+          </div>
           <!-- Footer -->
         </div>
         <!-- Printable Area End -->
@@ -84,11 +91,12 @@ const closeModal = () => {
   emits("close");
 };
 const baseUrl = `${window.location.origin}${router.resolve("/").href}`;
-console.log("Base URL:", baseUrl);
 
 const printBill = () => {
-  const printContents = document.getElementById("printable-area").innerHTML;
+  const printableArea = document.getElementById("printable-area");
+  const printContents = printableArea.innerHTML;
   const printWindow = window.open("", "_blank", "width=800,height=600");
+
   printWindow.document.open();
   printWindow.document.write(`
     <html>
@@ -96,8 +104,21 @@ const printBill = () => {
         <title>${props.title}</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <style>
-          body { margin: 0; font-family: Arial, sans-serif; }
-          .border { border: 1px solid #e5e7eb; padding: 8px; margin: 4px 0; }
+          @media print {
+            @page {
+              size: 58mm auto;
+              margin: 0;
+            }
+            body {
+              margin: 0;
+              padding: 0;
+              width: 58mm;
+              font-family: Arial, sans-serif;
+            }
+            .border {
+              border: 1px solid #e5e7eb;
+            }
+          }
         </style>
       </head>
       <body>
@@ -126,7 +147,7 @@ const fetchBillDetails = async () => {
     branchName.value = brName;
     tableNumber.value = tblNumber;
   } catch (error) {
-    console.error("Error fetching bill details:", error);
+    console.error("Error fetching bill details:", error.message);
   }
 };
 
@@ -137,3 +158,21 @@ watch(
   },
 );
 </script>
+
+<style>
+@media print {
+  @page {
+    size: 58mm auto; /* Fixed paper width */
+    margin: 5px;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    width: 58mm; /* Match receipt width */
+    font-family: Arial, sans-serif;
+  }
+  .border {
+    border: 1px solid #e5e7eb;
+  }
+}
+</style>
