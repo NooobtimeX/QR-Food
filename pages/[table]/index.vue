@@ -63,7 +63,9 @@ const categories = ref([]);
 const qrCodeId = ref(null);
 const isModalOpen = ref(false); // State to manage modal visibility
 const selectedMenuId = ref(null); // State to track selected menu
-
+const restaurantName = ref("");
+const branchName = ref("");
+const tableNumber = ref("");
 const openMenuModal = (menuId) => {
   selectedMenuId.value = menuId;
   isModalOpen.value = true;

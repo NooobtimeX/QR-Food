@@ -1,6 +1,6 @@
 <template>
   <h1 class="mt-4 text-center text-3xl font-bold">{{ restaurantName }}</h1>
-  <p class="text-center">Table: {{ tableNo }}</p>
+  <p class="text-center">Table: {{ tableNumber }}</p>
   <div class="mx-auto max-w-5xl items-center">
     <slot />
   </div>
@@ -78,9 +78,10 @@ import axios from "axios";
 const route = useRoute();
 const router = useRouter();
 
-const restaurantName = "Res Name";
 const tableNo = ref(route.params.table);
-
+const restaurantName = ref("");
+const branchName = ref("");
+const tableNumber = ref("");
 // Popup control
 const showPopup = ref(false);
 
@@ -106,8 +107,29 @@ const checkQrCode = async () => {
   }
 };
 
+const fetchBillDetails = async () => {
+  try {
+    const qrCodeId = route.params.table;
+    const response = await axios.get(`/api/${qrCodeId}`);
+    const {
+      restaurantName: restName,
+      branchName: brName,
+      tableNumber: tblNumber,
+    } = response.data.body;
+    restaurantName.value = restName;
+    branchName.value = brName;
+    tableNumber.value = tblNumber;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Error fetching bill details:", error.message);
+    } else {
+      console.error("Error fetching bill details:", error);
+    }
+  }
+};
 onMounted(() => {
   checkQrCode();
+  fetchBillDetails();
 });
 
 const clearCustomMessage = () => {
