@@ -25,43 +25,37 @@
         <div
           class="xl:grid-cols- grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
         >
-          <div
-            v-for="menu in menus"
-            :key="menu.id"
-            class="card flex w-full flex-col items-center justify-between"
-          >
-            <div class="flex flex-col items-center text-center">
-              <img
-                :src="menu.photoUrl"
-                alt="Menu photo"
-                class="mx-auto mb-2 max-h-40 object-cover"
-              />
-              <h3 class="text-xl font-semibold text-gray-900">
-                {{ menu.name }}
-              </h3>
-              <!-- Price Display -->
-              <p class="font-bold text-gray-800">
-                ฿{{ menu.price.toFixed(2) }}
-              </p>
+          <div v-for="menu in menus" :key="menu.id" class="card block">
+            <img
+              :src="menu.photoUrl"
+              alt="Menu photo"
+              class="c-t-lg h-32 w-full object-cover"
+            />
+            <h3 class="text-xl font-semibold text-gray-900">
+              {{ menu.name }}
+            </h3>
+            <!-- Price Display -->
+            <p class="text-gray-800">{{ menu.price.toFixed(2) }}฿</p>
+            <div class="flex justify-center">
+              <label
+                class="relative mt-1 inline-flex cursor-pointer items-center"
+              >
+                <input
+                  type="checkbox"
+                  class="peer sr-only"
+                  :checked="menu.isActive"
+                  @change="toggleMenuStatus(menu.id, !menu.isActive)"
+                />
+                <div
+                  class="h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-focus:ring-4 peer-focus:ring-green-300"
+                />
+                <span class="ml-3 text-sm font-medium text-gray-900">
+                  {{ menu.isActive ? "เปิด" : "ปิด" }}
+                </span>
+              </label>
             </div>
-            <!-- Toggle Status -->
-            <label
-              class="relative mt-1 inline-flex cursor-pointer items-center"
-            >
-              <input
-                type="checkbox"
-                class="peer sr-only"
-                :checked="menu.isActive"
-                @change="toggleMenuStatus(menu.id, !menu.isActive)"
-              />
-              <div
-                class="h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-green-500 peer-checked:after:translate-x-full peer-focus:ring-4 peer-focus:ring-green-300"
-              />
-              <span class="ml-3 text-sm font-medium text-gray-900">
-                {{ menu.isActive ? "เปิด" : "ปิด" }}
-              </span>
-            </label>
           </div>
+          <!-- Toggle Status -->
         </div>
       </div>
     </div>

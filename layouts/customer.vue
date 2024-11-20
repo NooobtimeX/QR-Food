@@ -1,7 +1,7 @@
 <template>
   <h1 class="mt-4 text-center text-3xl font-bold">{{ restaurantName }}</h1>
   <p class="text-center">Table: {{ tableNumber }}</p>
-  <div class="mx-auto max-w-5xl items-center">
+  <div class="mx-auto max-w-7xl items-center">
     <slot />
   </div>
   <div class="fixed bottom-4 right-4 z-10 grid grid-cols-1 gap-2">

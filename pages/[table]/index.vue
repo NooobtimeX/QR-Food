@@ -23,7 +23,9 @@
           class="card mb-2"
         >
           <h3 class="mb-2 text-2xl font-bold">{{ category.name }}</h3>
-          <div class="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div
+            class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+          >
             <div
               v-for="menu in category.menus"
               :key="menu.id"
@@ -36,7 +38,7 @@
               />
               <div class="p-1">
                 <h2 class="text-xl font-semibold">{{ menu.name }}</h2>
-                <p class="text-black">{{ menu.price }}฿</p>
+                <p class="text-black">{{ menu.price.toFixed(2) }}฿</p>
               </div>
             </div>
           </div>
