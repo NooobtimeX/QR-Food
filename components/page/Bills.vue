@@ -32,7 +32,7 @@
           v-for="bill in bills"
           :key="bill.id"
           class="cursor-pointer border-b border-gray-200 transition duration-200 hover:bg-gray-200"
-          @click="openBillDetails(bill.qrCodeId)"
+          @click="openBillPopup(bill.qrCodeId)"
         >
           <td class="px-4 py-2 text-center text-base">{{ bill.id }}</td>
           <td class="px-4 py-2 text-center text-base">{{ bill.qrCodeId }}</td>
@@ -45,8 +45,68 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Bill Popup -->
+    <div
+      v-if="isPopupVisible"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75"
+    >
+      <div class="w-96 rounded-lg bg-white p-4 shadow-lg">
+        <div class="bg-white">
+          <div
+            id="printableBill"
+            class="mb-4 rounded-md border border-gray-300 p-4"
+          >
+            <div class="border-b border-gray-300 pb-2 text-center">
+              <h2 class="text-center text-xl font-bold">
+                {{ bill?.branch?.restaurant?.name || "ร้านอาหาร" }}
+              </h2>
+            </div>
+
+            <h2 class="text-center text-lg">
+              {{ bill?.branch?.name || "สาขา" }}
+            </h2>
+            <div class="mt-2 border-t border-dashed text-center"></div>
+            <div class="mt-2 text-left">
+              <ul>
+                <li
+                  v-for="order in bill?.orderMenus?.filter(
+                    (order) => order.status === 'finish',
+                  ) || []"
+                  :key="order.id"
+                  class="flex justify-between"
+                >
+                  <span>{{ order.name }} (x{{ order.quantity }})</span>
+                  <span>{{ order.totalPrice }} ฿</span>
+                </li>
+              </ul>
+            </div>
+            <div class="border-b border-dashed py-2 text-right">
+              <p><strong>รวม:</strong> {{ bill?.totalAmount }} ฿</p>
+            </div>
+            <div class="mt-2 border-b border-gray-300 pb-4 text-center">
+              <p>
+                <strong>วันที่:</strong> {{ formatDate(bill?.createdAt || "") }}
+              </p>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-2">
+            <button
+              class="bg-green-500 px-4 py-2 text-white"
+              @click="printPreview"
+            >
+              ปริ้น
+            </button>
+            <button class="bg-red-500 px-4 py-2 text-white" @click="closePopup">
+              ยกเลิก
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
@@ -61,10 +121,26 @@ interface Bill {
   qrCodeId: string;
   createdAt: string;
   totalAmount: number;
+  branch?: {
+    restaurant?: { name: string };
+    name: string;
+  };
+  orderMenus?: {
+    id: number;
+    name: string;
+    quantity: number;
+    totalPrice: number;
+    status: string;
+  }[];
 }
 
 const bills = ref<Bill[]>([]);
 const branchId = localStorage.getItem("branchId") || 1;
+
+// State for popup
+const isPopupVisible = ref(false);
+const selectedQrCodeId = ref<string | null>(null);
+const bill = ref<Bill | null>(null);
 
 // Fetch bills within the selected date range
 const fetchBills = async () => {
@@ -80,11 +156,84 @@ const fetchBills = async () => {
   }
 };
 
+// Fetch single bill details
+const fetchBillData = async (qrCodeId: string) => {
+  try {
+    const response = await axios.get(`/api/bill/${qrCodeId}`);
+    bill.value = response.data;
+  } catch (error) {
+    console.error("Failed to fetch bill data", error);
+  }
+};
+
 // Watch for changes in selected date range and fetch bills
 watch(selected, fetchBills);
 
-const openBillDetails = (qrCodeId: string) => {
-  window.location.href = `/restaurant/bill/${qrCodeId}`;
+// Open the popup with the selected QR Code ID
+const openBillPopup = (qrCodeId: string) => {
+  selectedQrCodeId.value = qrCodeId;
+  fetchBillData(qrCodeId);
+  isPopupVisible.value = true;
+};
+
+// Close the popup
+const closePopup = () => {
+  isPopupVisible.value = false;
+  selectedQrCodeId.value = null;
+  bill.value = null;
+};
+
+// Format date for display
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return isNaN(date.getTime())
+    ? "Invalid Date"
+    : date.toLocaleString("th-TH", {
+        dateStyle: "short",
+        timeStyle: "short",
+      });
+};
+
+// Print the bill
+const printPreview = () => {
+  const printableContent = document.querySelector("#printableBill")?.innerHTML;
+
+  if (printableContent) {
+    const printWindow = window.open("", "_blank", "width=800,height=600");
+
+    if (printWindow) {
+      printWindow.document.open();
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Print Bill</title>
+            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+            <style>
+              @media print {
+                @page {
+                  size: 58mm auto;
+                  margin: 0;
+                }
+                body {
+                  margin: 0;
+                  padding: 0;
+                  width: 58mm;
+                  font-family: Arial, sans-serif;
+                }
+              }
+            </style>
+          </head>
+          <body>${printableContent}</body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.onload = () => {
+        printWindow.print();
+        printWindow.close();
+      };
+    }
+  }
 };
 
 // Initial fetch when component mounts

@@ -21,14 +21,14 @@
             <p class="text-center"><strong>โต๊ะ:</strong> {{ tableNumber }}</p>
           </div>
           <!-- QR Code -->
-          <div class="my-2 flex justify-center">
+          <div class="my-1 flex justify-center">
             <vue-qrcode
               :value="`${baseUrl}${qrCodeId}`"
               :size="128"
               tag="img"
             />
           </div>
-          <div class="border-b border-gray-300 pb-2 text-center">
+          <div class="border-b border-gray-300 pb-4 text-center">
             <p class="text-center text-sm text-gray-500">
               สแกน QR Code เพื่อสั่งเมนู
             </p>
