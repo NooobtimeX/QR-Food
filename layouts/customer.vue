@@ -1,6 +1,6 @@
 <template>
   <h1 class="mt-4 text-center text-3xl font-bold">{{ restaurantName }}</h1>
-  <p class="text-center">Table: {{ tableNumber }}</p>
+  <p class="text-center">โต๊ะ: {{ tableNumber }}</p>
   <div class="mx-auto max-w-7xl items-center">
     <slot />
   </div>
@@ -33,13 +33,13 @@
           class="mt-2 w-full rounded border-gray-300 p-2"
           @change="clearCustomMessage"
         >
-          <option value="">Select an option...</option>
-          <option value="Request more water">Request for water</option>
+          <option value="">เลือกตัวเลือก</option>
+          <option value="Request more water">ต้องการน้ำ</option>
           <option value="Need help with the menu">
-            Need help with the menu
+            ต้องการความช่วยเหลือเกี่ยวกับอาหาร
           </option>
-          <option value="Ask for the bill">Ask for the bill</option>
-          <option value="custom">Other (Specify)</option>
+          <option value="Ask for the bill">ต้องการความช่วยเหลือเกี่ยวกับบิล</option>
+          <option value="custom">อื่นๆ (โปรดระบุ)</option>
         </select>
 
         <div v-if="selectedOption === 'custom'" class="mt-2">
