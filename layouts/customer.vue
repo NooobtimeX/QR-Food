@@ -34,11 +34,11 @@
           @change="clearCustomMessage"
         >
           <option value="">เลือกตัวเลือก</option>
-          <option value="Request more water">ต้องการน้ำ</option>
-          <option value="Need help with the menu">
+          <option value="ต้องการน้ำ">ต้องการน้ำ</option>
+          <option value="ต้องการความช่วยเหลือเกี่ยวกับอาหาร">
             ต้องการความช่วยเหลือเกี่ยวกับอาหาร
           </option>
-          <option value="Ask for the bill">
+          <option value="ต้องการความช่วยเหลือเกี่ยวกับบิล">
             ต้องการความช่วยเหลือเกี่ยวกับบิล
           </option>
           <option value="custom">อื่นๆ (โปรดระบุ)</option>
@@ -48,7 +48,7 @@
           <input
             v-model="customMessage"
             type="text"
-            placeholder="Enter your message"
+            placeholder="โปรดระบุ"
             class="w-full rounded border-gray-300 p-2"
           />
         </div>
@@ -162,7 +162,7 @@ const confirmNotification = async () => {
       notification: message,
     });
 
-    alert("Notification sent.");
+    alert("ส่งการแจ้งเตือนแล้ว");
     closePopup();
   } catch (error) {
     console.error("Failed to send notification:", error);
