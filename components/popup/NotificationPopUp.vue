@@ -62,9 +62,7 @@
         </div>
 
         <!-- No Notifications Available -->
-        <div v-else class="text-center text-gray-500">
-          ไม่มีการแจ้งเตือน
-        </div>
+        <div v-else class="text-center text-gray-500">ไม่มีการแจ้งเตือน</div>
       </div>
     </div>
   </div>

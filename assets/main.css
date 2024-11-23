@@ -6,7 +6,9 @@
 body {
   @apply bg-white text-black;
 }
-
+body {
+  font-family: "Chakra Petch", sans-serif;
+}
 /* Input Field Styling */
 input {
   @apply block w-full rounded-lg border px-3 py-1 text-gray-900 shadow-sm;

@@ -38,7 +38,9 @@
           <option value="Need help with the menu">
             ต้องการความช่วยเหลือเกี่ยวกับอาหาร
           </option>
-          <option value="Ask for the bill">ต้องการความช่วยเหลือเกี่ยวกับบิล</option>
+          <option value="Ask for the bill">
+            ต้องการความช่วยเหลือเกี่ยวกับบิล
+          </option>
           <option value="custom">อื่นๆ (โปรดระบุ)</option>
         </select>
 

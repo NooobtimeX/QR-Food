@@ -35,7 +35,13 @@ export default defineNuxtConfig({
     ],
   },
 
-  modules: [],
-
+  modules: ["@nuxtjs/google-fonts"],
+  googleFonts: {
+    families: {
+      "Chakra+Petch": [300, 400, 500, 600, 700], // Add the desired font weights
+    },
+    display: "swap", // Optional: control font-display
+    preload: true, // Optional: preload fonts for faster loading
+  },
   compatibilityDate: "2024-08-27",
 });
