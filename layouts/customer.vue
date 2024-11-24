@@ -30,7 +30,7 @@
 
         <select
           v-model="selectedOption"
-          class="mt-2 w-full rounded border-gray-300 p-2"
+          class="mt-2 w-full rounded border-gray-300 p-2 border"
           @change="clearCustomMessage"
         >
           <option value="">เลือกตัวเลือก</option>
