@@ -33,7 +33,7 @@
           class="mt-2 w-full rounded border-gray-300 p-2 border"
           @change="clearCustomMessage"
         >
-          <option value="">เลือกตัวเลือก</option>
+          <option value="เลือกตัวเลือก">เลือกตัวเลือก</option>
           <option value="ต้องการน้ำ">ต้องการน้ำ</option>
           <option value="ต้องการความช่วยเหลือเกี่ยวกับอาหาร">
             ต้องการความช่วยเหลือเกี่ยวกับอาหาร
