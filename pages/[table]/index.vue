@@ -2,7 +2,7 @@
   <NuxtLayout name="customer">
     <div>
       <!-- Category Navigation -->
-      <nav class="card scrollbar-hide sticky top-0 z-50 flex overflow-x-auto">
+      <nav class="card scrollbar-hide sticky top-0 z-10 flex overflow-x-auto">
         <div
           v-for="category in categories"
           :key="category.name"

@@ -30,10 +30,10 @@
 
         <select
           v-model="selectedOption"
-          class="mt-2 w-full rounded border-gray-300 p-2 border"
+          class="mt-2 w-full rounded border border-gray-300 p-2"
           @change="clearCustomMessage"
         >
-          <option value="เลือกตัวเลือก">เลือกตัวเลือก</option>
+          <option value="">เลือกตัวเลือก</option>
           <option value="ต้องการน้ำ">ต้องการน้ำ</option>
           <option value="ต้องการความช่วยเหลือเกี่ยวกับอาหาร">
             ต้องการความช่วยเหลือเกี่ยวกับอาหาร
@@ -88,7 +88,7 @@ const tableNumber = ref("");
 const showPopup = ref(false);
 
 // Selected option for the preset messages
-const selectedOption = ref("Request more water");
+const selectedOption = ref("");
 const customMessage = ref("");
 
 // Function to check if the QR code is associated with a table

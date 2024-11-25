@@ -35,6 +35,17 @@
     class="fixed inset-0 z-20 flex items-center justify-center bg-gray-800 bg-opacity-50"
   >
     <div class="w-96 rounded-lg bg-white p-3">
+      <div class="-mt-2 flex justify-end">
+        <button
+          class="-mb-2 text-black hover:text-gray-700"
+          @click="
+            selectedTable = null;
+            isCustomerMenuVisible = false;
+          "
+        >
+          <span class="text-3xl">&times;</span>
+        </button>
+      </div>
       <p class="text-center text-2xl text-black">
         โต๊ะ : <span class="font-bold">{{ selectedTable.name }}</span>
       </p>
@@ -102,17 +113,6 @@
         </button>
       </div>
       <!-- Close Modal Button -->
-      <div class="mt-4 flex justify-end">
-        <button
-          class="bg-red-500 px-4 py-2 text-white hover:bg-red-02"
-          @click="
-            selectedTable = null;
-            isCustomerMenuVisible = false;
-          "
-        >
-          ยกเลิก
-        </button>
-      </div>
     </div>
   </div>
 

@@ -53,41 +53,49 @@
     >
       <div class="w-96 rounded-lg bg-white p-4 shadow-lg">
         <div class="bg-white">
-          <div
-            id="printableBill"
-            class="mb-4 rounded-md border border-gray-300 p-4"
-          >
-            <div class="border-b border-gray-300 pb-2 text-center">
-              <h2 class="text-center text-xl font-bold">
-                {{ bill?.branch?.restaurant?.name || "ร้านอาหาร" }}
-              </h2>
-            </div>
+          <div v-if="bill?.tableId">
+            <p class="text-center font-bold text-red-500">
+              บิลนี้ยังไม่เสร็จสิ้น
+            </p>
+          </div>
+          <div v-else>
+            <div
+              id="printableBill"
+              class="mb-4 rounded-md border border-gray-300 p-4"
+            >
+              <div class="border-b border-gray-300 pb-2 text-center">
+                <h2 class="text-center text-xl font-bold">
+                  {{ bill?.branch?.restaurant?.name || "ร้านอาหาร" }}
+                </h2>
+              </div>
 
-            <h2 class="text-center text-lg">
-              {{ bill?.branch?.name || "สาขา" }}
-            </h2>
-            <div class="mt-2 border-t border-dashed text-center"></div>
-            <div class="mt-2 text-left">
-              <ul>
-                <li
-                  v-for="order in bill?.orderMenus?.filter(
-                    (order) => order.status === 'finish',
-                  ) || []"
-                  :key="order.id"
-                  class="flex justify-between"
-                >
-                  <span>{{ order.name }} (x{{ order.quantity }})</span>
-                  <span>{{ order.totalPrice }} ฿</span>
-                </li>
-              </ul>
-            </div>
-            <div class="border-b border-dashed py-2 text-right">
-              <p><strong>รวม:</strong> {{ bill?.totalAmount }} ฿</p>
-            </div>
-            <div class="mt-2 border-b border-gray-300 pb-4 text-center">
-              <p>
-                <strong>วันที่:</strong> {{ formatDate(bill?.createdAt || "") }}
-              </p>
+              <h2 class="text-center text-lg">
+                {{ bill?.branch?.name || "สาขา" }}
+              </h2>
+              <div class="mt-2 border-t border-dashed text-center"></div>
+              <div class="mt-2 text-left">
+                <ul>
+                  <li
+                    v-for="order in bill?.orderMenus?.filter(
+                      (order) => order.status === 'finish',
+                    ) || []"
+                    :key="order.id"
+                    class="flex justify-between"
+                  >
+                    <span>{{ order.name }} (x{{ order.quantity }})</span>
+                    <span>{{ order.totalPrice }} ฿</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="border-b border-dashed py-2 text-right">
+                <p><strong>รวม:</strong> {{ bill?.totalAmount }} ฿</p>
+              </div>
+              <div class="mt-2 border-b border-gray-300 pb-4 text-center">
+                <p>
+                  <strong>วันที่:</strong>
+                  {{ formatDate(bill?.createdAt || "") }}
+                </p>
+              </div>
             </div>
           </div>
           <div class="mt-4 grid grid-cols-2">
@@ -121,6 +129,7 @@ interface Bill {
   qrCodeId: string;
   createdAt: string;
   totalAmount: number;
+  tableId?: number;
   branch?: {
     restaurant?: { name: string };
     name: string;
@@ -150,7 +159,11 @@ const fetchBills = async () => {
       startDate: format(startOfDay(selected.value[0]), "yyyy-MM-dd HH:mm:ss"),
       endDate: format(endOfDay(selected.value[1]), "yyyy-MM-dd HH:mm:ss"),
     });
-    bills.value = response.data;
+    bills.value = response.data.sort((a: Bill, b: Bill) => {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      return dateB - dateA; // Descending order
+    });
   } catch (error) {
     console.error("Failed to fetch bills", error);
   }

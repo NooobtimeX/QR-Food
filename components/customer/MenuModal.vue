@@ -31,7 +31,7 @@
             :key="index"
             class="mt-4"
           >
-            <h2 class="text-gray-700">{{ option.optionName }}</h2>
+            <h3 class="text-gray-700">{{ option.optionName }}</h3>
             <div class="mt-2 flex flex-wrap gap-2">
               <label
                 v-for="(subOption, subIndex) in option.choices"
@@ -54,12 +54,6 @@
             </div>
           </div>
         </div>
-        <h3 class="text-gray-700">เพิ่มโน๊ต</h3>
-        <textarea
-          v-model="orderNote"
-          placeholder="e.g., Extra spicy, no onions"
-          class="w-full rounded-md border-2 border-gray-300 p-2"
-        ></textarea>
         <!-- Quantity Control -->
         <div class="mt-2 flex items-center justify-center space-x-4">
           <button
@@ -76,6 +70,14 @@
             +
           </button>
         </div>
+        <label for="note" class="block text-sm font-semibold text-gray-700"
+          >เขียนโน๊ต</label
+        >
+        <textarea
+          v-model="orderNote"
+          placeholder="เช่น ไม่ผัก"
+          class="w-full rounded-md border-2 border-gray-300 p-2"
+        ></textarea>
 
         <div class="grid grid-cols-2">
           <!-- Add to Cart Button -->
