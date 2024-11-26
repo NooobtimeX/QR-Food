@@ -28,6 +28,16 @@ function prepareChartData(data) {
   }, {});
 }
 
+function getStatusLabel(status) {
+  // Map statuses to Thai labels
+  const labelMap = {
+    finish: "สำเร็จ",
+    pending: "กำลังจัดเตรียม",
+    cancel: "ยกเลิก",
+  };
+  return labelMap[status] || "ไม่ทราบสถานะ"; // Default to "Unknown status" in Thai
+}
+
 function getStatusColor(status) {
   // Map statuses to colors
   const colorMap = {
@@ -42,10 +52,10 @@ function createChart(chartElement, dataCounts) {
   return new Chart(chartElement, {
     type: "pie",
     data: {
-      labels: Object.keys(dataCounts),
+      labels: Object.keys(dataCounts).map(getStatusLabel), // Use Thai labels
       datasets: [
         {
-          label: "Order Counts by Status",
+          label: "",
           data: Object.values(dataCounts),
           backgroundColor: Object.keys(dataCounts).map(getStatusColor), // Apply dynamic colors
         },
@@ -67,7 +77,7 @@ onMounted(async () => {
   const interval = setInterval(async () => {
     const updatedData = await fetchData();
     const updatedCounts = prepareChartData(updatedData);
-    chartInstance.data.labels = Object.keys(updatedCounts);
+    chartInstance.data.labels = Object.keys(updatedCounts).map(getStatusLabel); // Use Thai labels
     chartInstance.data.datasets[0].data = Object.values(updatedCounts);
     chartInstance.data.datasets[0].backgroundColor =
       Object.keys(updatedCounts).map(getStatusColor);

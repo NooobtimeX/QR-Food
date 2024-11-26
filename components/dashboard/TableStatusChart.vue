@@ -22,9 +22,37 @@ async function fetchTableData() {
 }
 
 function updateChart(chart, tableStatusCounts) {
-  chart.data.labels = Object.keys(tableStatusCounts);
+  chart.data.labels = Object.keys(tableStatusCounts).map((status) =>
+    getStatusLabel(status),
+  );
   chart.data.datasets[0].data = Object.values(tableStatusCounts);
   chart.update();
+}
+
+function getStatusColor(status) {
+  switch (status) {
+    case "isReserved":
+      return "#34d399"; // green
+    case "isOpen":
+      return "#d1d5db"; // gray
+    case "isUnavailable":
+      return "#f87171"; // red
+    default:
+      return "#000000"; // fallback to black
+  }
+}
+
+function getStatusLabel(status) {
+  switch (status) {
+    case "isReserved":
+      return "ใช้งานอยู่"; // Reserved (in Thai)
+    case "isOpen":
+      return "ว่าง"; // Open (in Thai)
+    case "isUnavailable":
+      return "ใช้ไม่ได้"; // Unavailable (in Thai)
+    default:
+      return status; // fallback to original status if not found
+  }
 }
 
 onMounted(async () => {
@@ -34,14 +62,21 @@ onMounted(async () => {
     return acc;
   }, {});
 
+  // Assign colors based on the status
+  const statusColors = Object.keys(tableStatusCounts).map((status) =>
+    getStatusColor(status),
+  );
+
   chartInstance = new Chart(tableChart.value, {
     type: "pie",
     data: {
-      labels: Object.keys(tableStatusCounts),
+      labels: Object.keys(tableStatusCounts).map((status) =>
+        getStatusLabel(status),
+      ),
       datasets: [
         {
           data: Object.values(tableStatusCounts),
-          backgroundColor: ["#f87171", "#34d399", "#60a5fa"],
+          backgroundColor: statusColors,
         },
       ],
     },
