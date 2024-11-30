@@ -70,6 +70,7 @@
           สั่งอาหารเพิ่มเติม
         </button>
         <button
+          :disabled="isProcessing"
           class="bg-green-500 py-3 text-lg text-white"
           @click="confirmOrder"
         >
@@ -102,6 +103,7 @@ interface CartItem {
 }
 
 const cart = ref<CartItem[]>([]);
+const isProcessing = ref(false);
 
 onMounted(() => {
   const cartData = localStorage.getItem("cart");
@@ -159,6 +161,9 @@ const orderMore = () => {
 };
 
 const confirmOrder = async () => {
+  if (isProcessing.value) return; // Prevent multiple clicks
+
+  isProcessing.value = true; // Disable button
   console.log("Order button clicked");
 
   const orderData = cart.value.map((product) => ({
@@ -193,6 +198,8 @@ const confirmOrder = async () => {
     console.error("Error placing orders:", error);
     localStorage.removeItem("cart");
     window.location.reload(); // Refresh the page
+  } finally {
+    isProcessing.value = false; // Re-enable button after processing
   }
 };
 </script>

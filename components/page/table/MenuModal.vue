@@ -87,6 +87,7 @@
         <!-- Order Button -->
         <div class="mt-2 flex justify-center">
           <button
+            :disabled="isProcessing"
             class="w-full rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-green-600 disabled:opacity-50"
             @click="orderNow"
           >
@@ -123,6 +124,7 @@ const menuItem = ref(null);
 const quantity = ref(1);
 const selectedOptions = ref([]);
 const note = ref("");
+const isProcessing = ref(false);
 
 // Close modal
 const close = () => emit("close");
@@ -155,6 +157,9 @@ const incrementQuantity = () => quantity.value++;
 const decrementQuantity = () => quantity.value > 1 && quantity.value--;
 
 const orderNow = async () => {
+  if (isProcessing.value) return; // Prevent multiple clicks
+  isProcessing.value = true; // Disable button
+
   if (menuItem.value) {
     const orderData = {
       qrCodeId: props.qrCodeId,
@@ -183,6 +188,8 @@ const orderNow = async () => {
       }
     } catch (error) {
       console.error("Error placing order:", error);
+    } finally {
+      isProcessing.value = false; // Re-enable button after processing
     }
   }
 };
