@@ -1,40 +1,60 @@
 <!-- components/popup/CreateBranchModal.vue -->
 <template>
-  <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+  <div
+    v-if="isOpen"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75"
+  >
     <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
       <h3 class="mb-4 text-center text-xl font-bold text-black">สร้างสาขา</h3>
       <div class="mb-4">
         <label class="block font-bold text-black">ชื่อสาขา</label>
-        <input v-model="newBranch.name" type="text"
-          class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2" required />
+        <input
+          v-model="newBranch.name"
+          type="text"
+          class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
+          required
+        />
       </div>
 
       <div class="mb-4">
-  <label class="block font-bold text-black">เบอร์โทร</label>
-  <input
-    v-model="newBranch.phoneNumber"
-    type="tel"
-    class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
-    pattern="[0-9]*"
-    inputmode="tel"
-    required
-  />
-</div>
+        <label class="block font-bold text-black">เบอร์โทร</label>
+        <input
+          v-model="newBranch.phoneNumber"
+          type="tel"
+          class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
+          pattern="[0-9]*"
+          inputmode="tel"
+          required
+        />
+      </div>
 
       <div class="mb-4">
         <label class="block font-bold text-black">เลือกร้านอาหาร</label>
-        <select v-model="newBranch.restaurantId"
-          class="w-full rounded-lg border border-gray-400 p-3 text-black focus:outline-none focus:ring-2" required>
-          <option v-for="restaurant in ownerAccess" :key="restaurant.id" :value="restaurant.id">
+        <select
+          v-model="newBranch.restaurantId"
+          class="w-full rounded-lg border border-gray-400 p-3 text-black focus:outline-none focus:ring-2"
+          required
+        >
+          <option
+            v-for="restaurant in ownerAccess"
+            :key="restaurant.id"
+            :value="restaurant.id"
+          >
             {{ restaurant.name }}
           </option>
         </select>
       </div>
       <div class="flex justify-end space-x-2">
-        <button class="w-1/2 bg-green-500 pl-2 pr-2 text-white hover:bg-green-700" @click="createBranch">
+        <button
+          class="w-1/2 bg-green-500 pl-2 pr-2 text-white hover:bg-green-700"
+          @click="createBranch"
+        >
           สร้าง
         </button>
-        <button class="mr-2 w-1/2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02" @click="cancel">
+        <button
+          class="mr-2 w-1/2 bg-red-500 pl-2 pr-2 text-white hover:bg-red-02"
+          @click="cancel"
+        >
           ยกเลิก
         </button>
       </div>
