@@ -1,6 +1,6 @@
 <template>
   <div class="card m-auto w-full">
-    <h2 class="mb-2 text-xl font-semibold">คำสั่งซื้อ</h2>
+    <h2 class="mb-2 text-xl font-semibold">คำสั่งซื้อของโต๊ะที่ใช้งาน</h2>
     <canvas ref="chart" class="max-h-80"></canvas>
   </div>
 </template>
