@@ -364,7 +364,7 @@ const fetchCategories = async () => {
   if (!selectedRestaurant.value) return;
 
   try {
-    const response = await axios.post("/api/get/categories", {
+    const response = await axios.post("/api/restaurant/get/categories", {
       restaurantId: selectedRestaurant.value,
     });
     categories.value = response.data;

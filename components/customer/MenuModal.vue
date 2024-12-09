@@ -124,7 +124,7 @@ const orderNote = ref("");
 const close = () => emit("close");
 
 // Fetch menu item
-const { data } = await useFetch(`/api/menu/${props.menuId}`);
+const { data } = await useFetch(`/api/customer/menu/${props.menuId}`);
 menuItem.value = data.value;
 
 // Initialize options

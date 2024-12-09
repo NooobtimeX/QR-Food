@@ -130,7 +130,7 @@ const isProcessing = ref(false);
 const close = () => emit("close");
 
 // Fetch menu item
-const { data } = await useFetch(`/api/menu/${props.menuId}`);
+const { data } = await useFetch(`/api/restaurant/menu/${props.menuId}`);
 menuItem.value = data.value;
 
 // Initialize options

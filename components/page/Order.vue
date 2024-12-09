@@ -201,7 +201,7 @@ const updateOrderStatus = async () => {
   try {
     console.log("Updating order with ID:", selectedOrder.value.id); // Debug log
     // Call API to update the order status
-    const response = await axios.post("/api/orders/updateStatus", {
+    const response = await axios.post("/api/restaurant/orders/updateStatus", {
       orderMenuId: selectedOrder.value.id, // Pass the ID to the backend as orderMenuId
       status: selectedOrder.value.status, // Pass the status to the backend
     });

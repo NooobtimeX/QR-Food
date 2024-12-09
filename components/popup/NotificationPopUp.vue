@@ -79,7 +79,9 @@ const previousNotificationCount = ref(0);
 // Fetch tables with notifications
 const fetchTablesWithNotifications = async () => {
   const branchId = localStorage.getItem("branchId"); // Assuming branchId is stored in localStorage
-  const response = await axios.get(`/api/tablesWithNotifications/${branchId}`);
+  const response = await axios.get(
+    `/api/restaurant/tablesWithNotifications/${branchId}`,
+  );
   tables.value = response.data.body || [];
 
   // Get the current number of notifications
