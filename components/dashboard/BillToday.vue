@@ -23,7 +23,7 @@ async function fetchOpenBills() {
 
   try {
     const response = await axios.get(
-      `/api/dashboard/bills?date=${today}&branchId=${branchId}`,
+      `/api/restaurant/dashboard/bills?date=${today}&branchId=${branchId}`,
     );
     totalOpenBills.value = response.data.totalOpenBills;
   } catch (error) {
