@@ -14,8 +14,14 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  // Fetch orders where the bill belongs to the specified branch and is connected to a table
   const orders = await prisma.orderMenu.findMany({
-    where: { bill: { branchId } },
+    where: {
+      bill: {
+        branchId, // Ensure the bill belongs to the specified branch
+        tableId: { not: null }, // Ensure the bill is connected to a table
+      },
+    },
     select: {
       status: true,
       quantity: true,
