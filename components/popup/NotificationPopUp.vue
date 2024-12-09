@@ -107,7 +107,7 @@ const toggleNotificationPopup = () => {
 // Accept notification and clear it
 const acceptNotification = async (table) => {
   const tableId = table.id;
-  await axios.post("/api/clearNotification", { tableId });
+  await axios.post("/api/restaurant/notification/clear", { tableId });
 
   // Clear the notification locally
   table.notification = "";
