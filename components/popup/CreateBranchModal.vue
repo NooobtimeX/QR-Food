@@ -16,7 +16,7 @@
     type="tel"
     class="w-full rounded-lg border border-gray-400 p-3 focus:outline-none focus:ring-2"
     pattern="[0-9]*"
-    inputmode="numeric"
+    inputmode="tel"
     required
   />
 </div>

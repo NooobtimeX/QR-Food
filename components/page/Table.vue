@@ -239,9 +239,6 @@ const updateTable = async (newStatus, intent) => {
       if (newStatus === "isReserved") {
         await genQRCode();
       }
-      if (newStatus === "isOpen" && intent === "closeTable") {
-        window.location.href = `/restaurant/bill/${selectedTable.value.qrCodeId}`;
-      }
     }
   } catch (error) {
     console.error("Error updating table status:", error);
