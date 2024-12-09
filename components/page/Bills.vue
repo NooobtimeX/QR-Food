@@ -172,7 +172,7 @@ const fetchBills = async () => {
 // Fetch single bill details
 const fetchBillData = async (qrCodeId: string) => {
   try {
-    const response = await axios.get(`/api/bill/${qrCodeId}`);
+    const response = await axios.get(`/api/restaurant/bill/${qrCodeId}`);
     bill.value = response.data;
   } catch (error) {
     console.error("Failed to fetch bill data", error);

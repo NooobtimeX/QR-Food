@@ -1,4 +1,4 @@
-// /server/api/bill/[qrCodeId].ts
+// /server/api/restaurant/bill/[qrCodeId].ts
 import { PrismaClient } from "@prisma/client";
 import type { H3Event } from "h3";
 import { sendError, send } from "h3";

@@ -211,6 +211,8 @@ const fetchRestaurants = async () => {
   } catch (error) {
     console.error("Error fetching restaurants:", error);
   }
+  localStorage.removeItem("restaurantId");
+  localStorage.removeItem("branchId");
 };
 
 // Function to open branch modal after fetching restaurants

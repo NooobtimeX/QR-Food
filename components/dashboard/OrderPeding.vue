@@ -31,7 +31,7 @@ let intervalId = null;
 const fetchPendingOrders = async () => {
   try {
     const response = await axios.get(
-      `/api/dashboard/orderpeding?branchId=${props.branchId}`,
+      `/api/restaurant/dashboard/orderpeding?branchId=${props.branchId}`,
     );
     pendingOrdersCount.value = response.data.pendingOrdersCount || 0;
     errorMessage.value = ""; // Clear error message if successful

@@ -181,7 +181,7 @@ const confirmOrder = async () => {
   }));
 
   try {
-    const response = await axios.post("/api/user/order", {
+    const response = await axios.post("/api/customer/order", {
       qrCodeId,
       cart: orderData,
     });

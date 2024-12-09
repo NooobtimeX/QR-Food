@@ -72,7 +72,7 @@ const qrCodeId = route.params.table as string;
 
 const fetchOrders = async () => {
   try {
-    const response = await axios.post("/api/user/orders", { qrCodeId });
+    const response = await axios.post("/api/customer/orders", { qrCodeId });
     if (response.status === 200 && response.data?.data?.orders) {
       orders.value = response.data.data.orders;
     }

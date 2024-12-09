@@ -207,18 +207,34 @@ const addEmployee = async () => {
 };
 
 // Delete Employee
-const deleteStaff = async (id: number) => {
+const deleteStaff = async (id: number): Promise<void> => {
   try {
-    const isOwner = await checkOwnership();
-    if (isOwner) {
-      await axios.delete("/api/restaurant/deleteStaff", { params: { id } });
-      fetchStaffs();
-    } else {
-      alert("Only the restaurant owner can delete staff members.");
-    }
-  } catch (error) {
+    await axios.delete("/api/restaurant/deleteStaff", {
+      params: {
+        id,
+        userId: parseInt(localStorage.getItem("userId") || "0", 10),
+        restaurantId: parseInt(localStorage.getItem("restaurantId") || "0", 10),
+      },
+    });
+
+    await fetchStaffs(); // Refresh the staff list after successful deletion
+  } catch (error: any) {
     console.error("Error deleting staff:", error);
-    alert("Failed to delete staff. Please try again.");
+
+    if (axios.isAxiosError(error)) {
+      switch (error.response?.status) {
+        case 403:
+          alert("Only the restaurant owner can delete staff members.");
+          break;
+        case 400:
+          alert("Invalid request. Please check your input.");
+          break;
+        default:
+          alert("Failed to delete staff. Please try again.");
+      }
+    } else {
+      alert("An unexpected error occurred.");
+    }
   }
 };
 
@@ -228,14 +244,7 @@ const resetModal = () => {
   newEmployee.value.email = "";
 };
 
-// Redirect if not owner
 onMounted(async () => {
-  const isOwner = await checkOwnership();
-  if (!isOwner) {
-    router.push("/dashboard");
-    alert("กรุณาติดต่อเจ้าของร้าน");
-  } else {
-    fetchStaffs();
-  }
+  fetchStaffs();
 });
 </script>

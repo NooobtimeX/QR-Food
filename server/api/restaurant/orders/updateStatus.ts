@@ -1,4 +1,4 @@
-// File: server/api/orders/updateStatus.ts
+// File: server/api/restaurant/orders/updateStatus.ts
 import { PrismaClient } from "@prisma/client";
 import { defineEventHandler, readBody, createError } from "h3";
 

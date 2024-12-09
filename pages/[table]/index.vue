@@ -83,9 +83,7 @@ onMounted(async () => {
 
   if (qrCodeId.value) {
     try {
-      const response = await axios.get(
-        `/api/getMenusByQRCodeId/${qrCodeId.value}`,
-      );
+      const response = await axios.get(`/api/customer/${qrCodeId.value}`);
       const { menus } = response.data.body;
 
       const categoryMap = new Map();

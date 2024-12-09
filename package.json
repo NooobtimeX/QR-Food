@@ -13,23 +13,23 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^2.0.0",
-    "@prisma/client": "^5.19.1",
-    "@supabase/supabase-js": "^2.46.1",
+    "@prisma/client": "^6.0.1",
+    "@supabase/supabase-js": "^2.47.2",
     "@vuepic/vue-datepicker": "^10.0.0",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
-    "chart.js": "^4.4.6",
+    "chart.js": "^4.4.7",
     "date-fns": "^4.1.0",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "formidable": "^3.5.2",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "multer": "1.4.5-lts.1",
-    "nuxt": "^3.14.0",
-    "typescript": "^5.6.3"
+    "nuxt": "^3.14.1592",
+    "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^1.6.0",
+    "@nuxt/devtools": "^1.6.3",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@types/bcrypt": "^5.0.2",
@@ -37,13 +37,13 @@
     "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/multer": "^1.4.12",
-    "globals": "^15.12.0",
+    "globals": "^15.13.0",
     "happy-dom": "^14.12.3",
-    "playwright-core": "^1.48.2",
-    "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "prisma": "^5.21.1",
-    "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "playwright-core": "^1.49.0",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "prisma": "^6.0.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
   }
 }

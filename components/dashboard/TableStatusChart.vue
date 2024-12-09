@@ -16,7 +16,7 @@ let chartInstance = null;
 
 async function fetchTableData() {
   const response = await axios.get(
-    `/api/dashboard/tables?branchId=${props.branchId}`,
+    `/api/restaurant/dashboard/tables?branchId=${props.branchId}`,
   );
   return response.data;
 }

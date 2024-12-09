@@ -1,26 +1,30 @@
-import { defineEventHandler, readBody } from "h3";
+import { defineEventHandler } from "h3";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  const { restaurantId, branchId } = body;
+  const { restaurantId, branchId } = await readBody(event);
+
+  if (!restaurantId || !branchId) {
+    return {
+      success: false,
+      message: "Missing restaurantId or branchId",
+    };
+  }
 
   try {
-    // Check if the restaurant exists
     const restaurant = await prisma.restaurant.findUnique({
       where: { id: Number(restaurantId) },
     });
 
     if (!restaurant) {
       return {
-        exists: false,
+        success: false,
         message: "Restaurant not found",
       };
     }
 
-    // Check if the branch exists for the given restaurant
     const branch = await prisma.branch.findFirst({
       where: {
         id: Number(branchId),
@@ -30,21 +34,22 @@ export default defineEventHandler(async (event) => {
 
     if (!branch) {
       return {
-        exists: false,
+        success: false,
         message: "Branch not found",
       };
     }
 
-    // If both exist, return the restaurant and branch names
     return {
-      exists: true,
-      restaurant: { name: restaurant.name },
-      branch: { name: branch.name },
+      success: true,
+      data: {
+        restaurant: { name: restaurant.name },
+        branch: { name: branch.name },
+      },
     };
   } catch (error) {
-    console.error("Error checking restaurant and branch:", error);
+    console.error("Error fetching branch and restaurant details:", error);
     return {
-      exists: false,
+      success: false,
       message: "Internal server error",
     };
   }

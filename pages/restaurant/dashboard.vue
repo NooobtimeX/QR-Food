@@ -146,9 +146,12 @@ function toggleMobileMenu() {
 function signOut() {
   router.push("/"); // Redirect to home or login
 }
+
+// Change restaurant
 function changerestaurant() {
   router.push("/restaurant");
 }
+
 // Function to select component
 function selectComponent(item: MenuItem) {
   if (item.component) {
@@ -161,29 +164,7 @@ function selectComponent(item: MenuItem) {
   }
 }
 
-// Async function to check restaurant and branch
-async function checkRestaurantAndBranch(
-  restaurantId: string,
-  branchId: string,
-): Promise<boolean> {
-  try {
-    const { data } = await axios.post("/api/check/checkRestaurantAndBranch", {
-      restaurantId,
-      branchId,
-    });
-    if (data.exists) {
-      restaurantName.value = data.restaurant.name;
-      branchName.value = data.branch.name;
-      return true;
-    }
-  } catch (error) {
-    console.error("Error checking restaurant and branch:", error);
-  }
-  return false;
-}
-
-// On Mounted
-onMounted(() => {
+onMounted(async () => {
   menuItems.value = [
     {
       text: "แดชบอร์ด",
@@ -231,19 +212,47 @@ onMounted(() => {
 
   const restaurantId = localStorage.getItem("restaurantId");
   const branchId = localStorage.getItem("branchId");
+  const userId = localStorage.getItem("userId");
 
-  if (!restaurantId || !branchId) {
-    alert("Missing restaurant or branch ID in localStorage");
+  if (!restaurantId || !branchId || !userId) {
+    alert("Missing restaurant, branch, or user ID in localStorage");
     signOut();
     return;
   }
 
-  checkRestaurantAndBranch(restaurantId, branchId).then((exists) => {
-    if (!exists) {
-      alert("Restaurant or Branch does not exist. Redirecting.");
+  try {
+    // Fetch branch and restaurant details
+    const { data: restaurantDetails } = await axios.post(
+      "/api/restaurant/getDetails",
+      { restaurantId, branchId },
+    );
+
+    if (!restaurantDetails.success) {
+      alert("Restaurant, Branch, or User does not have access. Redirecting.");
       router.push("/restaurant");
+      return;
     }
-  });
+
+    restaurantName.value = restaurantDetails.data.restaurant.name;
+    branchName.value = restaurantDetails.data.branch.name;
+
+    // Check user access
+    const { data: userAccess } = await axios.post(
+      "/api/restaurant/user/checkAccess",
+      { userId, branchId },
+    );
+
+    if (!userAccess.success) {
+      alert("Restaurant, Branch, or User does not have access. Redirecting.");
+      router.push("/restaurant");
+      return;
+    }
+  } catch (error) {
+    console.error("Error during initialization:", error);
+    alert("An error occurred. Redirecting to restaurant selection.");
+    router.push("/restaurant");
+    return;
+  }
 
   const lastSelectedComponent = localStorage.getItem("lastSelectedComponent");
   if (lastSelectedComponent) {

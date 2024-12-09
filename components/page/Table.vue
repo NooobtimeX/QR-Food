@@ -155,7 +155,7 @@ const openCustomerMenu = (qrCodeId) => {
 
 const fetchMenusForTable = async (qrCodeId) => {
   try {
-    const response = await axios.get(`/api/getMenusByQRCodeId/${qrCodeId}`);
+    const response = await axios.get(`/api/customer/${qrCodeId}`);
     menusData.value = response.data.body.menus || [];
   } catch (error) {
     console.error("Error fetching menus:", error);
