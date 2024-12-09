@@ -116,7 +116,7 @@ const fetchRestaurants = async () => {
 // Function to create a branch with API call
 const createBranch = async () => {
   try {
-    await axios.post("/api/branch/createBranch", {
+    await axios.post("/api/restaurant/branch/createBranch", {
       name: newBranch.value.name,
       phoneNumber: newBranch.value.phoneNumber,
       restaurantId: newBranch.value.restaurantId,

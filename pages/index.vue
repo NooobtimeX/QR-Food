@@ -116,7 +116,7 @@ const handleError = (error: unknown, defaultMessage: string) => {
 // Handle user sign-up
 const handleSignup = async () => {
   try {
-    const response = await axios.post("/api/authentication/signup", {
+    const response = await axios.post("/api/restaurant/authentication/signup", {
       email: email.value,
       password: password.value,
     });
@@ -133,7 +133,7 @@ const handleSignup = async () => {
 // Handle user sign-in
 const handleSignin = async () => {
   try {
-    const response = await axios.post("/api/authentication/signin", {
+    const response = await axios.post("/api/restaurant/authentication/signin", {
       email: email.value,
       password: password.value,
     });
