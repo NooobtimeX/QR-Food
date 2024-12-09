@@ -62,7 +62,7 @@
 
           <!-- Sign Out Button (Visible on larger screens) -->
           <button
-            class="hidden bg-red-500 p-2 text-white hover:bg-red-02 lg:block"
+            class="hidden bg-gray-500 p-2 text-white hover:bg-orange-600 lg:block"
             @click="changerestaurant"
           >
             เปลี่ยนร้านอาหาร

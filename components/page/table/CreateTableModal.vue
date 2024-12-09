@@ -3,7 +3,7 @@
     class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
   >
     <div class="rounded-lg bg-white p-4">
-      <h2 class="mb-4 text-lg font-bold text-black">Create New Table</h2>
+      <h2 class="mb-4 text-lg font-bold text-black">สร้างโต๊ะอาหาร</h2>
       <input
         v-model="newTableName"
         placeholder="Table Name"

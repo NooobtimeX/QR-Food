@@ -45,7 +45,7 @@
                 v-model="menuName"
                 type="text"
                 class="mt-1 block w-full border-gray-400 p-2 shadow-sm"
-                placeholder="กรอกชื่อร้านอาหาร"
+                placeholder="กรอกชื่ออาหาร"
                 aria-required="true"
                 required
               />
@@ -146,7 +146,7 @@
                   v-model="section.name"
                   type="text"
                   class="mb-1 block w-5/6 border-gray-400 p-2 shadow-sm"
-                  placeholder="ตัวเลือก"
+                  placeholder="ตัวเลือก เช่น เส้น"
                   aria-required="true"
                   requiredw
                 />
@@ -168,7 +168,7 @@
                   v-model="option.name"
                   type="text"
                   class="w-7/12 border-gray-400 p-2 shadow-sm"
-                  placeholder="Option Name"
+                  placeholder="ตัวเลือกย่อย เช่น เส้นเล็ก"
                   aria-required="true"
                   required
                 />
@@ -176,7 +176,7 @@
                   v-model.number="option.price"
                   type="number"
                   class="w-3/12 border-gray-400 p-2 shadow-sm"
-                  placeholder="ตัวเลือกย่อย"
+                  placeholder="ราคา"
                   aria-required="true"
                   required
                 />
