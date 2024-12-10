@@ -21,8 +21,13 @@
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+
 const signOut = () => {
-  localStorage.removeItem("userId");
-  router.push("/");
+  const confirmLogout = window.confirm("คุณต้องการออกจากระบบหรือไม่?");
+  if (confirmLogout) {
+    localStorage.removeItem("userId");
+    router.push("/");
+  }
 };
+
 </script>
