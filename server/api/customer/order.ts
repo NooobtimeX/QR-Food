@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
         data: {
           name: item.name,
           quantity: item.quantity,
-          totalPrice: item.price * item.quantity,
+          totalPrice: item.price,
           qrCodeId,
           note: item.note || "",
           billId: bill.id,

@@ -4,11 +4,9 @@
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
   >
     <div
-      class="relative max-h-[75vh] overflow-y-auto rounded-lg bg-white p-4 shadow-lg"
+      class="relative max-h-[90vh] overflow-y-auto rounded-lg bg-white p-4 shadow-lg"
     >
-      <h1 class="mb-5 text-center text-3xl font-bold text-black">
-        สร้างเมนูอาหาร
-      </h1>
+      <h1 class="text-center text-3xl font-bold text-black">สร้างเมนูอาหาร</h1>
       <form @submit.prevent="submitForm">
         <!-- Restaurant Selection -->
         <div>
@@ -18,7 +16,7 @@
           <select
             id="restaurant"
             v-model="selectedRestaurant"
-            class="mt-1 block w-full rounded-lg border border-gray-400 p-2 text-black shadow-sm"
+            class="block w-full rounded-lg border border-gray-400 p-2 text-black shadow-sm"
             aria-required="true"
             required
           >
@@ -34,8 +32,8 @@
         </div>
 
         <!-- Menu Name and Price -->
-        <div class="mt-4 grid grid-cols-1 gap-4">
-          <div class="flex space-x-4">
+        <div class="mt-2 grid grid-cols-1 gap-4">
+          <div class="flex space-x-2">
             <div class="w-4/5">
               <label for="menu-name" class="block text-sm font-bold text-black"
                 >ชื่อเมนูอาหาร</label
@@ -44,7 +42,7 @@
                 id="menu-name"
                 v-model="menuName"
                 type="text"
-                class="mt-1 block w-full border-gray-400 p-2 shadow-sm"
+                class="block w-full border-gray-400 p-2 shadow-sm"
                 placeholder="กรอกชื่ออาหาร"
                 aria-required="true"
                 required
@@ -60,7 +58,7 @@
                 id="price"
                 v-model.number="price"
                 type="number"
-                class="mt-1 block w-full border-gray-400 p-2 shadow-sm"
+                class="block w-full border-gray-400 p-2 shadow-sm"
                 placeholder="ราคา"
                 aria-required="true"
                 required
@@ -76,14 +74,14 @@
               ref="photoInput"
               type="file"
               accept="image/*"
-              class="mt-1 block w-full text-black"
+              class="block w-full text-black"
               @change="handlePhotoUpload"
             />
-            <div v-if="previewUrl" class="mt-2">
+            <div v-if="previewUrl" class=" ">
               <img
                 :src="previewUrl"
                 alt="Photo preview"
-                class="mx-auto mt-2 max-h-40"
+                class="mx-auto max-h-40"
               />
             </div>
           </div>
@@ -92,11 +90,11 @@
             <label for="category" class="block text-sm font-bold text-black"
               >หมวดหมู่อาหาร</label
             >
-            <div class="flex items-center space-x-2">
+            <div class="flex flex-col items-center">
               <select
                 id="category"
                 v-model="selectedCategory"
-                class="mt-1 block w-full rounded-lg border border-gray-400 p-2 text-black shadow-sm"
+                class="block w-full rounded-lg border border-gray-400 p-2 text-black shadow-sm"
                 aria-required="true"
                 required
               >
@@ -111,7 +109,7 @@
               </select>
               <button
                 type="button"
-                class="bg-green-500 text-white hover:bg-green-700"
+                class="mx-auto mt-2 w-full justify-center bg-green-500 text-white hover:bg-green-700"
                 @click="openAddCategoryPopup"
               >
                 เพิ่มหมวดหมู่อาหาร
@@ -127,7 +125,7 @@
             <textarea
               id="description"
               v-model="description"
-              class="mt-1 block w-full rounded-lg border border-gray-400 p-2 text-black shadow-sm"
+              class="block w-full rounded-lg border border-gray-400 p-2 text-black shadow-sm"
               placeholder="กรอกคำอธิบายอาหาร เช่น มีกุ้งเป็นส่วนผสม"
               aria-required="true"
             />
@@ -139,13 +137,13 @@
             <div
               v-for="(section, sectionIndex) in sections"
               :key="sectionIndex"
-              class="mb-4 rounded-3xl border border-gray-400 p-2"
+              class="rounded-3xl border border-gray-400 p-2"
             >
-              <div class="mb-1 flex items-center justify-between">
+              <div class="flex items-center justify-between">
                 <input
                   v-model="section.name"
                   type="text"
-                  class="mb-1 block w-5/6 border-gray-400 p-2 shadow-sm"
+                  class="block w-5/6 border-gray-400 p-2 shadow-sm"
                   placeholder="ตัวเลือก เช่น เส้น"
                   aria-required="true"
                   requiredw
@@ -190,7 +188,7 @@
               </div>
               <button
                 type="button"
-                class="5 mt-2 w-full bg-green-500 p-2 text-white hover:bg-green-700"
+                class="w-full bg-green-500 p-2 text-white hover:bg-green-700"
                 @click="addOption(sectionIndex)"
               >
                 เพิ่มตัวเลือกย่อย
@@ -198,7 +196,7 @@
             </div>
             <button
               type="button"
-              class="w-full bg-green-500 p-2 text-white hover:bg-green-700"
+              class="mt-2 w-full bg-green-500 p-2 text-white hover:bg-green-700"
               @click="addSection"
             >
               เพิ่มตัวเลือก
@@ -206,15 +204,15 @@
           </div>
 
           <!-- Submit and Cancel Buttons -->
-          <div class="flex justify-end space-x-2">
+          <div class="-mt-3 grid grid-cols-2 gap-2">
             <button
               type="submit"
-              class="w-1/2 bg-green-500 p-2 text-white hover:bg-green-700"
+              class="w-full bg-green-500 p-2 text-white hover:bg-green-700"
             >
               สร้าง
             </button>
             <button
-              class="w-1/2 bg-red-500 p-2 text-white hover:bg-red-02"
+              class="w-full bg-red-500 p-2 text-white hover:bg-red-02"
               @click="closeModal"
             >
               ยกเลิก
@@ -240,12 +238,12 @@
           id="new-category-name"
           v-model="newCategoryName"
           type="text"
-          class="mt-1 block w-full border-gray-400 p-2 shadow-sm"
+          class="block w-full border-gray-400 p-2 shadow-sm"
           placeholder="Enter category name"
           aria-required="true"
           required
         />
-        <div class="mt-4 flex justify-end space-x-2">
+        <div class="flex justify-end space-x-3">
           <button
             class="bg-green-500 text-white hover:bg-green-700"
             @click="submitCategory"
