@@ -33,7 +33,7 @@ async function fetchOpenBills() {
 
 onMounted(() => {
   fetchOpenBills();
-  intervalId = setInterval(fetchOpenBills, 2000); // Fetch every 2 seconds
+  intervalId = setInterval(fetchOpenBills, 30000); // Fetch every 2 seconds
 });
 
 onUnmounted(() => {

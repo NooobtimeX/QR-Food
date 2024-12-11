@@ -93,7 +93,7 @@ onMounted(async () => {
       return acc;
     }, {});
     updateChart(chartInstance, updatedTableStatusCounts);
-  }, 2000);
+  }, 30000);
 
   onUnmounted(() => {
     clearInterval(interval);

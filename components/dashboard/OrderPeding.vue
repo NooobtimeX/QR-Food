@@ -46,7 +46,7 @@ const fetchPendingOrders = async () => {
 // Fetch data when the component mounts and start polling
 onMounted(() => {
   fetchPendingOrders();
-  intervalId = setInterval(fetchPendingOrders, 2000); // Poll every 2 seconds
+  intervalId = setInterval(fetchPendingOrders, 30000); // Poll every 2 seconds
 });
 
 // Clear the interval when the component is unmounted

@@ -117,7 +117,7 @@ const acceptNotification = async (table) => {
 
 onMounted(() => {
   fetchTablesWithNotifications();
-  const intervalId = setInterval(fetchTablesWithNotifications, 3000); // Fetch every 3 seconds
+  const intervalId = setInterval(fetchTablesWithNotifications, 5000); // Fetch every 3 seconds
 
   // Clear the interval when the component is unmounted
   onUnmounted(() => {

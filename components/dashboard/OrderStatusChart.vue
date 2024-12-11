@@ -82,7 +82,7 @@ onMounted(async () => {
     chartInstance.data.datasets[0].backgroundColor =
       Object.keys(updatedCounts).map(getStatusColor);
     chartInstance.update();
-  }, 2000);
+  }, 30000);
 
   onUnmounted(() => {
     clearInterval(interval);
