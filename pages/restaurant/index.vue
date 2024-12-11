@@ -24,15 +24,15 @@
             + เพิ่มร้านอาหาร
           </button>
           <button
-            class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
-            :disabled="!ownerAccess.length"
+            class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03 disabled:cursor-not-allowed disabled:bg-gray-400"
+            :disabled="!hasRestaurants"
             @click="openBranchModal"
           >
             + เพิ่มสาขา
           </button>
           <button
-            class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03"
-            :disabled="!ownerAccess.length"
+            class="bg-orange-04 pl-3 pr-3 text-white shadow-xl hover:bg-orange-03 disabled:cursor-not-allowed disabled:bg-gray-400"
+            :disabled="!hasRestaurants"
             @click="openMenuModal"
           >
             + เพิ่มเมนู
@@ -167,6 +167,9 @@ const goToDashboard = (restaurantId: number, branchId: number) => {
   router.push(`/restaurant/dashboard`);
 };
 
+const hasRestaurants = computed(
+  () => ownerAccess.value.length > 0 || staffAccess.value.length > 0,
+); // Add this here
 // Computed property for filtering restaurants
 const filteredRestaurants = computed(() => {
   const query = searchQuery.value.toLowerCase();
@@ -217,7 +220,6 @@ const fetchRestaurants = async () => {
 
 // Function to open branch modal after fetching restaurants
 const openRestaurantModal = async () => {
-  await fetchRestaurants();
   showRestaurantModal.value = true;
 };
 const openBranchModal = async () => {

@@ -27,6 +27,12 @@ module.exports = {
       },
     },
   },
+  variants: {
+    extend: {
+      backgroundColor: ["disabled"],
+      cursor: ["disabled"],
+    },
+  },
   plugins: [],
   fontFamily: {
     body: ["Chakra Petch", "sans-serif"],
