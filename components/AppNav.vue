@@ -29,5 +29,4 @@ const signOut = () => {
     router.push("/");
   }
 };
-
 </script>

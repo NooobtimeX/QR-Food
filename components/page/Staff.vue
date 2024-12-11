@@ -139,6 +139,7 @@ const router = useRouter();
 
 // Local Storage
 const restaurantId = parseInt(localStorage.getItem("restaurantId") || "0", 10);
+const branchId = parseInt(localStorage.getItem("branchId") || "0", 10);
 const userId = parseInt(localStorage.getItem("userId") || "0", 10);
 
 // Fetch Staffs
@@ -147,7 +148,7 @@ const fetchStaffs = async () => {
     const { data } = await axios.get<{ body: Staff[] }>(
       "/api/restaurant/getStaffById",
       {
-        params: { restaurantId },
+        params: { branchId },
       },
     );
     staffs.value = data.body.map(({ id, email, role }) => ({
@@ -193,7 +194,7 @@ const addEmployee = async () => {
     if (isOwner || newEmployee.value.role === "owner") {
       await axios.post("/api/restaurant/assignUserRole", {
         ...newEmployee.value,
-        restaurantId,
+        branchId,
       });
       resetModal();
       fetchStaffs();
@@ -208,12 +209,18 @@ const addEmployee = async () => {
 
 // Delete Employee
 const deleteStaff = async (id: number): Promise<void> => {
+  const isConfirmed = window.confirm("คุณแน่ใจหรือว่าต้องการลบพนักงานนี้?");
+  if (!isConfirmed) {
+    return; // If not confirmed, exit the function
+  }
+
   try {
     await axios.delete("/api/restaurant/deleteStaff", {
       params: {
         id,
         userId: parseInt(localStorage.getItem("userId") || "0", 10),
         restaurantId: parseInt(localStorage.getItem("restaurantId") || "0", 10),
+        branchId: branchId, // Pass the branchId here
       },
     });
 

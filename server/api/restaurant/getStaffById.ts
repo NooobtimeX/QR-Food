@@ -5,35 +5,33 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  const restaurantId = parseInt(query.restaurantId as string, 10);
+  const branchId = parseInt(query.branchId as string, 10); // Use branchId instead of restaurantId
 
-  if (!restaurantId) {
+  if (!branchId) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Invalid restaurant ID",
+      statusMessage: "Invalid branch ID",
     });
   }
 
   try {
-    const restaurant = await prisma.restaurant.findUnique({
-      where: { id: restaurantId },
+    // Fetch users by their role in a specific branch
+    const branchRoles = await prisma.userBranchRole.findMany({
+      where: { branchId },
       include: {
-        userRestaurantRoles: {
-          include: {
-            user: true,
-          },
-        },
+        user: true, // Include user information
       },
     });
 
-    if (!restaurant) {
+    if (!branchRoles || branchRoles.length === 0) {
       throw createError({
         statusCode: 404,
-        statusMessage: "Restaurant not found",
+        statusMessage: "No users found for this branch",
       });
     }
 
-    const allStaff = restaurant.userRestaurantRoles.map((role) => ({
+    // Map the roles and users data
+    const allStaff = branchRoles.map((role) => ({
       id: role.user.id,
       email: role.user.email,
       role: role.role, // This will be either 'owner' or 'staff'
